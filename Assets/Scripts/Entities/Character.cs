@@ -1,11 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Character : MonoBehaviour
 {
 
     private MovementController _movementController;
+    private LifeController _lifeController;
     // [SerializeField] private Gun _gun;
     
     // MOVEMENT KEYS
@@ -21,6 +23,7 @@ public class Character : MonoBehaviour
     // Start is called before the first frame update
     void Start() {
         _movementController = GetComponent<MovementController>();
+        _lifeController = GetComponent<LifeController>();
     }
 
     // Update is called once per frame
