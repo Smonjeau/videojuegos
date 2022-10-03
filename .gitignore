@@ -64,5 +64,4 @@ UserSettings/
 ProjectSettings/
 Packages/
 .DS_Store
-*.meta
 .idea/

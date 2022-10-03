@@ -418,6 +418,8 @@ Animation:
   - {fileID: 7400000, guid: 37e6af8636979e04086967e3bd667606, type: 2}
   - {fileID: 7400000, guid: 812aae90a9297f249908057eed4c0879, type: 2}
   - {fileID: 7400000, guid: de559bbb071ebfd40ab5af80881e75e8, type: 2}
+  - {fileID: 7400000, guid: 23ee7f6864c52b243bfb4f2da09bc287, type: 2}
+  - {fileID: 7400000, guid: fc9a62f9b1354f342bacfbbe077c503e, type: 2}
   m_WrapMode: 0
   m_PlayAutomatically: 0
   m_AnimatePhysics: 0
@@ -434,11 +436,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8eaac6b2326b4406c9af9060e75682c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _zombie: {fileID: 8261884191757066075}
-  _player: {fileID: 0}
-  _layerTarget: 06000000
   _hitDamage: 5
-  _attackSpeed: 1
   _navMeshAgent: {fileID: 1857054356}
 --- !u!195 &1857054356
 NavMeshAgent:

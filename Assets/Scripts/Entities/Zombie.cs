@@ -1,9 +1,5 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
-using UnityEngine.Serialization;
 
 public class Zombie : MonoBehaviour
 {
@@ -18,12 +14,9 @@ public class Zombie : MonoBehaviour
     
     // ANIMATIONS
     private Animation _animations;
-    private string _attackAnimation = "Z_Walk_InPlace";
-    private string _walkAnimation = "Z_Attack";
-    private string _deathAnimation = "Z_FallingBack";
     
     private GameObject _target;
-    private bool _attacking;
+    [SerializeField] private string _state;
 
     private void Start()
     {
@@ -31,6 +24,8 @@ public class Zombie : MonoBehaviour
         _lifeController = GetComponent<LifeController>();
         _navMeshAgent.stoppingDistance = _attackRange;
         _target = GameObject.FindGameObjectWithTag("Player");
+        _state = ZombieState.WALK;
+        _animations.Play(_state);
     }
 
     private void Update()
@@ -40,24 +35,21 @@ public class Zombie : MonoBehaviour
         var playerPosition = _target.transform.position;
         float distance = DistanceBetween(playerPosition, transform.position);
 
-        if (distance <= _attackRange && _attacking == false)
+        if (distance <= _attackRange && _state != ZombieState.ATTACK)
         {
-            _animations.Stop(_walkAnimation);
-            _animations.Play(_attackAnimation);
-            _attacking = true;
+            ChangeStateTo(ZombieState.ATTACK);
             InvokeRepeating(nameof(Attack), 0, _attackSpeed);
             _navMeshAgent.enabled = false;
         }
         
-        if (distance > _attackRange && _attacking)
+        if (distance > _attackRange && _state == ZombieState.ATTACK)
         {
             _navMeshAgent.enabled = true;
-            _attacking = false;
             CancelInvoke(nameof(Attack));
-            _animations.Stop(_attackAnimation);
+            ChangeStateTo(ZombieState.WALK);
         }
         
-        if (_attacking == false) WalkTowards(playerPosition);
+        if (_state == ZombieState.WALK) WalkTowards(playerPosition);
     }
 
     private static float DistanceBetween(Vector3 playerPosition, Vector3 zombiePosition)
@@ -81,6 +73,13 @@ public class Zombie : MonoBehaviour
     private void OnDestroy()
     {
         // TODO: Spawn explosion animation
-        _animations.Play(_deathAnimation);
+        ChangeStateTo(ZombieState.DIE);
+    }
+    
+    private void ChangeStateTo(string state)
+    {
+        _animations.Stop(_state);
+        _state = state;
+        _animations.Play(_state);
     }
 }
