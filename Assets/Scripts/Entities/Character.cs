@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+[RequireComponent( typeof(Rigidbody))]
+
 public class Character : MonoBehaviour
 {
 
@@ -16,6 +18,16 @@ public class Character : MonoBehaviour
     [SerializeField] private KeyCode _moveLeft = KeyCode.A;
     [SerializeField] private KeyCode _moveRight = KeyCode.D;
     
+    
+    public Rigidbody Rigidbody => _rigidbody;
+    [SerializeField] private Rigidbody _rigidbody;
+
+
+
+    
+    public Vector3 movement;
+    public Vector3 rotation;
+    
     // ATTACK KEYS
     [SerializeField] private KeyCode _attack = KeyCode.Space;
     [SerializeField] private KeyCode _reload = KeyCode.R;
@@ -25,25 +37,32 @@ public class Character : MonoBehaviour
         _movementController = GetComponent<MovementController>();
         _lifeController = GetComponent<LifeController>();
         _gun = GetComponent<Gun>();
+        _rigidbody = GetComponent<Rigidbody>();
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKey(_moveForward))
-            _movementController.Travel(transform.forward);
+        movement = new Vector3(0f, 0f, 0f);
+
+        if (Input.GetKey(_moveForward)) movement = transform.forward;
+        if (Input.GetKey(_moveBackward)) movement =  -transform.forward;
+        if (Input.GetKey(_moveLeft))    movement =  -transform.right;
+        if (Input.GetKey(_moveRight))   movement =  transform.right;
+
         
-        if (Input.GetKey(_moveBackward))
-            _movementController.Travel(-transform.forward);
         
-        if (Input.GetKey(_moveLeft))
-            _movementController.Rotate(-transform.up);
-        
-        if (Input.GetKey(_moveRight))
-            _movementController.Rotate(transform.up);
+        rotation = new Vector3(0f, Input.GetAxis("Mouse X"), 0f);
 
         if (Input.GetKeyDown(_attack)) _gun.Attack();
         
         if (Input.GetKeyDown(_reload)) _gun.Reload();
+
     }
+        private void FixedUpdate()
+        {
+            _movementController.Rotate(rotation,_rigidbody);
+            _movementController.Travel(movement,_rigidbody);
+        }
 }
