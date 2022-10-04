@@ -8,7 +8,7 @@ public class Character : MonoBehaviour
 
     private MovementController _movementController;
     private LifeController _lifeController;
-    // [SerializeField] private Gun _gun;
+    private Gun _gun;
     
     // MOVEMENT KEYS
     [SerializeField] private KeyCode _moveForward = KeyCode.W;
@@ -17,13 +17,14 @@ public class Character : MonoBehaviour
     [SerializeField] private KeyCode _moveRight = KeyCode.D;
     
     // ATTACK KEYS
-    // [SerializeField] private KeyCode _attack = KeyCode.Space;
-    // [SerializeField] private KeyCode _reload = KeyCode.R;
+    [SerializeField] private KeyCode _attack = KeyCode.Space;
+    [SerializeField] private KeyCode _reload = KeyCode.R;
     
     // Start is called before the first frame update
     void Start() {
         _movementController = GetComponent<MovementController>();
         _lifeController = GetComponent<LifeController>();
+        _gun = GetComponent<Gun>();
     }
 
     // Update is called once per frame
@@ -41,8 +42,8 @@ public class Character : MonoBehaviour
         if (Input.GetKey(_moveRight))
             _movementController.Rotate(transform.up);
 
-        // if (Input.GetKeyDown(_attack)) _gun.Shoot();;
-        //
-        // if (Input.GetKeyDown(_reload)) _gun.Reload();
+        if (Input.GetKeyDown(_attack)) _gun.Attack();
+        
+        if (Input.GetKeyDown(_reload)) _gun.Reload();
     }
 }
