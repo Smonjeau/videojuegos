@@ -8,7 +8,7 @@ public interface IMoveable {
     
     float RotationSpeed { get; }
     
-    void Travel(Vector3 direction);
+    void Travel(Vector3 direction,Rigidbody rb);
     
-    void Rotate(Vector3 direction);
+    void Rotate(Vector3 direction,Rigidbody rb);
 }
