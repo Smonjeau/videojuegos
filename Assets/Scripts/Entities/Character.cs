@@ -75,7 +75,10 @@ namespace Entities
 
             if (Input.GetKeyDown(KeyCode.Y))
             {
-                ChangeWeapon(++_selectedGunIndex>=_guns.Count?0:_selectedGunIndex);
+                _selectedGunIndex++;
+                if (_selectedGunIndex >= _guns.Count)
+                    _selectedGunIndex = 0;
+                ChangeWeapon(_selectedGunIndex);
             }
            
         
