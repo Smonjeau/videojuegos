@@ -13,11 +13,11 @@ MonoBehaviour:
   m_Name: PistolStats
   m_EditorClassIdentifier: 
   _gunStatsValues:
-    BulletPrefab: {fileID: 0}
-    GunPrefab: {fileID: 0}
-    Damage: 0
-    MagSize: 0
-    BulletCount: 0
-    RateOfFire: 0
-    ReloadCooldown: 0
-    WeaponName: 
+    BulletPrefab: {fileID: 8750377684753805614, guid: eef70db8d747f704e93012ec120fec11, type: 3}
+    GunPrefab: {fileID: 3072228731155828337, guid: b8a15b328f48113418a6369a421c740c, type: 3}
+    Damage: 10
+    MagSize: 7
+    BulletCount: 1
+    RateOfFire: 100
+    ReloadCooldown: 3
+    WeaponName: Desert Eagle

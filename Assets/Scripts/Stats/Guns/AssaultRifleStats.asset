@@ -13,11 +13,11 @@ MonoBehaviour:
   m_Name: AssaultRifleStats
   m_EditorClassIdentifier: 
   _gunStatsValues:
-    BulletPrefab: {fileID: 0}
-    GunPrefab: {fileID: 0}
-    Damage: 5
-    MagSize: 10
+    BulletPrefab: {fileID: 8750377684753805614, guid: eef70db8d747f704e93012ec120fec11, type: 3}
+    GunPrefab: {fileID: 6172834586263702601, guid: 47468fec1ccafb94db82f0f045d6e7bf, type: 3}
+    Damage: 20
+    MagSize: 30
     BulletCount: 1
-    RateOfFire: 10
+    RateOfFire: 100
     ReloadCooldown: 4
-    WeaponName: 
+    WeaponName: AK-47
