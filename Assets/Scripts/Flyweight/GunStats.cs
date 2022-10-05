@@ -7,22 +7,34 @@ namespace Flyweight
     {
         [SerializeField] private GunStatValues _gunStatsValues;
 
-        // public GameObject BulletPrefab => _gunStatsValues.BulletPrefab;
+        public GameObject BulletPrefab => _gunStatsValues.BulletPrefab;
+        public GameObject GunPrefab => _gunStatsValues.GunPrefab;
         public int Damage => _gunStatsValues.Damage;
         public int MagSize => _gunStatsValues.MagSize;
         public int BulletCount => _gunStatsValues.BulletCount;
-        public float ShotCooldown => _gunStatsValues.ShotCooldown;
-        
+        public float RateOfFire => _gunStatsValues.RateOfFire;
+        public float ReloadCooldown => _gunStatsValues.ReloadCooldown;
+
+        public string WeaponName => _gunStatsValues.WeaponName;
+
+        public GunStats(GunStatValues gunStatsValues)
+        {
+            _gunStatsValues = gunStatsValues;
+        }
     }
+    
 }
 
 
 [System.Serializable]
 public struct GunStatValues
 {
-    // public GameObject BulletPrefab;
+    public GameObject BulletPrefab;
+    public GameObject GunPrefab;
     public int Damage;
     public int MagSize;
     public int BulletCount;
-    public float ShotCooldown;
+    public float RateOfFire;
+    public float ReloadCooldown;
+    public string WeaponName;
 }

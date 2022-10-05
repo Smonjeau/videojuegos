@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Entities;
 using Strategy;
 using UnityEngine;
 
@@ -6,10 +7,10 @@ using UnityEngine;
 public class Bullet : MonoBehaviour, IBullet
 {
     public float LifeTime => _lifeTime;
-    [SerializeField] private float _lifeTime = 5;
+    [SerializeField] private float _lifeTime;
     
     public float Speed => _speed;
-    [SerializeField] private float _speed = 15;
+    [SerializeField] private float _speed;
 
     public Gun Owner => _owner;
     [SerializeField] private Gun _owner;
@@ -27,16 +28,14 @@ public class Bullet : MonoBehaviour, IBullet
     public void OnTriggerEnter(Collider collider)
     {
         //if bullet hits player ignore
-        if (collider.gameObject.name=="Soldier") return;   
+        if (collider.gameObject.name=="Soldier"||collider.gameObject.GetComponentInParent<Character>()?.name == "Soldier") return;
         
-        if (_layerTarget.Contains(collider.gameObject.layer))
-        {
-            IDamagable damageable = collider.GetComponent<IDamagable>();
-            damageable?.TakeDamage(_owner.Damage);
+        //if whatever is hits is damageable, damage it
+        IDamagable damageable = collider.GetComponent<IDamagable>();
+        damageable?.TakeDamage(_owner.Damage);
         
-            Destroy(this.gameObject);
-        }
-        // Debug.Log(collider.name);
+        Destroy(this.gameObject);
+       
     }
 
     private void Start()

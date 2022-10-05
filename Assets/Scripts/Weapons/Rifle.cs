@@ -1,10 +1,12 @@
+﻿
+
 using UnityEngine;
 
 namespace Weapons
 {
-    public class Pistol : Gun
+    public class Rifle :Gun
     {
-    
-
+       
+        
     }
 }
