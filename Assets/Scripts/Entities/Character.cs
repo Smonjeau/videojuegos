@@ -59,6 +59,8 @@ public class Character : MonoBehaviour
         
         //TODO SACAME
         if (Input.GetKey(KeyCode.G)) EventsManager.Instance.EventGameOver(true);
+        if (Input.GetKey(KeyCode.F)) EventsManager.Instance.EventGameOver(false);
+
         // if (Input.GetKeyDown(_attack)) _gun.Shoot();;
         //
         // if (Input.GetKeyDown(_reload)) _gun.Reload();

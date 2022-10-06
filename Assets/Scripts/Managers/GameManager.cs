@@ -1,16 +1,22 @@
-﻿using UnityEngine;
+﻿using UI;
+using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 namespace Managers
 {
+    
+
     public class GameManager : MonoBehaviour
     {
+        [SerializeField] private UIController _uiController;
+
         [SerializeField] private bool _isGameOver = false;
         [SerializeField] private bool _isVictory = false;
 
         private void Start()
         {
+            _uiController = GetComponent<UIController>();
             EventsManager.Instance.OnGameOver += OnGameOver;
         }
 
@@ -19,15 +25,12 @@ namespace Managers
             _isGameOver = true;
             _isVictory = isVictory;
 
-            Debug.Log(isVictory);
             GlobalData.Instance.SetVictory(_isVictory);
 
-            Invoke(nameof(LoadEndgameScene), 1);
+            
+            StartCoroutine(_uiController.FadeOut());
         }
 
-        private void LoadEndgameScene()
-        {
-            SceneManager.LoadScene("Endgame");
-        }
+   
     }
 }
