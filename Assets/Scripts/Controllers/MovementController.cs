@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class MovementController : MonoBehaviour, IMoveable
@@ -9,15 +10,32 @@ public class MovementController : MonoBehaviour, IMoveable
     [SerializeField] private float _speed = 11; 
     [SerializeField] private float _rotationSpeed = 140;
 
-    public void Travel(Vector3 direction, Rigidbody rb) =>
-        rb.MovePosition(transform.position + direction * (_speed * Time.deltaTime));
+    [SerializeField] private Rigidbody _rigidbody;
+    
+    private Transform _cameraPosition;
 
-    public void Rotate(Vector3 direction,Rigidbody rb)
+
+    private void Start()
     {
-        Quaternion deltaRotation = Quaternion.Euler(direction * (_rotationSpeed * Time.deltaTime));
- 
-        rb.MoveRotation(rb.rotation * deltaRotation);
+        _rigidbody = GetComponent<Rigidbody>();
+        _cameraPosition = transform.Find("CM Position");
 
+    }
 
+    public void Travel(Vector3 direction) =>
+        
+        _rigidbody.MovePosition(transform.position + direction * (_speed * Time.deltaTime));
+
+    public void RotateX(Vector3 direction)
+    {
+        var deltaRotation = Quaternion.Euler(direction * (_rotationSpeed * Time.deltaTime));
+        _rigidbody.MoveRotation(_rigidbody.rotation * deltaRotation);
+        
+    }
+
+    public void RotateY(Vector3 direction)
+    {
+        _cameraPosition.Rotate(direction* (Time.deltaTime * _rotationSpeed));
+        
     }
 }
