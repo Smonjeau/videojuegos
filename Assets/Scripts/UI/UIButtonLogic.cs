@@ -8,7 +8,7 @@ public class UIButtonLogic : MonoBehaviour
 {
     public void LoadMenuScene() => SceneManager.LoadScene("Main Menu");
 
-    public void LoadGameScene() => SceneManager.LoadScene("Game Scene");
+    public void LoadGameScene() => SceneManager.LoadScene("SampleScene");
 
     public void LoadHelpScene() => Debug.Log("Help Scene");
     
