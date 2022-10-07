@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -25,7 +26,9 @@ namespace Managers
 
         private void Start()
         {
-            _audioSource = GetComponent<AudioSource>();
+            var victoryColor = Color.black;
+            ColorUtility.TryParseHtmlString("#be6c5b", out var defeatColor);
+    
             var wasVictory = GlobalData.Instance.IsVictory;
             _background.sprite = wasVictory ? _victorySprite : _defeatSprite;
             _gameoverMessage.text = wasVictory ? "VICTORY" : "DEFEAT";
@@ -34,7 +37,10 @@ namespace Managers
             _gameoverMessage.verticalOverflow = VerticalWrapMode.Truncate;
             _gameoverMessage.alignment = TextAnchor.UpperCenter;
             _gameoverMessage.fontStyle = FontStyle.Bold;
-            _gameoverMessage.color = wasVictory ? new Color(0,0,0,225) : new Color(190,108,91,255); //TODO no se está aplicando bien
+            _gameoverMessage.color = wasVictory ? victoryColor : defeatColor;
+            
+            StartCoroutine(ChangeVolumeGradually());
+
 
         }
 
@@ -42,7 +48,22 @@ namespace Managers
         {
             var wasVictory = GlobalData.Instance.IsVictory;
             _audioSource.clip = wasVictory ? _victorySong : _defeatSong;
+            _audioSource.volume = 0f;
             _audioSource.Play();
+
+        }
+
+
+
+
+        private IEnumerator ChangeVolumeGradually()
+        {
+
+            while (_audioSource.volume < 1f)
+            {
+                _audioSource.volume += 0.0003f;
+                yield return null;
+            }
         }
     }
 

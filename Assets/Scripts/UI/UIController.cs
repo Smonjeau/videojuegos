@@ -18,7 +18,10 @@ namespace UI
             const float rate = 1.0f / fadeSpeed;
             var progress = 0f;
 
-            var color = Color.black;
+            var wasVictory = GlobalData.Instance.IsVictory;
+            var victoryColor = Color.black;
+            ColorUtility.TryParseHtmlString("#660000", out var defeatColor);
+            var color = wasVictory ? victoryColor : defeatColor;
             while (progress < 1f)
             {
                 blackoutImg.color = Color.Lerp(Color.clear, color
