@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using Managers;
+using Controllers;
 using UnityEngine;
 
 namespace Entities
@@ -24,18 +25,11 @@ namespace Entities
         [SerializeField] private KeyCode _moveBackward = KeyCode.S;
         [SerializeField] private KeyCode _moveLeft = KeyCode.A;
         [SerializeField] private KeyCode _moveRight = KeyCode.D;
-    
-    
-    
-
-
-
-    
-    public Vector3 movement;
-    public Vector3 rotationX;
-    public Vector3 rotationY;
-
-    
+        
+        public Vector3 movement;
+        public Vector3 rotationX;
+        public Vector3 rotationY;
+        
         // ATTACK KEYS
         [SerializeField] private KeyCode _attack = KeyCode.Space;
         [SerializeField] private KeyCode _reload = KeyCode.R;
@@ -45,15 +39,10 @@ namespace Entities
             _movementController = GetComponent<MovementController>();
             _lifeController = GetComponent<LifeController>();
             
-            
             foreach (var gun in _guns) {gun.gameObject.SetActive(false);}
             _selectedGun = _guns[_selectedGunIndex];
             _selectedGun.gameObject.SetActive(true);
             _selectedGun.Reset();
-            
-            
-            
-
         }
 
         // Update is called once per frame
@@ -68,13 +57,13 @@ namespace Entities
 
         
         
-        rotationX = new Vector3(0f, Input.GetAxis("Mouse X"), 0f);
-        rotationY = new Vector3(Input.GetAxis("Mouse Y"), 0f, 0f);
+            rotationX = new Vector3(0f, Input.GetAxis("Mouse X"), 0f);
+            rotationY = new Vector3(Input.GetAxis("Mouse Y"), 0f, 0f);
         
         
-        //TODO SACAME
-        if (Input.GetKey(KeyCode.G)) EventsManager.Instance.EventGameOver(true);
-        if (Input.GetKey(KeyCode.F)) EventsManager.Instance.EventGameOver(false);
+            //TODO SACAME
+            if (Input.GetKey(KeyCode.G)) EventsManager.Instance.EventGameOver(true);
+            if (Input.GetKey(KeyCode.F)) EventsManager.Instance.EventGameOver(false);
 
             if (Input.GetKeyDown(_attack)) _selectedGun.Attack();
         
@@ -87,10 +76,8 @@ namespace Entities
                     _selectedGunIndex = 0;
                 ChangeWeapon(_selectedGunIndex);
             }
-           
-        
-
         }
+        
         private void FixedUpdate()
         {
             _movementController.RotateX(rotationX);
@@ -106,6 +93,7 @@ namespace Entities
         //     newGunObj.transform.SetAsFirstSibling();
         //     
         // }
+        
         private void ChangeWeapon(int index)
         {
             // foreach (var gun in guns) gun.gameObject.SetActive(false);

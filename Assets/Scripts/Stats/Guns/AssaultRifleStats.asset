@@ -18,6 +18,6 @@ MonoBehaviour:
     Damage: 20
     MagSize: 30
     BulletCount: 1
-    RateOfFire: 100
+    RateOfFire: 700
     ReloadCooldown: 4
     WeaponName: AK-47

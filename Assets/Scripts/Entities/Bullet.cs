@@ -23,15 +23,15 @@ public class Bullet : MonoBehaviour, IBullet
 
     [SerializeField] private List<int> _layerTarget;
 
-    public void Travel() => transform.Translate(Vector3.forward * Time.deltaTime * _speed);
+    public void Travel() => transform.Translate(_speed * Time.deltaTime * Vector3.forward);
 
     public void OnTriggerEnter(Collider collider)
     {
         //if bullet hits player ignore
-        if (collider.gameObject.name=="Soldier"||collider.gameObject.GetComponentInParent<Character>()?.name == "Soldier") return;
+        if (collider.gameObject.CompareTag("Player")) return;
         
         //if whatever is hits is damageable, damage it
-        IDamagable damageable = collider.GetComponent<IDamagable>();
+        IDamageable damageable = collider.GetComponent<IDamageable>();
         damageable?.TakeDamage(_owner.Damage);
         
         Destroy(this.gameObject);
