@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Managers;
 using UnityEngine;
 
 namespace Entities
@@ -25,14 +26,15 @@ namespace Entities
         [SerializeField] private KeyCode _moveRight = KeyCode.D;
     
     
-        public Rigidbody Rigidbody => _rigidbody;
-        [SerializeField] private Rigidbody _rigidbody;
+    
 
 
 
     
-        public Vector3 movement;
-        public Vector3 rotation;
+    public Vector3 movement;
+    public Vector3 rotationX;
+    public Vector3 rotationY;
+
     
         // ATTACK KEYS
         [SerializeField] private KeyCode _attack = KeyCode.Space;
@@ -51,7 +53,6 @@ namespace Entities
             
             
             
-            _rigidbody = GetComponent<Rigidbody>();
 
         }
 
@@ -67,7 +68,13 @@ namespace Entities
 
         
         
-            rotation = new Vector3(0f, Input.GetAxis("Mouse X"), 0f);
+        rotationX = new Vector3(0f, Input.GetAxis("Mouse X"), 0f);
+        rotationY = new Vector3(Input.GetAxis("Mouse Y"), 0f, 0f);
+        
+        
+        //TODO SACAME
+        if (Input.GetKey(KeyCode.G)) EventsManager.Instance.EventGameOver(true);
+        if (Input.GetKey(KeyCode.F)) EventsManager.Instance.EventGameOver(false);
 
             if (Input.GetKeyDown(_attack)) _selectedGun.Attack();
         
@@ -86,8 +93,9 @@ namespace Entities
         }
         private void FixedUpdate()
         {
-            _movementController.Rotate(rotation,_rigidbody);
-            _movementController.Travel(movement,_rigidbody);
+            _movementController.RotateX(rotationX);
+            _movementController.Travel(movement);
+            _movementController.RotateY(-rotationY);
         }
 
         // private void GunSwitch(Gun gun)

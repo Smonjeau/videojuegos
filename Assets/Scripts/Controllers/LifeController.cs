@@ -1,5 +1,6 @@
 
 using System;
+using Managers;
 using UnityEngine;
 
 public class LifeController : MonoBehaviour, IDamagable
@@ -27,6 +28,9 @@ public class LifeController : MonoBehaviour, IDamagable
     
     private void Die()
     {
+        if(name == "Soldier") EventsManager.Instance.EventGameOver(false);
         Destroy(gameObject);
     }
+    
+
 }
