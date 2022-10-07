@@ -14,12 +14,17 @@ namespace Controllers
         [SerializeField] private Rigidbody _rigidbody;
 
         private Transform _cameraPosition;
+        private Transform _leftArm;
+        private Transform _rightArm;
+
 
 
         private void Start()
         {
             _rigidbody = GetComponent<Rigidbody>();
             _cameraPosition = transform.Find("CM Position");
+            _leftArm = transform.Find("LeftArm");
+            _rightArm = transform.Find("RightArm");
 
         }
 
@@ -37,7 +42,11 @@ namespace Controllers
         public void RotateY(Vector3 direction)
         {
             _cameraPosition.Rotate(direction * (Time.deltaTime * _rotationSpeed));
+            _leftArm.Rotate(direction * (Time.deltaTime * _rotationSpeed));
+            _rightArm.Rotate(direction * (Time.deltaTime * _rotationSpeed));
 
+            
+            
         }
     }
 }
