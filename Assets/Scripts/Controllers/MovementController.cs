@@ -1,4 +1,6 @@
 using System;
+using Command;
+using Strategy;
 using UnityEngine;
 
 namespace Controllers
@@ -28,9 +30,21 @@ namespace Controllers
 
         }
 
-        public void Travel(Vector3 direction) =>
-
-            _rigidbody.MovePosition(transform.position + direction * (_speed * Time.deltaTime));
+        public void Travel(Directions direction)
+        {
+            var transform1 = transform;
+            var forward = transform1.forward;
+            var right = transform1.right;
+            var dir = direction switch
+            {
+                Directions.Forward => forward,
+                Directions.Backward => -forward,
+                Directions.Left => -right,
+                Directions.Right => right,
+                _ => throw new ArgumentOutOfRangeException(nameof(direction), direction, null)
+            };
+            _rigidbody.MovePosition((transform1.position + dir  * (_speed * Time.deltaTime)));
+        }
 
         public void RotateX(Vector3 direction)
         {

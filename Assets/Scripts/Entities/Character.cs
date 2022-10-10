@@ -1,6 +1,8 @@
 using System.Collections.Generic;
+using Command;
 using Managers;
 using Controllers;
+using EventQueue;
 using UnityEngine;
 
 namespace Entities
@@ -22,9 +24,23 @@ namespace Entities
 
         // MOVEMENT KEYS
         [SerializeField] private KeyCode _moveForward = KeyCode.W;
-        [SerializeField] private KeyCode _moveBackward = KeyCode.S;
+        [SerializeField] private KeyCode _moveBack = KeyCode.S;
         [SerializeField] private KeyCode _moveLeft = KeyCode.A;
         [SerializeField] private KeyCode _moveRight = KeyCode.D;
+        
+        
+        
+        
+        private CmdMovement _cmdMoveForward;
+        private CmdMovement _cmdMoveBack;
+        private CmdMovement _cmdMoveRight;
+        private CmdMovement _cmdMoveLeft;
+
+        private CmdRotationX _cmdRotateLeft;
+        private CmdRotationX _cmdRotateRight;
+        private CmdRotationY _cmdRotateUp;
+        private CmdRotationY _cmdRotateDown;
+
         
         public Vector3 movement;
         public Vector3 rotationX;
@@ -43,6 +59,14 @@ namespace Entities
             _selectedGun = _guns[_selectedGunIndex];
             _selectedGun.gameObject.SetActive(true);
             _selectedGun.Reset();
+
+
+            _cmdMoveForward = new CmdMovement(_movementController, Directions.Forward);
+            _cmdMoveBack = new CmdMovement(_movementController, Directions.Backward);
+            _cmdMoveLeft = new CmdMovement(_movementController, Directions.Left);
+            _cmdMoveRight = new CmdMovement(_movementController, Directions.Right);
+     
+
         }
 
         // Update is called once per frame
@@ -50,13 +74,12 @@ namespace Entities
         {
             movement = new Vector3(0f, 0f, 0f);
 
-            if (Input.GetKey(_moveForward)) movement = transform.forward;
-            if (Input.GetKey(_moveBackward)) movement =  -transform.forward;
-            if (Input.GetKey(_moveLeft))    movement =  -transform.right;
-            if (Input.GetKey(_moveRight))   movement =  transform.right;
-
-        
-        
+            if (Input.GetKey(_moveForward)) EventQueueManager.Instance.AddMovementCommand(_cmdMoveForward);
+            if (Input.GetKey(_moveBack))    EventQueueManager.Instance.AddMovementCommand(_cmdMoveBack);
+            if (Input.GetKey(_moveLeft))    EventQueueManager.Instance.AddMovementCommand(_cmdMoveLeft);
+            if (Input.GetKey(_moveRight))   EventQueueManager.Instance.AddMovementCommand(_cmdMoveRight);
+            
+            
             rotationX = new Vector3(0f, Input.GetAxis("Mouse X"), 0f);
             rotationY = new Vector3(Input.GetAxis("Mouse Y"), 0f, 0f);
         
@@ -81,7 +104,6 @@ namespace Entities
         private void FixedUpdate()
         {
             _movementController.RotateX(rotationX);
-            _movementController.Travel(movement);
             _movementController.RotateY(-rotationY);
         }
 

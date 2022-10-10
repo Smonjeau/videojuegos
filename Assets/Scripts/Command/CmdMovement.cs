@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Strategy;
+using UnityEngine;
 
 namespace Command
 {
@@ -6,9 +7,9 @@ namespace Command
     {
         // propiedades
         private IMoveable _moveable;
-        private Vector3 _direction;
+        private Directions _direction;
 
-        public CmdMovement(IMoveable moveable, Vector3 direction)
+        public CmdMovement(IMoveable moveable, Directions direction)
         {
             _moveable = moveable;
             _direction = direction;

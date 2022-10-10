@@ -18,6 +18,7 @@ namespace Managers
         {
             _uiManager = GetComponent<UIManager>();
             EventsManager.Instance.OnGameOver += OnGameOver;
+            StartCoroutine(_uiManager.LoadGame());
         }
 
         private void OnGameOver(bool isVictory)
@@ -29,6 +30,7 @@ namespace Managers
 
             StartCoroutine(_uiManager.FadeOut());
         }
+
 
    
     }

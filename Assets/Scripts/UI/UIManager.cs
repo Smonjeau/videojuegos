@@ -55,6 +55,23 @@ namespace UI
             SceneManager.LoadScene("Endgame");
         }
         
+        public IEnumerator LoadGame()
+        {
+
+            const float fadeSpeed = 3f;
+            const float rate = 1.0f / fadeSpeed;
+            var progress = 0f;
+
+            var color = Color.black;
+            while (progress < 1f)
+            {
+                blackoutImg.color = Color.Lerp(color, Color.clear
+                    , progress);
+                progress += rate * Time.deltaTime;
+                yield return null;
+            }
+
+        }
         
         private void OnWeaponChange(int weaponId)
         {
