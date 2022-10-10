@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections;
+using System.Collections.Generic;
+using Flyweight;
 using Managers;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -7,9 +9,29 @@ using UnityEngine.UI;
 
 namespace UI
 {
-    public class UIController : MonoBehaviour
+    public class UIManager : MonoBehaviour
     {
-        public Image blackoutImg;
+        [SerializeField] private Image blackoutImg;
+        
+
+        [SerializeField] private Image _weapon;
+        
+        
+        [SerializeField] private Text _ammo;
+
+        
+        [SerializeField] private List<Sprite> _weaponSprites;
+
+        [SerializeField] private GunStats _stats;
+
+
+        private void Start()
+        {
+            EventsManager.Instance.OnAmmoChange += OnAmmoChange;
+            EventsManager.Instance.OnWeaponChange += OnWeaponChange;
+            _weapon.sprite = _weaponSprites[0];
+            
+        }
 
         public IEnumerator FadeOut()
         {
@@ -31,6 +53,17 @@ namespace UI
             }
 
             SceneManager.LoadScene("Endgame");
+        }
+        
+        
+        private void OnWeaponChange(int weaponId)
+        {
+            _weapon.sprite = _weaponSprites[weaponId];
+        }
+        
+        private void OnAmmoChange(int currentAmmo, int maxAmmo)
+        {
+            _ammo.text = $"{currentAmmo}/{maxAmmo}";
         }
     }
 }

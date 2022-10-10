@@ -102,6 +102,8 @@ namespace Entities
             _selectedGun = _guns[index];
             _selectedGun.gameObject.SetActive(true);
             _selectedGun.Reset();
+            EventsManager.Instance.EventWeaponChange(index);
+            EventsManager.Instance.EventAmmoChange(_selectedGun.CurrentMagSize,_selectedGun.MagSize);
 
             // _cmdAttack = new CmdAttack(_currentGun);
             // EventsManager.instance.WeaponChange(index);

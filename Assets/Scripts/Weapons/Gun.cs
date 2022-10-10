@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using Flyweight;
+using Managers;
 using Strategy;
 using UnityEditor;
 using UnityEngine;
@@ -39,6 +40,8 @@ public class Gun : MonoBehaviour, IGun
         // Debug.Log("magsize is"+_stats.MagSize);
         // Debug.Log("found"+MagSize);
         _currentMagSize = MagSize;
+        EventsManager.Instance.EventAmmoChange(_currentMagSize,_currentMagSize);
+    
         // _barrelExitTransform = transform.GetChild(0).GetChild(0);
         _barrelExitTransform = transform.GetChild(0);
         
@@ -66,6 +69,7 @@ public class Gun : MonoBehaviour, IGun
         
         
         _currentMagSize--;
+        EventsManager.Instance.EventAmmoChange(_currentMagSize,MagSize);
         // UI_AmmoUpdater();
 
         _cooldownTimer = ShotCooldown;
@@ -77,9 +81,10 @@ public class Gun : MonoBehaviour, IGun
         if (!CanFire()) return; //not ready to fire
         _currentMagSize = MagSize;
         _cooldownTimer = ReloadCooldown;
-        // UI_AmmoUpdater();
+        StartCoroutine(UI_AmmoUpdater());
     }
 
+    
     public bool CanFire()
     {
         return ! (_cooldownTimer > 0);
@@ -87,12 +92,13 @@ public class Gun : MonoBehaviour, IGun
 
     public void Reset()
     {
-        _currentMagSize = MagSize;
+  //      _currentMagSize = MagSize;
         _cooldownTimer = 0;
     }
 
-    // public void UI_AmmoUpdater()
-    // {
-    //     EventsManager.instance.AmmoChange(_bulletCount, _stats.MagSize);
-    // }
+     private IEnumerator UI_AmmoUpdater()
+     {
+         yield return new WaitForSeconds(_cooldownTimer);
+         EventsManager.Instance.EventAmmoChange(_currentMagSize, _stats.MagSize);
+     }
 }

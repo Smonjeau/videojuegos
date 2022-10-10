@@ -9,14 +9,14 @@ namespace Managers
 
     public class GameManager : MonoBehaviour
     {
-        [SerializeField] private UIController _uiController;
+        [SerializeField] private UIManager _uiManager;
 
         [SerializeField] private bool _isGameOver = false;
         [SerializeField] private bool _isVictory = false;
 
         private void Start()
         {
-            _uiController = GetComponent<UIController>();
+            _uiManager = GetComponent<UIManager>();
             EventsManager.Instance.OnGameOver += OnGameOver;
         }
 
@@ -24,11 +24,10 @@ namespace Managers
         {
             _isGameOver = true;
             _isVictory = isVictory;
-
+            
             GlobalData.Instance.SetVictory(_isVictory);
 
-            
-            StartCoroutine(_uiController.FadeOut());
+            StartCoroutine(_uiManager.FadeOut());
         }
 
    
