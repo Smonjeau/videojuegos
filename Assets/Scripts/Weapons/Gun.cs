@@ -114,6 +114,6 @@ public class Gun : MonoBehaviour, IGun
      private IEnumerator UI_AmmoUpdater()
      {
          yield return new WaitForSeconds(_cooldownTimer);
-         EventsManager.Instance.EventAmmoChange(_currentMagSize, _stats.MaxAmmo);
+         EventsManager.Instance.EventAmmoChange(_currentMagSize, _currentAmmo);
      }
      private bool OutOfAmmo() => !InfiniteAmmo && _currentAmmo <= 0;}

@@ -28,6 +28,8 @@ namespace UI
         
         [SerializeField] private List<Sprite> _weaponSprites;
 
+        [SerializeField] private RawImage gunSight;
+
 
 
         private void Start()
@@ -127,6 +129,11 @@ namespace UI
                 i.color = new Color(i.color.r, i.color.g, i.color.b, i.color.a - (Time.deltaTime / t));
                 yield return null;
             }
+        }
+
+        public void SetGunSight(bool active)
+        {
+            gunSight.gameObject.SetActive(active);
         }
     }
 }

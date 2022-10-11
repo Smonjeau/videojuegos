@@ -45,12 +45,14 @@ namespace Managers
         private void PauseGame()
         {
             foreach (RectTransform child in _pauseMenu.transform) child.gameObject.SetActive(true);
+            _uiManager.SetGunSight(false);
             Time.timeScale = 0;
         }
 
         public void ResumeGame()
         {
             foreach (RectTransform child in _pauseMenu.transform) child.gameObject.SetActive(false);
+            _uiManager.SetGunSight(true);
             Time.timeScale = 1;
         }
 
