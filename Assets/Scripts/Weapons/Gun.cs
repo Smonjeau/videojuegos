@@ -106,7 +106,7 @@ public class Gun : MonoBehaviour, IGun
 
     public void Reset()
     {
-        _currentMagSize = MagSize;
+        //_currentMagSize = MagSize;
         _currentAmmo = MaxAmmo;
         _cooldownTimer = 0;
     }
@@ -116,5 +116,4 @@ public class Gun : MonoBehaviour, IGun
          yield return new WaitForSeconds(_cooldownTimer);
          EventsManager.Instance.EventAmmoChange(_currentMagSize, _stats.MaxAmmo);
      }
-    private bool OutOfAmmo() => _currentAmmo <= 0;
-}
+     private bool OutOfAmmo() => !InfiniteAmmo && _currentAmmo <= 0;}

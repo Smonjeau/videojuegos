@@ -1,8 +1,6 @@
 ﻿using UI;
 using UnityEngine;
-using UnityEngine.SceneManagement;
-using UnityEngine.Serialization;
-using UnityEngine.UI;
+
 
 namespace Managers
 {
@@ -16,6 +14,8 @@ namespace Managers
 
         [SerializeField] private GameObject _pauseMenu;
 
+        [SerializeField] private bool _gamePaused;
+
         private void Start()
         {
             _uiManager = GetComponent<UIManager>();
@@ -26,10 +26,10 @@ namespace Managers
 
         private void Update()
         {
-            if (Input.GetKey(KeyCode.Escape))
-                PauseGame();
-            if (Input.GetKey(KeyCode.LeftShift))
-                ResumeGame();
+            if (!Input.GetKeyDown(KeyCode.Escape)) return;
+            if (_gamePaused) ResumeGame();
+            else PauseGame();
+            _gamePaused = !_gamePaused;
         }
 
         private void OnGameOver(bool isVictory)

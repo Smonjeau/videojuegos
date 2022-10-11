@@ -28,7 +28,6 @@ namespace UI
         
         [SerializeField] private List<Sprite> _weaponSprites;
 
-        [SerializeField] private GunStats _stats;
 
 
         private void Start()

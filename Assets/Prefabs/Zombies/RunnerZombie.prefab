@@ -1111,7 +1111,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _audioClip: {fileID: 8300000, guid: 297cdbcab390b4473ae4986b5dbf8114, type: 3}
   _hitAudioClip: {fileID: 8300000, guid: 2ff66202cae8144b6bab3834e2208870, type: 3}
-  _defeatAudioClip: {fileID: 0}
 --- !u!114 &-2872319253270026483
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1270,7 +1269,7 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 9fdb5531bdf185e448dd06dfa8192f8d, type: 2}
+  - {fileID: 2100000, guid: 8fbc9cde5127189429857a1607c506cf, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1765,7 +1764,7 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 9fdb5531bdf185e448dd06dfa8192f8d, type: 2}
+  - {fileID: 2100000, guid: 8fbc9cde5127189429857a1607c506cf, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
