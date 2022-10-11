@@ -17,7 +17,9 @@ MonoBehaviour:
     GunPrefab: {fileID: 3072228731155828337, guid: b8a15b328f48113418a6369a421c740c, type: 3}
     Damage: 10
     MagSize: 7
+    MaxAmmo: 0
     BulletCount: 1
     RateOfFire: 100
     ReloadCooldown: 3
     WeaponName: Desert Eagle
+    InfiniteAmmo: 1

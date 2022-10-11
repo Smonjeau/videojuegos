@@ -1,14 +1,23 @@
+using System;
+using System.Collections;
+using UnityEngine;
+
 namespace Controllers
 {
-    public class HeadController : HitController
+    public class HeadController : ChildLifeController
     {
+        
         public override void TakeDamage(int damage)
         {
-            if (ParentLifeController.Life - damage * DamageRatio <= 0)
+            var fixedDamage = Convert.ToInt32(damage * DamageRatio);
+            
+            if (ParentLifeController.Life - fixedDamage <= 0)
             {
-                Destroy(this);
+                ParentLifeController.TakePartDamage(damage, true);
+                Destroy(gameObject);
             }
-            base.TakeDamage(damage);
+            else base.TakeDamage(damage);
         }
+        
     }
 }

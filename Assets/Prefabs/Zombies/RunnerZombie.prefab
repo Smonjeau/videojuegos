@@ -889,7 +889,6 @@ GameObject:
   - component: {fileID: -7373416789637420472}
   - component: {fileID: 8771218893984188144}
   - component: {fileID: -2872319253270026483}
-  - component: {fileID: 5221336632590137556}
   m_Layer: 0
   m_Name: RunnerZombie
   m_TagString: Untagged
@@ -1127,21 +1126,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _life: 0
   _maxLife: 100
---- !u!114 &5221336632590137556
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3520478986436058278}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c7cad0da42f7146f2a5ff13759c43fb4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _audioClip: {fileID: 0}
-  _victoryAudioClip: {fileID: 0}
-  _defeatAudioClip: {fileID: 0}
 --- !u!1 &3648539170161296439
 GameObject:
   m_ObjectHideFlags: 0

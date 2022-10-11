@@ -1,8 +1,10 @@
 
-public interface ISpawner
+using Flyweight;
+
+namespace Strategy
 {
-    float SpawnDelay { get; set; }
-    int SpawnCount { get; set; }
-    
-    void Spawn();
+    public interface ISpawner
+    {
+        void Spawn(ZombieStats stats);
+    }
 }

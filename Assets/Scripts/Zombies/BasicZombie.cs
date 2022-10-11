@@ -1,4 +1,7 @@
 
-public class BasicZombie : Zombie
+namespace Zombies
 {
+    public class BasicZombie : Zombie
+    {
+    }
 }

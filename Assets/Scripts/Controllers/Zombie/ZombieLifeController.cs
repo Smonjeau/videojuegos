@@ -1,20 +1,37 @@
+using System.Collections;
+using System.Runtime.CompilerServices;
+using Strategy;
+using UnityEngine;
+
 namespace Controllers
 {
     public class ZombieLifeController : LifeController
     {
         
-        private Zombie _zombie;
+        private global::Zombies.Zombie _zombie;
         public new int MaxLife => _zombie.Stats.MaxLife;
         
         private void Start()
         {
-            _zombie = GetComponent<Zombie>();
+            _zombie = GetComponent<global::Zombies.Zombie>();
             SetLife(MaxLife);
+            dieable = GetComponent<IDieable>();
+        }
+
+        public override void TakeDamage(int damage) {}
+
+        public void TakePartDamage(int damage, bool removedHead)
+        {
+            if (removedHead)
+                StartCoroutine(RemoveHeadAndDie(damage));
+            else
+                base.TakeDamage(damage);
         }
         
-        public override void Die()
+        IEnumerator RemoveHeadAndDie(int damage)
         {
-            _zombie.Die();
+            yield return new WaitForSeconds(0.6f);
+            base.TakeDamage(damage);
         }
     }
 }

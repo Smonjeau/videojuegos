@@ -10,18 +10,14 @@ namespace Controllers
     {
         public AudioClip AudioClip => _audioClip;
         [SerializeField] private AudioClip _audioClip;
-        // [SerializeField] private AudioClip _victoryAudioClip;
         [SerializeField] private AudioClip _hitAudioClip;
-        [SerializeField] private AudioClip _defeatAudioClip;
 
         public AudioSource AudioSource => _audioSource;
         private AudioSource _audioSource;
         
         public void InitAudioSource()
         {
-            // Asignar el componente AudioSource
             _audioSource = GetComponent<AudioSource>();
-            // Asignamos el audio clip al AudioSource
             _audioSource.clip = AudioClip;
         }
 
@@ -30,11 +26,7 @@ namespace Controllers
         
         public void PlayOnHit() => AudioSource.PlayOneShot(_hitAudioClip);
 
-        void Start()
-        {
-            InitAudioSource();
-            // EventManager.instance.OnGameOver += OnGameOver;
-        }
+        void Start() =>  InitAudioSource();
     }
 
 }

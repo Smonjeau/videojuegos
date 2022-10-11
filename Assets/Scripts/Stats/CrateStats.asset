@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1336745dd59e46518168ffcab49c3633, type: 3}
+  m_Name: CrateStats
+  m_EditorClassIdentifier: 
+  _stats:
+    CratePrefab: {fileID: 9065924571364506927, guid: d22404bbc14524845b77fe1548c3aa4c, type: 3}
+    Health: 30
+    PowerUpChance: 0.5
+    PowerUpPrefabs:
+    - {fileID: 7169054663632484900, guid: 7846388dc4c164297916ae6329dd23f9, type: 3}
+    - {fileID: 731813801729813074, guid: 975e90ff36128422a98cb39ab2669e9d, type: 3}

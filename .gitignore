@@ -67,4 +67,5 @@ Packages/
 .idea/
 Assets/Zombie/
 Assets/Low Poly Guns/
+*.app
 Assets/Textures/

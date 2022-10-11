@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 8843097603367975933}
   - component: {fileID: 8843097603367975932}
   - component: {fileID: 8843097603367975935}
-  - component: {fileID: 8843097603367975928}
   - component: {fileID: 8843097603367975931}
   - component: {fileID: 4814429773513204193}
   - component: {fileID: 1957688241594612191}
@@ -100,28 +99,6 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &8843097603367975928
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8843097603367975934}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0a9328465efe6604084752d25d528ca3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _guns: []
-  _moveForward: 119
-  _moveBackward: 115
-  _moveLeft: 97
-  _moveRight: 100
-  _rigidbody: {fileID: 0}
-  movement: {x: 0, y: 0, z: 0}
-  rotation: {x: 0, y: 0, z: 0}
-  _attack: 32
-  _reload: 114
 --- !u!114 &8843097603367975931
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -136,6 +113,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _speed: 30
   _rotationSpeed: 80
+  _rigidbody: {fileID: 0}
 --- !u!114 &4814429773513204193
 MonoBehaviour:
   m_ObjectHideFlags: 0

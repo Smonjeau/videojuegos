@@ -14,7 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _statValues:
     MaxLife: 100
-    MovementSpeed: 2
+    MovementSpeed: 3.5
     AttackSpeed: 0.6
-    AttackRange: 3.2
+    AttackRange: 3.8
     AttackDamage: 2
+    ZombiePrefab: {fileID: 3520478986436058278, guid: b2b704e37c56e4fd0bd131915516289b, type: 3}

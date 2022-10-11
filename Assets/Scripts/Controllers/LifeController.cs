@@ -1,6 +1,7 @@
 
 using System;
 using Managers;
+using Strategy;
 using UnityEngine;
 
 namespace Controllers
@@ -10,14 +11,16 @@ namespace Controllers
         public int Life => _life;
         [SerializeField] private int _life;
         public int MaxLife => _maxLife;
-        [SerializeField] private int _maxLife = 100;
+        [SerializeField] public int _maxLife = 100;
+        public IDieable dieable;
 
         private void Start()
         {
-            _life = _maxLife;
+            ResetLife();
+            dieable = gameObject.GetComponent<IDieable>();
         }
 
-        public void TakeDamage(int damage)
+        public virtual void TakeDamage(int damage)
         {
             if (IsDead()) return;
             
@@ -31,23 +34,24 @@ namespace Controllers
 
         public bool IsDead() => _life <= 0;
     
-        public virtual void Die()
+        public void Die()
         {
-            if(name == "Soldier") EventsManager.Instance.EventGameOver(false);
-            Destroy(gameObject);
+            if (dieable != null) dieable.Die();
+            else Destroy(gameObject);
         }
         
-        public void SetLife(int life)
-        {
-            _life = life;
-        }
+        public void SetLife(int life) => _life = life;
         
         public void Heal(int heal)
         {
             _life += heal;
-            if (_life > _maxLife) _life = _maxLife;
+            if (_life > _maxLife) ResetLife();
         }
 
+        public void ResetLife()
+        {
+            _life = _maxLife;
+        }
     }
     
 

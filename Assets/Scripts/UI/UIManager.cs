@@ -1,7 +1,8 @@
-﻿using System;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Flyweight;
+using Levels;
 using Managers;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -11,8 +12,13 @@ namespace UI
 {
     public class UIManager : MonoBehaviour
     {
-        [SerializeField] private Image blackoutImg;
+        /* Text Reference */
+        [SerializeField] private Text _nextLevel;
+        [SerializeField] private Text _level;
+
+        private int _currentLevel = 1;
         
+        public Image blackoutImg;
 
         [SerializeField] private Image _weapon;
         
@@ -27,6 +33,7 @@ namespace UI
 
         private void Start()
         {
+            LevelManager.Instance.OnNextLevel += OnNextLevel;
             EventsManager.Instance.OnAmmoChange += OnAmmoChange;
             EventsManager.Instance.OnWeaponChange += OnWeaponChange;
             _weapon.sprite = _weaponSprites[0];
@@ -79,7 +86,48 @@ namespace UI
         
         private void OnAmmoChange(int currentAmmo, int maxAmmo)
         {
-            _ammo.text = $"{currentAmmo}/{maxAmmo}";
+            if (maxAmmo == 0)
+            {
+                _ammo.text = $"{currentAmmo}/∞";
+            }
+            else
+            {
+                _ammo.text = $"{currentAmmo}/{maxAmmo}";
+            }
+        }
+
+        private void OnNextLevel(LevelStats nextLevel)
+        {
+            _currentLevel = nextLevel.LevelNumber;
+            _nextLevel.text = "Round " + nextLevel.LevelName;
+            StartCoroutine(FadeTextToFullAlpha(2f, _nextLevel));
+            _level.text = nextLevel.LevelName;
+            Invoke(nameof(DisableLevelText), 5f);
+        }
+        
+        private void DisableLevelText()
+        {
+            StartCoroutine(FadeTextToZeroAlpha(2f, _nextLevel));
+        }
+        
+        private IEnumerator FadeTextToFullAlpha(float t, Text i)
+        {
+            i.color = new Color(i.color.r, i.color.g, i.color.b, 0);
+            while (i.color.a < 1.0f)
+            {
+                i.color = new Color(i.color.r, i.color.g, i.color.b, i.color.a + (Time.deltaTime / t));
+                yield return null;
+            }
+        }
+ 
+        private IEnumerator FadeTextToZeroAlpha(float t, Text i)
+        {
+            i.color = new Color(i.color.r, i.color.g, i.color.b, 1);
+            while (i.color.a > 0.0f)
+            {
+                i.color = new Color(i.color.r, i.color.g, i.color.b, i.color.a - (Time.deltaTime / t));
+                yield return null;
+            }
         }
     }
 }
