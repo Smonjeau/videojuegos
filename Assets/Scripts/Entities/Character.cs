@@ -29,6 +29,7 @@ namespace Entities
         [SerializeField] private KeyCode _moveRight = KeyCode.D;
         
         
+
         
         
         private CmdMovement _cmdMoveForward;
@@ -40,9 +41,11 @@ namespace Entities
         private CmdRotationX _cmdRotateRight;
         private CmdRotationY _cmdRotateUp;
         private CmdRotationY _cmdRotateDown;
-
         
-        public Vector3 movement;
+        private CmdAttack _cmdAttack;
+
+        private bool _isFiring;
+        
         public Vector3 rotationX;
         public Vector3 rotationY;
         
@@ -56,9 +59,12 @@ namespace Entities
             _lifeController = GetComponent<LifeController>();
             
             foreach (var gun in _guns) {gun.gameObject.SetActive(false);}
+
             _selectedGun = _guns[_selectedGunIndex];
             _selectedGun.gameObject.SetActive(true);
             _selectedGun.Reset();
+            _cmdAttack = new CmdAttack(_selectedGun);
+
 
 
             _cmdMoveForward = new CmdMovement(_movementController, Directions.Forward);
@@ -69,10 +75,8 @@ namespace Entities
 
         }
 
-        // Update is called once per frame
         void Update()
         {
-            movement = new Vector3(0f, 0f, 0f);
 
             if (Input.GetKey(_moveForward)) EventQueueManager.Instance.AddMovementCommand(_cmdMoveForward);
             if (Input.GetKey(_moveBack))    EventQueueManager.Instance.AddMovementCommand(_cmdMoveBack);
@@ -88,8 +92,28 @@ namespace Entities
             if (Input.GetKey(KeyCode.G)) EventsManager.Instance.EventGameOver(true);
             if (Input.GetKey(KeyCode.F)) EventsManager.Instance.EventGameOver(false);
 
-            if (Input.GetKeyDown(_attack)) _selectedGun.Attack();
-        
+            
+            if(Input.GetKeyDown(_attack))
+            {
+                _isFiring = true;
+            }
+
+            if (Input.GetKeyUp(_attack))
+            {
+                _isFiring = false;
+            }
+
+            if (_isFiring)
+            {
+                EventQueueManager.Instance.AddCommand(_cmdAttack);
+
+                if (!_selectedGun.IsAutomatic)
+                    _isFiring = false;
+            }
+
+
+
+
             if (Input.GetKeyDown(_reload)) _selectedGun.Reload();
 
             if (Input.GetKeyDown(KeyCode.Y))
@@ -118,17 +142,16 @@ namespace Entities
         
         private void ChangeWeapon(int index)
         {
-            // foreach (var gun in guns) gun.gameObject.SetActive(false);
 
             _selectedGun.gameObject.SetActive(false);
             _selectedGun = _guns[index];
             _selectedGun.gameObject.SetActive(true);
             _selectedGun.Reset();
+            _cmdAttack = new CmdAttack(_selectedGun);
+
             EventsManager.Instance.EventWeaponChange(index);
             EventsManager.Instance.EventAmmoChange(_selectedGun.CurrentMagSize,_selectedGun.MaxAmmo);
 
-            // _cmdAttack = new CmdAttack(_currentGun);
-            // EventsManager.instance.WeaponChange(index);
         }
     }
 }

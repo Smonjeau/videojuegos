@@ -23,3 +23,4 @@ MonoBehaviour:
     ReloadCooldown: 3
     WeaponName: Desert Eagle
     InfiniteAmmo: 1
+    IsAutomatic:0

@@ -18,6 +18,8 @@ namespace Flyweight
         public string WeaponName => _gunStatsValues.WeaponName;
         public bool InfiniteAmmo => _gunStatsValues.InfiniteAmmo;
 
+        public bool IsAutomatic => _gunStatsValues.IsAutomatic;
+
         public GunStats(GunStatValues gunStatsValues)
         {
             _gunStatsValues = gunStatsValues;
@@ -37,5 +39,6 @@ namespace Flyweight
         public float ReloadCooldown;
         public string WeaponName;
         public bool InfiniteAmmo;
+        public bool IsAutomatic;
     }
 }

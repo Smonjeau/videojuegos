@@ -23,14 +23,19 @@ public class Gun : MonoBehaviour, IGun
     public float ShotCooldown => 60/_stats.RateOfFire;
     public float ReloadCooldown => _stats.ReloadCooldown;
 
+    public bool IsAutomatic => _stats.IsAutomatic;
+
+    public float RateOfFire => _stats.RateOfFire;
+    
+
     
     private float _cooldownTimer = 0;
-    private Transform _barrelExitTransform;
-    private SoundEffectController _soundEffectController;
+    protected Transform _barrelExitTransform;
+    protected SoundEffectController _soundEffectController;
     private GameObject _parentArm;
     public int CurrentMagSize => _currentMagSize;
     
-    [SerializeField] private int _currentMagSize;
+    [SerializeField] protected int _currentMagSize;
     [SerializeField] private int _currentAmmo;
 
     
@@ -72,8 +77,7 @@ public class Gun : MonoBehaviour, IGun
         bullet.GetComponent<Bullet>().SetOwner(this);
         
         _currentMagSize--;
-        EventsManager.Instance.EventAmmoChange(_currentMagSize,_currentAmmo);
-        // UI_AmmoUpdater();
+         StartCoroutine(UI_AmmoUpdater(0));
 
         _cooldownTimer = ShotCooldown;
     }
@@ -96,7 +100,7 @@ public class Gun : MonoBehaviour, IGun
             _currentMagSize += ammoToAdd;
             _currentAmmo -= ammoToAdd;
         }
-        StartCoroutine(UI_AmmoUpdater());
+        StartCoroutine(UI_AmmoUpdater(_cooldownTimer));
     }
     
     private IEnumerator ReloadAnimation()
@@ -124,20 +128,21 @@ public class Gun : MonoBehaviour, IGun
     public void FullAmmo()
     {
         _currentAmmo = MaxAmmo;
-        EventsManager.Instance.EventAmmoChange(_currentMagSize, _currentAmmo);
+        StartCoroutine(UI_AmmoUpdater(0));
     } 
 
-    private bool CanFire() => ! (_cooldownTimer > 0);
+    protected bool CanFire() => ! (_cooldownTimer > 0);
 
     public void Reset()
     {
         _cooldownTimer = 0;
     }
 
-     private IEnumerator UI_AmmoUpdater()
+     protected IEnumerator UI_AmmoUpdater(float secondsToSleep)
      {
-         yield return new WaitForSeconds(_cooldownTimer);
+         yield return new WaitForSeconds(secondsToSleep);
          EventsManager.Instance.EventAmmoChange(_currentMagSize, _currentAmmo);
      }
+
     private bool OutOfAmmo() => !InfiniteAmmo && _currentAmmo <= 0;
 }
