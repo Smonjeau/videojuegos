@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 01eecd6e1e8b4172bba08a5863d3484a, type: 3}
+  m_Name: ShotgunStats
+  m_EditorClassIdentifier: 
+  _gunStatsValues:
+    BulletPrefab: {fileID: 8750377684753805614, guid: eef70db8d747f704e93012ec120fec11, type: 3}
+    GunPrefab: {fileID: 4999444334603179992, guid: 1191b84140fcbba49b667e7d8c6c27e6, type: 3}
+    Damage: 15
+    MagSize: 7
+    MaxAmmo: 21
+    BulletCount: 5
+    RateOfFire: 70
+    ReloadCooldown: 3
+    WeaponName: Winchester 21
+    InfiniteAmmo: 0
+    IsAutomatic: 0

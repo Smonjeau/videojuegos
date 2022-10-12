@@ -29,9 +29,21 @@ namespace Entities
         [SerializeField] private KeyCode _moveRight = KeyCode.D;
         
         
+        //COMBAT
+        [SerializeField] private KeyCode _weaponSlot1 = KeyCode.Alpha1;
+        [SerializeField] private KeyCode _weaponSlot2 = KeyCode.Alpha2;
+        [SerializeField] private KeyCode _weaponSlot3 = KeyCode.Alpha3;
+        private CmdAttack _cmdAttack;
+
+        private bool _isFiring;
+        
+        [SerializeField] private KeyCode _attack = KeyCode.Space;
+        [SerializeField] private KeyCode _reload = KeyCode.R;
 
         
         
+        
+        //MOVEMENT
         private CmdMovement _cmdMoveForward;
         private CmdMovement _cmdMoveBack;
         private CmdMovement _cmdMoveRight;
@@ -42,16 +54,12 @@ namespace Entities
         private CmdRotationY _cmdRotateUp;
         private CmdRotationY _cmdRotateDown;
         
-        private CmdAttack _cmdAttack;
+        private Vector3 _rotationX;
+        private Vector3 _rotationY;
 
-        private bool _isFiring;
+
         
-        public Vector3 rotationX;
-        public Vector3 rotationY;
-        
-        // ATTACK KEYS
-        [SerializeField] private KeyCode _attack = KeyCode.Space;
-        [SerializeField] private KeyCode _reload = KeyCode.R;
+
     
         // Start is called before the first frame update
         void Start() {
@@ -84,8 +92,8 @@ namespace Entities
             if (Input.GetKey(_moveRight))   EventQueueManager.Instance.AddMovementCommand(_cmdMoveRight);
             
             
-            rotationX = new Vector3(0f, Input.GetAxis("Mouse X"), 0f);
-            rotationY = new Vector3(Input.GetAxis("Mouse Y"), 0f, 0f);
+            _rotationX = new Vector3(0f, Input.GetAxis("Mouse X"), 0f);
+            _rotationY = new Vector3(Input.GetAxis("Mouse Y"), 0f, 0f);
         
         
             //TODO SACAME
@@ -116,19 +124,23 @@ namespace Entities
 
             if (Input.GetKeyDown(_reload)) _selectedGun.Reload();
 
-            if (Input.GetKeyDown(KeyCode.Y))
+            if (Input.GetKeyDown(KeyCode.Y) && !_selectedGun.IsReloading)
             {
                 _selectedGunIndex++;
                 if (_selectedGunIndex >= _guns.Count)
                     _selectedGunIndex = 0;
                 ChangeWeapon(_selectedGunIndex);
             }
+            
+            if (Input.GetKeyDown(_weaponSlot1)) ChangeWeapon(0);
+            if (Input.GetKeyDown(_weaponSlot2)) ChangeWeapon(1);
+            if (Input.GetKeyDown(_weaponSlot3)) ChangeWeapon(2);
         }
         
         private void FixedUpdate()
         {
-            _movementController.RotateX(rotationX);
-            _movementController.RotateY(-rotationY);
+            _movementController.RotateX(_rotationX);
+            _movementController.RotateY(-_rotationY);
         }
 
         // private void GunSwitch(Gun gun)

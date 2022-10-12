@@ -29,14 +29,16 @@ public class Gun : MonoBehaviour, IGun
     
 
     
-    private float _cooldownTimer = 0;
+    protected float _cooldownTimer = 0;
     protected Transform _barrelExitTransform;
     protected SoundEffectController _soundEffectController;
     private GameObject _parentArm;
     public int CurrentMagSize => _currentMagSize;
+    public bool IsReloading => _isReloading;
     
     [SerializeField] protected int _currentMagSize;
     [SerializeField] private int _currentAmmo;
+    [SerializeField] private bool _isReloading;
 
     
 
@@ -85,6 +87,7 @@ public class Gun : MonoBehaviour, IGun
     
     public void Reload()
     {
+        _isReloading = true;
         if (!CanFire() || OutOfAmmo()) return; //not ready to fire
 
         StartCoroutine(ReloadAnimation());
@@ -113,7 +116,8 @@ public class Gun : MonoBehaviour, IGun
         _soundEffectController.PlayOnReload();
         
         yield return new WaitForSeconds(ReloadCooldown/2);
-        
+
+        _isReloading = false;
         var currentRotation = _parentArm.transform.eulerAngles;
         _parentArm.transform.eulerAngles = new Vector3(currentRotation.x, currentRotation.y + 75, currentRotation.z);
     }

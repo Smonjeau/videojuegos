@@ -13,6 +13,8 @@ namespace Strategy
         string Name { get; }
         bool InfiniteAmmo { get; }
 
+        bool IsReloading { get; }
+
         void Attack();
         void Reload();
         void AddAmmo(int amount);
