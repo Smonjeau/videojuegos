@@ -23,13 +23,16 @@ namespace Controllers
         public virtual void TakeDamage(int damage)
         {
             if (IsDead()) return;
-            
+
             _life -= damage;
             if (_life <= 0)
             {
                 _life = 0;
                 Die();
             }
+
+            if (gameObject.CompareTag("Player"))
+                EventsManager.Instance.EventPlayerAttacked();
         }
 
         public bool IsDead() => _life <= 0;

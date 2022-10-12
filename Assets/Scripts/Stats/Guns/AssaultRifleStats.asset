@@ -17,9 +17,9 @@ MonoBehaviour:
     GunPrefab: {fileID: 6172834586263702601, guid: 47468fec1ccafb94db82f0f045d6e7bf, type: 3}
     Damage: 20
     MagSize: 30
-    MaxAmmo: 300
+    MaxAmmo: 200
     BulletCount: 1
     RateOfFire: 700
-    ReloadCooldown: 4
+    ReloadCooldown: 2
     WeaponName: AK-47
     InfiniteAmmo: 0

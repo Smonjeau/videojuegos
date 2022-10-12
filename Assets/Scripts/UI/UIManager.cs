@@ -19,6 +19,7 @@ namespace UI
         private int _currentLevel = 1;
         
         public Image blackoutImg;
+        public Image redImg;
 
         [SerializeField] private Image _weapon;
         
@@ -37,6 +38,7 @@ namespace UI
             LevelManager.Instance.OnNextLevel += OnNextLevel;
             EventsManager.Instance.OnAmmoChange += OnAmmoChange;
             EventsManager.Instance.OnWeaponChange += OnWeaponChange;
+            EventsManager.Instance.OnAttacked += OnAttacked;
             _weapon.sprite = _weaponSprites[0];
             
         }
@@ -78,6 +80,21 @@ namespace UI
                 yield return null;
             }
 
+        }
+
+        private void Update()
+        {
+            if (!(redImg.color.a > 0f)) return;
+            var color = redImg.color;
+            color.a -= 0.01f;
+            redImg.color = color;
+        }
+
+        private void OnAttacked()
+        {
+            var color = redImg.color;
+            color.a = 0.8f;
+            redImg.color = color;
         }
         
         private void OnWeaponChange(int weaponId)

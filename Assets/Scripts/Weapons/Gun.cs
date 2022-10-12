@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
+using Controllers;
 using Entities;
 using Flyweight;
 using Managers;
@@ -17,16 +18,16 @@ public class Gun : MonoBehaviour, IGun
     public int MaxAmmo => _stats.MaxAmmo;
     public int Damage => _stats.Damage;
     public bool InfiniteAmmo => _stats.InfiniteAmmo;
-
     public string Name => _stats.WeaponName;
-
     public int BulletCount => _stats.BulletCount;
-
     public float ShotCooldown => 60/_stats.RateOfFire;
     public float ReloadCooldown => _stats.ReloadCooldown;
 
+    
     private float _cooldownTimer = 0;
-
+    private Transform _barrelExitTransform;
+    private SoundEffectController _soundEffectController;
+    private GameObject _parentArm;
     public int CurrentMagSize => _currentMagSize;
     
     [SerializeField] private int _currentMagSize;
@@ -34,18 +35,20 @@ public class Gun : MonoBehaviour, IGun
 
     
 
-    private Transform _barrelExitTransform;
+    
     
 
     private void Start()
     {
         _currentMagSize = MagSize;
-        EventsManager.Instance.EventAmmoChange(_currentMagSize,_currentAmmo);
-    
         if (!InfiniteAmmo) _currentAmmo = MaxAmmo - _currentMagSize;
-        // _barrelExitTransform = transform.GetChild(0).GetChild(0);
-        _barrelExitTransform = transform.GetChild(0);
+        EventsManager.Instance.EventAmmoChange(_currentMagSize,_currentAmmo);
         
+        _barrelExitTransform = transform.GetChild(0);
+        _soundEffectController = GetComponent<SoundEffectController>();
+        
+        _parentArm = transform.parent.gameObject;
+
     }
 
     private void Update()
@@ -59,10 +62,11 @@ public class Gun : MonoBehaviour, IGun
         
         if (_currentMagSize <= 0) //empty mag
         {
-            //play click sound
+            _soundEffectController.PlayOnEmpty();
             return;
         }
         
+        _soundEffectController.PlayOnShot();
         var bullet = Instantiate(BulletPrefab, _barrelExitTransform.position, transform.rotation);
         bullet.name = "Bullet";
         bullet.GetComponent<Bullet>().SetOwner(this);
@@ -78,6 +82,9 @@ public class Gun : MonoBehaviour, IGun
     public void Reload()
     {
         if (!CanFire() || OutOfAmmo()) return; //not ready to fire
+
+        StartCoroutine(ReloadAnimation());
+        _cooldownTimer = ReloadCooldown;
         
         if (InfiniteAmmo)
         {
@@ -89,8 +96,22 @@ public class Gun : MonoBehaviour, IGun
             _currentMagSize += ammoToAdd;
             _currentAmmo -= ammoToAdd;
         }
-        _cooldownTimer = ReloadCooldown;
         StartCoroutine(UI_AmmoUpdater());
+    }
+    
+    private IEnumerator ReloadAnimation()
+    {
+        var initialRotation = _parentArm.transform.eulerAngles;
+        _parentArm.transform.eulerAngles = new Vector3(initialRotation.x, initialRotation.y - 75, initialRotation.z);
+        
+        yield return new WaitForSeconds(ReloadCooldown/2);
+        
+        _soundEffectController.PlayOnReload();
+        
+        yield return new WaitForSeconds(ReloadCooldown/2);
+        
+        var currentRotation = _parentArm.transform.eulerAngles;
+        _parentArm.transform.eulerAngles = new Vector3(currentRotation.x, currentRotation.y + 75, currentRotation.z);
     }
 
     public void AddAmmo(int amount)
@@ -100,14 +121,16 @@ public class Gun : MonoBehaviour, IGun
         else _currentAmmo += amount;
     }
 
-    public void FullAmmo() => _currentAmmo = MaxAmmo;
+    public void FullAmmo()
+    {
+        _currentAmmo = MaxAmmo;
+        EventsManager.Instance.EventAmmoChange(_currentMagSize, _currentAmmo);
+    } 
 
     private bool CanFire() => ! (_cooldownTimer > 0);
 
     public void Reset()
     {
-        //_currentMagSize = MagSize;
-        _currentAmmo = MaxAmmo;
         _cooldownTimer = 0;
     }
 
@@ -116,4 +139,5 @@ public class Gun : MonoBehaviour, IGun
          yield return new WaitForSeconds(_cooldownTimer);
          EventsManager.Instance.EventAmmoChange(_currentMagSize, _currentAmmo);
      }
-     private bool OutOfAmmo() => !InfiniteAmmo && _currentAmmo <= 0;}
+    private bool OutOfAmmo() => !InfiniteAmmo && _currentAmmo <= 0;
+}
