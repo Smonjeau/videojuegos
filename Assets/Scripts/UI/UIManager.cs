@@ -31,6 +31,8 @@ namespace UI
 
         [SerializeField] private RawImage gunSight;
 
+        [SerializeField] private RawImage hitmarker;
+
 
 
         private void Start()
@@ -39,6 +41,7 @@ namespace UI
             EventsManager.Instance.OnAmmoChange += OnAmmoChange;
             EventsManager.Instance.OnWeaponChange += OnWeaponChange;
             EventsManager.Instance.OnAttacked += OnAttacked;
+            EventsManager.Instance.OnHit += OnHit;
             _weapon.sprite = _weaponSprites[0];
             
         }
@@ -122,6 +125,17 @@ namespace UI
             _level.text = nextLevel.LevelName;
             Invoke(nameof(DisableLevelText), 5f);
         }
+
+        private void OnHit()
+        {
+            hitmarker.gameObject.SetActive(true);
+            Invoke(nameof(DisableHitmarker),0.5f);
+        }
+
+        private void DisableHitmarker()
+        {
+            hitmarker.gameObject.SetActive(false);
+        }
         
         private void DisableLevelText()
         {
@@ -152,5 +166,7 @@ namespace UI
         {
             gunSight.gameObject.SetActive(active);
         }
+        
+        
     }
 }

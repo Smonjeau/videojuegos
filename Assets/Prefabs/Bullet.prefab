@@ -56,11 +56,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _lifeTime: 5
-  _speed: 45
+  _speed: 50
   _owner: {fileID: 0}
   _rigidbody: {fileID: 0}
   _collider: {fileID: 0}
-  _layerTarget: 
+  _layerTarget: 0600000007000000
 --- !u!23 &4480755294948611638
 MeshRenderer:
   m_ObjectHideFlags: 0
