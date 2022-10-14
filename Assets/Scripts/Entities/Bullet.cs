@@ -35,12 +35,10 @@ namespace Entities
             //if bullet hits player or something not damageable, ignore
             if (!_layerTarget.Contains(collider.gameObject.layer))
             {
-                Destroy(gameObject);
                 return;
             }
             if (collider.gameObject.CompareTag("Player"))
             {
-                Destroy(gameObject);
 
                 return;
             };
