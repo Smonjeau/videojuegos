@@ -3,20 +3,24 @@ using Command;
 using Managers;
 using Controllers;
 using EventQueue;
+using Strategy;
 using UnityEngine;
 
 namespace Entities
 {
     [RequireComponent( 
         typeof(MovementController),
-        typeof(LifeController))]
+        typeof(LifeController),
+        typeof(SoldierSoundController))]
     [RequireComponent( typeof(Rigidbody))]
 
-    public class Character : MonoBehaviour
+    public class Character : MonoBehaviour, IDieable
     {
 
+        // CONTROLLERS
         private MovementController _movementController;
         private LifeController _lifeController;
+        private SoldierSoundController _soundEffectController;   
 
         private Gun _selectedGun;
         private int _selectedGunIndex=0;
@@ -66,6 +70,7 @@ namespace Entities
         void Start() {
             _movementController = GetComponent<MovementController>();
             _lifeController = GetComponent<LifeController>();
+            _soundEffectController = GetComponent<SoldierSoundController>();
             
             foreach (var gun in _guns) {gun.gameObject.SetActive(false);}
 
@@ -81,7 +86,8 @@ namespace Entities
             _cmdMoveLeft = new CmdMovement(_movementController, Directions.Left);
             _cmdMoveRight = new CmdMovement(_movementController, Directions.Right);
      
-
+            EventsManager.Instance.OnLowLife += OnLowLife;
+            EventsManager.Instance.OnLifeHealed += OnLifeHealed;
         }
 
         void Update()
@@ -137,22 +143,24 @@ namespace Entities
             if (Input.GetKeyDown(_weaponSlot1)) ChangeWeapon(0);
             if (Input.GetKeyDown(_weaponSlot2)) ChangeWeapon(1);
             if (Input.GetKeyDown(_weaponSlot3)) ChangeWeapon(2);
+
         }
-        
+
+        private void OnLowLife()
+        {
+            _soundEffectController.Play();
+        }
+
+        private void OnLifeHealed(int life, int maxLife, int criticalLife)
+        {
+            _soundEffectController.Stop();
+        }
+
         private void FixedUpdate()
         {
             _movementController.RotateX(_rotationX);
             _movementController.RotateY(-_rotationY);
         }
-
-        // private void GunSwitch(Gun gun)
-        // {
-        //     
-        //     var newGunObj=Instantiate(gun.GunPrefab, transform.GetChild(0).position, transform.rotation);
-        //     
-        //     newGunObj.transform.SetAsFirstSibling();
-        //     
-        // }
         
         private void ChangeWeapon(int index)
         {
@@ -168,6 +176,12 @@ namespace Entities
             EventsManager.Instance.EventWeaponChange(index);
             EventsManager.Instance.EventAmmoChange(_selectedGun.CurrentMagSize,_selectedGun.CurrentAmmo,_selectedGun.InfiniteAmmo);
 
+        }
+
+        public void Die()
+        {
+            EventsManager.Instance.EventGameOver(false);
+            Destroy(gameObject);
         }
     }
 }

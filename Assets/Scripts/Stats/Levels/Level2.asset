@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _levelStatsValues:
     LevelNumber: 1
-    MinRandomSpawnTime: 7
-    MaxRandomSpawnTime: 10
+    MinRandomSpawnTime: 5
+    MaxRandomSpawnTime: 8
     MaxEnemyCount: 10
     ZombieStats:
     - {fileID: 11400000, guid: e404c7d5e3b4a47d38be16601c7cc148, type: 2}

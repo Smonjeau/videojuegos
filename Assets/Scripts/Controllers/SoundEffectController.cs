@@ -23,18 +23,6 @@ namespace Controllers
         public void PlayOnReload() => AudioSource.PlayOneShot(_reloadClip);
         public void PlayOnEmpty() => AudioSource.PlayOneShot(_emptyClip);
 
-        public void PlayOnLowLife()
-        {
-            AudioSource.loop = true;
-            
-            AudioSource.Play();
-        }
-
-        public void StopLowLifeSound()
-        {
-            AudioSource.loop = false;
-            AudioSource.Stop();
-        }
         public void Play() => AudioSource.Play();
         public void Stop() => AudioSource.Stop();
         void Start()

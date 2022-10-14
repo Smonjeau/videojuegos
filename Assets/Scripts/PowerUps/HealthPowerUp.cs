@@ -12,7 +12,7 @@ namespace PowerUps
             var damageable = target.GetComponent<IDamageable>();
             if (damageable != null)
             {
-                damageable.ResetLife();
+                damageable.Heal(damageable.MaxLife);
                 Die();
             }
             

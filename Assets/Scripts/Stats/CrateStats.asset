@@ -21,4 +21,4 @@ MonoBehaviour:
     - {fileID: 731813801729813074, guid: 975e90ff36128422a98cb39ab2669e9d, type: 3}
     PowerUpChances:
     - 0.6
-    - 0.2
+    - 0.4

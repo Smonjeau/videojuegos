@@ -36,6 +36,7 @@ namespace Zombies
         private GameObject _target;
         [SerializeField] private string _state;
         private string _baseState;
+        private bool _gameOver;
 
         private void Start()
         {
@@ -54,11 +55,13 @@ namespace Zombies
             _animations.Play(_state);
         
             InvokeRepeating(nameof(PlaySound), 2, 5);
+            
+            EventsManager.Instance.OnGameOver += OnGameOver;
         }
 
         private void Update()
         {
-            if (_state == ZombieState.DIE) return;
+            if (_state == ZombieState.DIE || _gameOver) return;
 
             var playerPosition = _target.transform.position;
             float distance = DistanceBetween(playerPosition, transform.position);
@@ -116,6 +119,13 @@ namespace Zombies
             ChangeStateTo(ZombieState.DIE);
             LevelManager.Instance.ZombieKill();
             Destroy(gameObject, 2f);
+        }
+
+        private void OnGameOver(bool gameOver)
+        {
+            _gameOver = true;
+            CancelInvoke(nameof(Attack));
+            ChangeStateTo(ZombieState.IDLE);
         }
     }
 }

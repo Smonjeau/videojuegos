@@ -39,9 +39,11 @@ namespace Entities
             _hasPowerUp = random <= _powerUpChance;
             if (!_hasPowerUp) return;
             random = Random.Range(0f, 1f);
+            var sum = 0f;
             for (var i = 0; i < _powerUpChances.Count; i++)
             {
-                if (random <= _powerUpChances[i])
+                sum += _powerUpChances[i];
+                if (random <= sum)
                 {
                     _powerUpPrefab = _powerUpPrefabs[i];
                     break;

@@ -15,24 +15,15 @@ namespace UI
         /* Text Reference */
         [SerializeField] private Text _nextLevel;
         [SerializeField] private Text _level;
-
-        private int _currentLevel = 1;
         
         public Image blackoutImg;
         public Image redImg;
 
         [SerializeField] private Image _weapon;
-        
-        
         [SerializeField] private Text _ammo;
-
-        
         [SerializeField] private List<Sprite> _weaponSprites;
-
         [SerializeField] private RawImage gunSight;
-
         [SerializeField] private RawImage hitmarker;
-
         [SerializeField] private GameObject _helpPopup;
 
 
@@ -44,9 +35,37 @@ namespace UI
             EventsManager.Instance.OnAmmoChange += OnAmmoChange;
             EventsManager.Instance.OnWeaponChange += OnWeaponChange;
             EventsManager.Instance.OnAttacked += OnAttacked;
+            EventsManager.Instance.OnLowLife += OnLowLife;
+            EventsManager.Instance.OnLifeHealed += OnLifeHealed;
             EventsManager.Instance.OnHit += OnHit;
             _weapon.sprite = _weaponSprites[0];
 
+        }
+
+        private void OnLifeHealed(int life, int maxLife, int criticalLife)
+        {
+            var opacity = CalculateBloodOpacity(life, criticalLife);
+            PaintBloodOnScreen(opacity);
+        }
+
+        private void OnAttacked(int life, int maxLife, int criticalLife)
+        {
+            var opacity = CalculateBloodOpacity(life, maxLife);
+            PaintBloodOnScreen(opacity);
+            if (life > criticalLife*2)
+                StartCoroutine(FadeTextToZeroAlpha(1f, redImg));
+        }
+        
+        private void OnLowLife()
+        {
+            PaintBloodOnScreen(1f);
+        }
+        
+        private float CalculateBloodOpacity(int life, int criticalLife)
+        {
+            var opacity = 1 - ((float)life / criticalLife);
+            if (life > criticalLife) opacity = 0;
+            return opacity;
         }
 
         public IEnumerator FadeOut(string scene,bool blackColor)
@@ -88,32 +107,13 @@ namespace UI
 
         }
 
-        private void Update()
-        {
-            if (SceneManager.GetActiveScene().name != "SampleScene") return;
-            if (!(redImg.color.a > 0f)) return;
-            var color = redImg.color;
-            color.a -= 0.01f;
-            redImg.color = color;
-        }
-
-        private void OnAttacked()
-        {
-            PaintBloodOnScreen(0.6f);
-        }
-    
-
-        public void DisplayCriticLifeIndicator()
-        {
-            PaintBloodOnScreen(1f);
-        }
-
         private void PaintBloodOnScreen(float opacity)
         {
             var color = redImg.color;
             color.a = opacity;
             redImg.color = color;
         }
+        
         private void OnWeaponChange(int weaponId)
         {
             _weapon.sprite = _weaponSprites[weaponId];
@@ -126,7 +126,6 @@ namespace UI
 
         private void OnNextLevel(LevelStats nextLevel)
         {
-            _currentLevel = nextLevel.LevelNumber;
             _nextLevel.text = "Round " + nextLevel.LevelName;
             StartCoroutine(FadeTextToFullAlpha(2f, _nextLevel));
             _level.text = nextLevel.LevelName;
@@ -159,7 +158,7 @@ namespace UI
             }
         }
  
-        private IEnumerator FadeTextToZeroAlpha(float t, Text i)
+        private IEnumerator FadeTextToZeroAlpha(float t, MaskableGraphic i)
         {
             i.color = new Color(i.color.r, i.color.g, i.color.b, 1);
             while (i.color.a > 0.0f)

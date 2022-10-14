@@ -9,7 +9,7 @@ namespace Controllers
 {
     public class LifeController : MonoBehaviour, IDamageable
     {
-        private const int CriticLife = 15;
+        [SerializeField] public int CriticLife = 20;
         public int Life => _life;
         [SerializeField] private int _life;
         public int MaxLife => _maxLife;
@@ -35,9 +35,8 @@ namespace Controllers
 
             if (gameObject.CompareTag("Player"))
             {
-                if (_life < 2 * CriticLife && _life > CriticLife)
-                    EventsManager.Instance.EventPlayerAttacked();
-                else if (_life < CriticLife) EventsManager.Instance.EventLowLife();
+                EventsManager.Instance.EventPlayerAttacked(_life, _maxLife, CriticLife);
+                if (_life <= CriticLife) EventsManager.Instance.EventLowLife();
             }
         }
 
@@ -56,7 +55,7 @@ namespace Controllers
             _life += heal;
             if (_life > _maxLife) ResetLife();
             
-            if(_life > CriticLife) EventsManager.Instance.EventLifeHealed();
+            if(_life > CriticLife) EventsManager.Instance.EventLifeHealed(_life, _maxLife, CriticLife);
         }
 
         public void ResetLife()

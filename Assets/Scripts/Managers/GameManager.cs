@@ -10,8 +10,6 @@ namespace Managers
     public class GameManager : MonoBehaviour
     {
         [SerializeField] private UIManager _uiManager;
-
-        private SoundEffectController _soundEffectController;
         
 
         [SerializeField] private bool _isVictory;
@@ -23,12 +21,9 @@ namespace Managers
         private void Start()
         {
             _uiManager = GetComponent<UIManager>();
-            _soundEffectController = GetComponent<SoundEffectController>();
 
             _pauseMenu = GameObject.FindGameObjectWithTag("pause");
             EventsManager.Instance.OnGameOver += OnGameOver;
-            EventsManager.Instance.OnLowLife += OnLowLife;
-            EventsManager.Instance.OnLifeHealed += OnLifeHealed;
             StartCoroutine(_uiManager.LoadGame());
         }
 
@@ -76,18 +71,6 @@ namespace Managers
             GlobalData.Instance.SetGamePaused(false);
 
             Time.timeScale = 1;
-        }
-        
-        private void OnLowLife()
-        {
-            _soundEffectController.PlayOnLowLife();
-            _uiManager.DisplayCriticLifeIndicator();
-        }
-
-        
-        private void OnLifeHealed()
-        {
-            _soundEffectController.StopLowLifeSound();
         }
 
 
