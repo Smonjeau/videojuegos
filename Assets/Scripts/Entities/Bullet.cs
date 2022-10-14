@@ -33,16 +33,25 @@ namespace Entities
         public void OnTriggerEnter(Collider collider)
         {
             //if bullet hits player or something not damageable, ignore
-            if (!_layerTarget.Contains(collider.gameObject.layer)) return;
-            if (collider.gameObject.CompareTag("Player")) return;
-        
+            if (!_layerTarget.Contains(collider.gameObject.layer))
+            {
+                Destroy(gameObject);
+                return;
+            }
+            if (collider.gameObject.CompareTag("Player"))
+            {
+                Destroy(gameObject);
+
+                return;
+            };
+
             //if whatever is hits is damageable, damage it
             IDamageable damageable = collider.GetComponent<IDamageable>();
             damageable?.TakeDamage(_owner.Damage);
-            EventsManager.Instance.EventHit();    
-        
+            EventsManager.Instance.EventHit();
+
             Destroy(gameObject);
-       
+
         }
 
         private void Start()

@@ -12,7 +12,7 @@ namespace Managers
     public class LevelManager : MonoBehaviour
     {
         [SerializeField] private GameObject _levelsContainer;
-        private Level[] _levels;
+        [SerializeField] private Level[] _levels;
         
         public static LevelManager Instance;
         private int _currentLevelNumber;
@@ -29,8 +29,8 @@ namespace Managers
         
         private void Start()
         {
-            _levels = _levelsContainer.GetComponents<Level>();
-            foreach (var level in _levels) level.enabled = false;
+            _levels = GetComponentsInChildren<Level>();
+            foreach (var level in _levels) level.gameObject.SetActive(false);
             _currentLevelNumber = 1;
             PlayLevel(_currentLevelNumber);
             
@@ -40,12 +40,12 @@ namespace Managers
         {
             if (level.IsFinalLevel)
             {
-                Destroy(_currentLevel);
+                Destroy(_currentLevel.gameObject);
                 EventsManager.Instance.EventGameOver(true);
             }
             else
             {
-                Destroy(_currentLevel);
+                Destroy(_currentLevel.gameObject);
                 _currentLevelNumber++;
                 PlayLevel(_currentLevelNumber);
             }
@@ -55,7 +55,7 @@ namespace Managers
         {
             _currentLevel = _levels[levelNumber - 1];
             OnNextLevel?.Invoke(_currentLevel._stats);
-            _currentLevel.enabled = true;
+            _currentLevel.gameObject.SetActive(true);
             _currentLevel.StartLevel();
         }
 

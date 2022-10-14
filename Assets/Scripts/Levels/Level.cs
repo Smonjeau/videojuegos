@@ -26,13 +26,13 @@ namespace Levels
         
 
         private int _spawnersCount;
-        private float _timeRemaining = 10;
-        private int _enemyCount;
+        [SerializeField] private float _timeRemaining = 10;
+        [SerializeField] private int _enemyCount;
         
-        private bool _isLevelStarted;
+        [SerializeField] private bool _isLevelStarted;
         private float[] _zombieChances;
 
-        private int _zombieKills;
+        [SerializeField] private int _zombieKills;
 
         public void Start()
         {
@@ -58,11 +58,14 @@ namespace Levels
             _enemyCount = 0;
             _timeRemaining = 5f;
             _isLevelStarted = true;
+            _zombieKills = 0;
             LevelManager.Instance.OnZombieKill += OnZombieKill;
         }
         
         public void EndLevel()
         {
+            _isLevelStarted = false;
+            LevelManager.Instance.OnZombieKill -= OnZombieKill;
             LevelManager.Instance.CompletedLevel(this);
         }
         
@@ -80,12 +83,12 @@ namespace Levels
             if (_enemyCount >= _maxEnemyCount) return;
             
             if (_zombieKills == _maxEnemyCount) EndLevel();
-
+            
             if (_timeRemaining <= 0)
             {
+                _enemyCount++;
                 SpawnZombie();
                 _timeRemaining = UnityEngine.Random.Range(_minRandomSpawnTime, _maxRandomSpawnTime);
-                _enemyCount++;
             }
             else  _timeRemaining -= Time.deltaTime;
         }

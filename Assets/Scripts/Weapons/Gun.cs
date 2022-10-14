@@ -128,7 +128,7 @@ namespace Weapons
         public void FullAmmo()
         {
             _currentAmmo = MaxAmmo;
-            StartCoroutine(UI_AmmoUpdater(0));
+            if (gameObject.activeSelf) StartCoroutine(UI_AmmoUpdater(0));
         } 
 
         protected bool CanFire() => ! (_cooldownTimer > 0);

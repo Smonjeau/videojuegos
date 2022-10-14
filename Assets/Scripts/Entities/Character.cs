@@ -26,7 +26,7 @@ namespace Entities
         private Gun _selectedGun;
         private int _selectedGunIndex=0;
 
-        [SerializeField] private List<Gun> _guns;
+        [SerializeField] public List<Gun> Guns;
 
         // MOVEMENT KEYS
         [SerializeField] private KeyCode _moveForward = KeyCode.W;
@@ -73,9 +73,9 @@ namespace Entities
             _lifeController = GetComponent<LifeController>();
             _soundEffectController = GetComponent<SoldierSoundController>();
             
-            foreach (var gun in _guns) {gun.gameObject.SetActive(false);}
+            foreach (var gun in Guns) {gun.gameObject.SetActive(false);}
 
-            _selectedGun = _guns[_selectedGunIndex];
+            _selectedGun = Guns[_selectedGunIndex];
             _selectedGun.gameObject.SetActive(true);
             _selectedGun.Reset();
             _cmdAttack = new CmdAttack(_selectedGun);
@@ -132,7 +132,7 @@ namespace Entities
             if (Input.GetKeyDown(KeyCode.Y))
             {
                 _selectedGunIndex++;
-                if (_selectedGunIndex >= _guns.Count)
+                if (_selectedGunIndex >= Guns.Count)
                     _selectedGunIndex = 0;
                 ChangeWeapon(_selectedGunIndex);
             }
@@ -164,7 +164,7 @@ namespace Entities
 
             if (_selectedGun.IsReloading) return;
             _selectedGun.gameObject.SetActive(false);
-            _selectedGun = _guns[index];
+            _selectedGun = Guns[index];
             _selectedGunIndex = index;
             _selectedGun.gameObject.SetActive(true);
             _selectedGun.Reset();

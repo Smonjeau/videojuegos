@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Level2
   m_EditorClassIdentifier: 
   _levelStatsValues:
-    LevelNumber: 1
+    LevelNumber: 2
     MinRandomSpawnTime: 5
     MaxRandomSpawnTime: 8
     MaxEnemyCount: 10
@@ -21,7 +21,7 @@ MonoBehaviour:
     - {fileID: 11400000, guid: e404c7d5e3b4a47d38be16601c7cc148, type: 2}
     - {fileID: 11400000, guid: 2fab3f0f45e3e46dcb17d7cb1cce07ae, type: 2}
     EnemiesSpawnChance:
-    - 0.5
+    - 0.8
     - 0.2
     IsFinalLevel: 0
     LevelName: ii
