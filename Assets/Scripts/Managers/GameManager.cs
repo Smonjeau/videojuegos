@@ -5,8 +5,6 @@ using UnityEngine;
 
 namespace Managers
 {
-    
-    [RequireComponent(typeof(UIManager))]
     public class GameManager : MonoBehaviour
     {
         [SerializeField] private UIManager _uiManager;

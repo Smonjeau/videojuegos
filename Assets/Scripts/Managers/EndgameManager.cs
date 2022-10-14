@@ -25,17 +25,14 @@ namespace Managers
 
         private void Start()
         {
-            var victoryColor = Color.black;
-            ColorUtility.TryParseHtmlString("#be6c5b", out var defeatColor);
+            ColorUtility.TryParseHtmlString("#CAC3C3", out var defeatColor);
+            ColorUtility.TryParseHtmlString("#F8EDED", out var victoryColor);
     
             var wasVictory = GlobalData.Instance.IsVictory;
             _background.sprite = wasVictory ? _victorySprite : _defeatSprite;
             _gameoverMessage.text = wasVictory ? "VICTORY" : "DEFEAT";
-            _gameoverMessage.fontSize = 160;
             _gameoverMessage.horizontalOverflow = HorizontalWrapMode.Overflow;
             _gameoverMessage.verticalOverflow = VerticalWrapMode.Truncate;
-            _gameoverMessage.alignment = TextAnchor.UpperCenter;
-            _gameoverMessage.fontStyle = FontStyle.Bold;
             _gameoverMessage.color = wasVictory ? victoryColor : defeatColor;
             
             StartCoroutine(ChangeVolumeGradually());
