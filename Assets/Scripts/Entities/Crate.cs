@@ -8,6 +8,7 @@ namespace Entities
 {
     using UnityEngine;
 
+    [RequireComponent(typeof(LifeController))]
     public class Crate : MonoBehaviour, IDieable
     {
         

@@ -12,7 +12,7 @@ namespace Zombies
         typeof(NavMeshAgent),
         typeof(ZombieLifeController),
         typeof(ZombieSoundEffectController))]
-    [RequireComponent(typeof(Animation))]
+    [RequireComponent(typeof(Animation), typeof(Collider))]
     public class Zombie : MonoBehaviour, IDieable
     {
 

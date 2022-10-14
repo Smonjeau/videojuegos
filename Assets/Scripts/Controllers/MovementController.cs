@@ -5,6 +5,7 @@ using UnityEngine;
 
 namespace Controllers
 {
+    [RequireComponent(typeof(Rigidbody))]
     public class MovementController : MonoBehaviour, IMoveable
     {
 

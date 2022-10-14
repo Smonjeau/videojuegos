@@ -1,5 +1,6 @@
 ﻿
 using UnityEngine;
+using Weapons;
 
 namespace Strategy
 {
