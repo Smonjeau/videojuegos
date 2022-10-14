@@ -19,9 +19,13 @@ namespace Weapons
             {
                 for (int i = 0; i < BulletCount; i++)
                 {
+                    var rot = transform.rotation;
+                    var random = new System.Random();
+                    //rot *= Quaternion.Euler(Vector3.up * (1f * (random.Next(0, 1) == 0 ? 1 : -1)));
+                    rot *= Quaternion.Euler(Vector3.left * (1.2f * (random.Next(0, 1) == 0 ? 1 : -1)));
                     var bullet = Instantiate(
                         BulletPrefab,
-                        _barrelExitTransform.position + Random.insideUnitSphere * 0.6f, transform.rotation);
+                        _barrelExitTransform.position + Random.insideUnitSphere * 0.3f, rot);
                     bullet.name = "Shotgun Bullet";
                     bullet.GetComponent<Bullet>().SetOwner(this);
                     _soundEffectController.PlayOnShot();

@@ -15,10 +15,10 @@ MonoBehaviour:
   _gunStatsValues:
     BulletPrefab: {fileID: 8750377684753805614, guid: eef70db8d747f704e93012ec120fec11, type: 3}
     GunPrefab: {fileID: 4999444334603179992, guid: 1191b84140fcbba49b667e7d8c6c27e6, type: 3}
-    Damage: 15
+    Damage: 20
     MagSize: 7
     MaxAmmo: 21
-    BulletCount: 5
+    BulletCount: 6
     RateOfFire: 70
     ReloadCooldown: 3
     WeaponName: Winchester 21

@@ -1,6 +1,7 @@
 ﻿using Controllers;
 using UI;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 
 namespace Managers
@@ -19,7 +20,7 @@ namespace Managers
         private void Start()
         {
             _uiManager = GetComponent<UIManager>();
-
+            if (SceneManager.GetActiveScene().name != "SampleScene") return;
             _pauseMenu = GameObject.FindGameObjectWithTag("pause");
             EventsManager.Instance.OnGameOver += OnGameOver;
             StartCoroutine(_uiManager.LoadGame());
