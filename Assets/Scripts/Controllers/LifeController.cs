@@ -31,6 +31,7 @@ namespace Controllers
             {
                 _life = 0;
                 Die();
+                return;
             }
 
             if (gameObject.CompareTag("Player"))

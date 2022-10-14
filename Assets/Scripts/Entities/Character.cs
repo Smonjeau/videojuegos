@@ -181,6 +181,7 @@ namespace Entities
         public void Die()
         {
             EventsManager.Instance.EventGameOver(false);
+            _soundEffectController.Stop();
             Destroy(gameObject);
         }
     }

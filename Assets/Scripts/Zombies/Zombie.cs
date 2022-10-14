@@ -126,6 +126,7 @@ namespace Zombies
             _gameOver = true;
             CancelInvoke(nameof(Attack));
             ChangeStateTo(ZombieState.IDLE);
+            Destroy(this);
         }
     }
 }
