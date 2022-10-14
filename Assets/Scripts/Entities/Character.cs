@@ -5,6 +5,7 @@ using Controllers;
 using EventQueue;
 using Strategy;
 using UnityEngine;
+using Weapons;
 
 namespace Entities
 {

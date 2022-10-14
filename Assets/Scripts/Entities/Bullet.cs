@@ -2,6 +2,7 @@
 using Managers;
 using Strategy;
 using UnityEngine;
+using Weapons;
 
 namespace Entities
 {
@@ -46,8 +47,8 @@ namespace Entities
 
         private void Start()
         {
-            _rigidbody = gameObject.GetComponent<Rigidbody>();
-            _collider = gameObject.GetComponent<Collider>();
+            _rigidbody = GetComponent<Rigidbody>();
+            _collider = GetComponent<Collider>();
 
             _collider.isTrigger = true;
             _rigidbody.useGravity = false;

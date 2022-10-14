@@ -5,6 +5,7 @@ using Random = UnityEngine.Random;
 
 namespace Controllers
 {
+    [RequireComponent(typeof(MeshFilter))]
     public class SpawnCrateController : MonoBehaviour
     {
         [SerializeField] private GameObject _cratePrefab;
