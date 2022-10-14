@@ -12,6 +12,7 @@ namespace Controllers
         [SerializeField] private float _speed = 11; 
         public float RotationSpeed => _rotationSpeed;
         [SerializeField] private float _rotationSpeed = 140;
+        [SerializeField] private int _verticalAngleViewLimit =60; 
 
         [SerializeField] private Rigidbody _rigidbody;
 
@@ -55,10 +56,22 @@ namespace Controllers
 
         public void RotateY(Vector3 direction)
         {
-            _cameraPosition.Rotate(direction * (Time.deltaTime * _rotationSpeed));
-            _leftArm.Rotate(direction * (Time.deltaTime * _rotationSpeed));
-            _rightArm.Rotate(direction * (Time.deltaTime * _rotationSpeed));
 
+            int limit = _verticalAngleViewLimit;
+            Vector3 currRotation = _cameraPosition.eulerAngles;
+            Vector3 rotation = direction * (Time.deltaTime * _rotationSpeed);
+            if (currRotation.x>180)
+            {
+
+                currRotation.x = -(-currRotation.x + 360);
+            }
+            rotation.x = Mathf.Clamp(rotation.x, -limit-currRotation.x, limit-currRotation.x);
+            
+            _cameraPosition.Rotate(rotation);
+            _leftArm.Rotate(rotation);
+            _rightArm.Rotate(rotation);
+            
+            
             
             
         }
