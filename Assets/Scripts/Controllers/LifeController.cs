@@ -2,12 +2,14 @@
 using System;
 using Managers;
 using Strategy;
+using UnityEditor.PackageManager;
 using UnityEngine;
 
 namespace Controllers
 {
     public class LifeController : MonoBehaviour, IDamageable
     {
+        private const int CriticLife = 15;
         public int Life => _life;
         [SerializeField] private int _life;
         public int MaxLife => _maxLife;
@@ -32,7 +34,11 @@ namespace Controllers
             }
 
             if (gameObject.CompareTag("Player"))
-                EventsManager.Instance.EventPlayerAttacked();
+            {
+                if (_life < 2 * CriticLife && _life > CriticLife)
+                    EventsManager.Instance.EventPlayerAttacked();
+                else if (_life < CriticLife) EventsManager.Instance.EventLowLife();
+            }
         }
 
         public bool IsDead() => _life <= 0;
@@ -49,6 +55,8 @@ namespace Controllers
         {
             _life += heal;
             if (_life > _maxLife) ResetLife();
+            
+            if(_life > CriticLife) EventsManager.Instance.EventLifeHealed();
         }
 
         public void ResetLife()

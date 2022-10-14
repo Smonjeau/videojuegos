@@ -33,17 +33,20 @@ namespace UI
 
         [SerializeField] private RawImage hitmarker;
 
+        [SerializeField] private GameObject _helpPopup;
+
 
 
         private void Start()
         {
+            if (SceneManager.GetActiveScene().name != "SampleScene") return;
             LevelManager.Instance.OnNextLevel += OnNextLevel;
             EventsManager.Instance.OnAmmoChange += OnAmmoChange;
             EventsManager.Instance.OnWeaponChange += OnWeaponChange;
             EventsManager.Instance.OnAttacked += OnAttacked;
             EventsManager.Instance.OnHit += OnHit;
             _weapon.sprite = _weaponSprites[0];
-            
+
         }
 
         public IEnumerator FadeOut(string scene,bool blackColor)
@@ -87,6 +90,7 @@ namespace UI
 
         private void Update()
         {
+            if (SceneManager.GetActiveScene().name != "SampleScene") return;
             if (!(redImg.color.a > 0f)) return;
             var color = redImg.color;
             color.a -= 0.01f;
@@ -95,26 +99,29 @@ namespace UI
 
         private void OnAttacked()
         {
+            PaintBloodOnScreen(0.6f);
+        }
+    
+
+        public void DisplayCriticLifeIndicator()
+        {
+            PaintBloodOnScreen(1f);
+        }
+
+        private void PaintBloodOnScreen(float opacity)
+        {
             var color = redImg.color;
-            color.a = 0.8f;
+            color.a = opacity;
             redImg.color = color;
         }
-        
         private void OnWeaponChange(int weaponId)
         {
             _weapon.sprite = _weaponSprites[weaponId];
         }
         
-        private void OnAmmoChange(int currentAmmo, int maxAmmo, bool infiniteAmmo)
+        private void OnAmmoChange(int currentAmmo, int maxAmmo,bool infiniteAmmo)
         {
-            if (infiniteAmmo)
-            {
-                _ammo.text = $"{currentAmmo}/∞";
-            }
-            else
-            {
-                _ammo.text = $"{currentAmmo}/{maxAmmo}";
-            }
+            _ammo.text = infiniteAmmo ? $"{currentAmmo}/∞" : $"{currentAmmo}/{maxAmmo}";
         }
 
         private void OnNextLevel(LevelStats nextLevel)
@@ -166,7 +173,21 @@ namespace UI
         {
             gunSight.gameObject.SetActive(active);
         }
-        
+
+        public void ShowHelpPopup()
+        {
+            _helpPopup.SetActive(true);
+        }
+
+        public void CloseHelpPopup()
+        {
+            _helpPopup.SetActive(false);
+        }
+
+        public bool IsHelpPopupActive()
+        {
+            return _helpPopup.activeSelf;
+        }
         
     }
 }

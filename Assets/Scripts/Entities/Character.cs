@@ -17,6 +17,7 @@ namespace Entities
 
         private MovementController _movementController;
         private LifeController _lifeController;
+
         private Gun _selectedGun;
         private int _selectedGunIndex=0;
 
@@ -86,6 +87,7 @@ namespace Entities
         void Update()
         {
 
+            if (GlobalData.Instance.GamePaused) return;
             if (Input.GetKey(_moveForward)) EventQueueManager.Instance.AddMovementCommand(_cmdMoveForward);
             if (Input.GetKey(_moveBack))    EventQueueManager.Instance.AddMovementCommand(_cmdMoveBack);
             if (Input.GetKey(_moveLeft))    EventQueueManager.Instance.AddMovementCommand(_cmdMoveLeft);
@@ -100,6 +102,7 @@ namespace Entities
             if (Input.GetKey(KeyCode.G)) EventsManager.Instance.EventGameOver(true);
             if (Input.GetKey(KeyCode.F)) EventsManager.Instance.EventGameOver(false);
 
+            
             if(Input.GetKeyDown(_attack))
             {
                 _isFiring = true;
@@ -123,7 +126,7 @@ namespace Entities
 
             if (Input.GetKeyDown(_reload)) _selectedGun.Reload();
 
-            if (Input.GetKeyDown(KeyCode.Y) && !_selectedGun.IsReloading)
+            if (Input.GetKeyDown(KeyCode.Y))
             {
                 _selectedGunIndex++;
                 if (_selectedGunIndex >= _guns.Count)
@@ -154,14 +157,16 @@ namespace Entities
         private void ChangeWeapon(int index)
         {
 
+            if (_selectedGun.IsReloading) return;
             _selectedGun.gameObject.SetActive(false);
             _selectedGun = _guns[index];
+            _selectedGunIndex = index;
             _selectedGun.gameObject.SetActive(true);
             _selectedGun.Reset();
             _cmdAttack = new CmdAttack(_selectedGun);
 
             EventsManager.Instance.EventWeaponChange(index);
-            EventsManager.Instance.EventAmmoChange(_selectedGun.CurrentMagSize,_selectedGun.MaxAmmo, _selectedGun.InfiniteAmmo);
+            EventsManager.Instance.EventAmmoChange(_selectedGun.CurrentMagSize,_selectedGun.CurrentAmmo,_selectedGun.InfiniteAmmo);
 
         }
     }

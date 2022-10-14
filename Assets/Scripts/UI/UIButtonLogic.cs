@@ -12,7 +12,11 @@ public class UIButtonLogic : MonoBehaviour
 
     public void LoadGameScene() => SceneManager.LoadScene("SampleScene");
 
-    public void LoadHelpScene() => Debug.Log("Help Scene");
+    public void LoadHelpPopup()
+    {
+        var uiManager = GetComponent<UIManager>();
+        uiManager.ShowHelpPopup();
+    }
     
     public void CloseGame() => Application.Quit();
 
@@ -28,5 +32,11 @@ public class UIButtonLogic : MonoBehaviour
         var gameManager = GetComponent<GameManager>();
         gameManager.ResumeGame();
         StartCoroutine(uiManager.FadeOut("Main Menu",true));
+    }
+
+    public void CloseHelpPopup()
+    {
+        var uiManager = GetComponent<UIManager>();
+        uiManager.CloseHelpPopup();
     }
 }

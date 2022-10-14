@@ -25,6 +25,8 @@ public class Gun : MonoBehaviour, IGun
 
     public bool IsAutomatic => _stats.IsAutomatic;
 
+    public int CurrentAmmo => _currentAmmo;
+
     public float RateOfFire => _stats.RateOfFire;
     
 
@@ -49,7 +51,7 @@ public class Gun : MonoBehaviour, IGun
     {
         _currentMagSize = MagSize;
         if (!InfiniteAmmo) _currentAmmo = MaxAmmo - _currentMagSize;
-        EventsManager.Instance.EventAmmoChange(_currentMagSize,_currentAmmo, InfiniteAmmo);
+        EventsManager.Instance.EventAmmoChange(_currentMagSize,_currentAmmo,InfiniteAmmo);
         
         _barrelExitTransform = transform.GetChild(0);
         _soundEffectController = GetComponent<SoundEffectController>();
@@ -145,7 +147,7 @@ public class Gun : MonoBehaviour, IGun
      protected IEnumerator UI_AmmoUpdater(float secondsToSleep)
      {
          yield return new WaitForSeconds(secondsToSleep);
-         EventsManager.Instance.EventAmmoChange(_currentMagSize, _currentAmmo, InfiniteAmmo);
+         EventsManager.Instance.EventAmmoChange(_currentMagSize, _currentAmmo,InfiniteAmmo);
      }
 
     private bool OutOfAmmo() => !InfiniteAmmo && _currentAmmo <= 0;
