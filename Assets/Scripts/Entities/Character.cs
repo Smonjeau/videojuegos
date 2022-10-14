@@ -43,7 +43,7 @@ namespace Entities
 
         private bool _isFiring;
         
-        [SerializeField] private KeyCode _attack = KeyCode.Space;
+        [SerializeField] private KeyCode _attack = KeyCode.Mouse0;
         [SerializeField] private KeyCode _reload = KeyCode.R;
 
         
@@ -105,10 +105,6 @@ namespace Entities
             _rotationY = new Vector3(Input.GetAxis("Mouse Y"), 0f, 0f);
         
         
-            //TODO SACAME
-            if (Input.GetKey(KeyCode.G)) EventsManager.Instance.EventGameOver(true);
-            if (Input.GetKey(KeyCode.F)) EventsManager.Instance.EventGameOver(false);
-
             
             if(Input.GetKeyDown(_attack))
             {
