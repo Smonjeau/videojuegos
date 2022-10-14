@@ -11,14 +11,14 @@ namespace Controllers
 
         public void Start()
         {
-            _portalPosition = gameObject.transform.position;
+            _portalPosition = transform.position;
         }
 
         public void Spawn(ZombieStats zombieStats)
         {
             Instantiate(zombieStats.ZombiePrefab,
                 new Vector3(_portalPosition.x, _portalPosition.y, _portalPosition.z),
-                gameObject.transform.rotation
+                transform.rotation
             );
         }
 

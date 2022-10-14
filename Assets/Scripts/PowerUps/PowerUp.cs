@@ -10,13 +10,13 @@ namespace PowerUps
         [SerializeField] private List<int> _layerTarget;
         public virtual string Name => "Base PowerUp";
         
-        private float _timeToDestroy = 25f;
+        private float _timeToDestroy = 20f;
         
-        private void Start()
+        public void Init()
         {
             Destroy(gameObject, _timeToDestroy);
         }
-        
+
         public virtual void Use(GameObject target) {}
 
         private void OnTriggerEnter(Collider other)

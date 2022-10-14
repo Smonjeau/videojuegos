@@ -7,5 +7,7 @@ namespace Strategy
         string Name { get; }
         
         void Use(GameObject target);
+
+        void Init();
     }
 }

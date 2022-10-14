@@ -15,7 +15,7 @@ namespace Managers
         
         
         public event Action<bool> OnGameOver;
-        public event Action<int, int> OnAmmoChange;
+        public event Action<int, int, bool> OnAmmoChange;
         public event Action<int> OnWeaponChange;
         public event Action OnAttacked;
         public event Action OnHit;
@@ -26,9 +26,9 @@ namespace Managers
             OnGameOver?.Invoke(isVictory);
         }
 
-        public void EventAmmoChange(int currentAmmo, int maxAmmo)
+        public void EventAmmoChange(int currentAmmo, int maxAmmo, bool InfiniteAmmo)
         {
-            OnAmmoChange?.Invoke(currentAmmo, maxAmmo);
+            OnAmmoChange?.Invoke(currentAmmo, maxAmmo, InfiniteAmmo);
 
         }
 

@@ -19,13 +19,11 @@ namespace Entities
         [SerializeField] public CrateStats _stats;
         private float _powerUpChance => Stats.PowerUpChance;
         private List<GameObject> _powerUpPrefabs => Stats.PowerUpPrefabs;
+        private List<float> _powerUpChances => Stats.PowerUpChances;
 
-        [Header("Whole Create")]
         public MeshRenderer wholeCrate;
         public BoxCollider boxCollider;
-        [Header("Fractured Create")]
         public GameObject fracturedCrate;
-        [Header("Audio")]
         public AudioSource crashAudioClip;
 
         private bool _hasPowerUp;
@@ -40,7 +38,15 @@ namespace Entities
             var random = Random.Range(0f, 1f);
             _hasPowerUp = random <= _powerUpChance;
             if (!_hasPowerUp) return;
-            _powerUpPrefab = _powerUpPrefabs[Random.Range(0, _powerUpPrefabs.Count)];
+            random = Random.Range(0f, 1f);
+            for (var i = 0; i < _powerUpChances.Count; i++)
+            {
+                if (random <= _powerUpChances[i])
+                {
+                    _powerUpPrefab = _powerUpPrefabs[i];
+                    break;
+                }
+            }
             CreatePowerUp();
         }
 
@@ -61,6 +67,7 @@ namespace Entities
             crashAudioClip.Play();
             if (_hasPowerUp)
             {
+                _powerUp.GetComponent<IPowerUp>().Init();
                 _powerUp.SetActive(true);
             }
             Destroy(gameObject, 2f);

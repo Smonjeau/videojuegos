@@ -105,9 +105,9 @@ namespace UI
             _weapon.sprite = _weaponSprites[weaponId];
         }
         
-        private void OnAmmoChange(int currentAmmo, int maxAmmo)
+        private void OnAmmoChange(int currentAmmo, int maxAmmo, bool infiniteAmmo)
         {
-            if (maxAmmo == 0)
+            if (infiniteAmmo)
             {
                 _ammo.text = $"{currentAmmo}/∞";
             }

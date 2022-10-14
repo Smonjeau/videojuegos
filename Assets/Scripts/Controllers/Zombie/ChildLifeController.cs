@@ -19,7 +19,7 @@ namespace Controllers
 
         private void Start()
         {
-            _parentObject = transform.parent.gameObject;
+            if (_parentObject == null) _parentObject = transform.parent.gameObject;
             _parentLifeController = _parentObject.GetComponent<ZombieLifeController>();
         }
 

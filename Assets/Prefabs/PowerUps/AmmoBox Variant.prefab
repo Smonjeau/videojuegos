@@ -139,4 +139,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7fd25cd7d83846e08a8451b89f7ff0d9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _layerTarget: 07000000
+  _layerTarget: 08000000

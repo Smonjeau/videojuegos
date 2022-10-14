@@ -8,12 +8,12 @@ namespace Controllers
     public class ZombieLifeController : LifeController
     {
         
-        private global::Zombies.Zombie _zombie;
+        private Zombies.Zombie _zombie;
         public new int MaxLife => _zombie.Stats.MaxLife;
         
         private void Start()
         {
-            _zombie = GetComponent<global::Zombies.Zombie>();
+            _zombie = GetComponent<Zombies.Zombie>();
             SetLife(MaxLife);
             dieable = GetComponent<IDieable>();
         }

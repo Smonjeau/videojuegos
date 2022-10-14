@@ -100,7 +100,6 @@ namespace Entities
             if (Input.GetKey(KeyCode.G)) EventsManager.Instance.EventGameOver(true);
             if (Input.GetKey(KeyCode.F)) EventsManager.Instance.EventGameOver(false);
 
-            
             if(Input.GetKeyDown(_attack))
             {
                 _isFiring = true;
@@ -115,7 +114,7 @@ namespace Entities
             {
                 EventQueueManager.Instance.AddCommand(_cmdAttack);
 
-                if (!_selectedGun.IsAutomatic)
+                if (!_selectedGun.IsAutomatic || _selectedGun.CurrentMagSize == 0)
                     _isFiring = false;
             }
 
@@ -162,7 +161,7 @@ namespace Entities
             _cmdAttack = new CmdAttack(_selectedGun);
 
             EventsManager.Instance.EventWeaponChange(index);
-            EventsManager.Instance.EventAmmoChange(_selectedGun.CurrentMagSize,_selectedGun.MaxAmmo);
+            EventsManager.Instance.EventAmmoChange(_selectedGun.CurrentMagSize,_selectedGun.MaxAmmo, _selectedGun.InfiniteAmmo);
 
         }
     }

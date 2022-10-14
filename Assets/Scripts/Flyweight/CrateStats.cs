@@ -12,6 +12,7 @@ namespace Flyweight
         public int MaxLife => _stats.Health;
         public float PowerUpChance => _stats.PowerUpChance;
         public List<GameObject> PowerUpPrefabs => _stats.PowerUpPrefabs;
+        public List<float> PowerUpChances => _stats.PowerUpChances;
         
     }
     
@@ -22,5 +23,6 @@ namespace Flyweight
         public int Health;
         public float PowerUpChance;
         public List<GameObject> PowerUpPrefabs;
+        public List<float> PowerUpChances;
     }
 }

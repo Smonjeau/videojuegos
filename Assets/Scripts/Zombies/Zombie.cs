@@ -10,9 +10,9 @@ namespace Zombies
 {
     [RequireComponent( 
         typeof(NavMeshAgent),
-        typeof(LifeController),
+        typeof(ZombieLifeController),
         typeof(ZombieSoundEffectController))]
-    [RequireComponent(typeof(Animation), typeof(NavMeshObstacle))]
+    [RequireComponent(typeof(Animation))]
     public class Zombie : MonoBehaviour, IDieable
     {
 

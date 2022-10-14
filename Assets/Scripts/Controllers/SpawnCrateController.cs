@@ -37,9 +37,9 @@ namespace Controllers
         
         private void SpawnInside(GameObject spawnObject){
             Vector3 pos = Vector3.zero;
-            pos.x = Random.Range(-_xDim/2f, _xDim/2f) + _center.x;
+            pos.x = Random.Range(-_xDim, _xDim) + _center.x;
             pos.y = 0f;
-            pos.z = Random.Range(-_zDim/2f, _zDim/2f) + _center.z;
+            pos.z = Random.Range(-_zDim, _zDim) + _center.z;
             _previousCrate = Instantiate(spawnObject, pos, Quaternion.identity);
         }
     }
