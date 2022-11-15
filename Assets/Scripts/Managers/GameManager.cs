@@ -1,4 +1,4 @@
-﻿using Controllers;
+﻿using System;
 using UI;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -17,6 +17,15 @@ namespace Managers
 
         [SerializeField] private bool _gamePaused;
 
+        private void Awake()
+        {
+            if (SceneManager.GetActiveScene().name == "Main Menu")
+            {
+                DontDestroyOnLoad(GameObject.Find("Menu Background Sound"));
+            }
+
+        }
+
         private void Start()
         {
             _uiManager = GetComponent<UIManager>();
@@ -24,6 +33,8 @@ namespace Managers
             _pauseMenu = GameObject.FindGameObjectWithTag("pause");
             EventsManager.Instance.OnGameOver += OnGameOver;
             StartCoroutine(_uiManager.LoadGame());
+            Destroy(GameObject.Find("Menu Background Sound").gameObject);
+
         }
 
 

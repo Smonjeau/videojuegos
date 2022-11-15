@@ -14,7 +14,7 @@ namespace UI
     {
         public void LoadMenuScene() => SceneManager.LoadScene("Main Menu");
 
-        public void LoadGameScene() => SceneManager.LoadScene("SampleScene");
+        public void LoadGameScene() => SceneManager.LoadScene("Load Screen");
 
         public void LoadHelpPopup()
         {
