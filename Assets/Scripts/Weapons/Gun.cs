@@ -84,7 +84,11 @@ namespace Weapons
         public void Reload()
         {
             _isReloading = true;
-            if (!CanFire() || OutOfAmmo()) return; //not ready to fire
+            if (!CanFire() || OutOfAmmo() || HasFullMag()) {
+                //not ready to fire
+                _isReloading = false;
+                return;
+            }
 
             StartCoroutine(ReloadAnimation());
             _cooldownTimer = ReloadCooldown;
@@ -145,6 +149,12 @@ namespace Weapons
          }
 
         private bool OutOfAmmo() => !InfiniteAmmo && _currentAmmo <= 0;
+
+        private bool HasFullMag()
+        {
+
+            return _currentMagSize == MagSize;
+        }
     }
     
 }
