@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 using Controllers;
 using Entities;
 using Flyweight;
@@ -12,7 +13,6 @@ namespace Weapons
     public class Gun : MonoBehaviour, IGun
     {
         [SerializeField] private GunStats _stats;
-        public GameObject BulletPrefab => _stats.BulletPrefab;
         public GameObject GunPrefab => _stats.GunPrefab;
         public int MagSize => _stats.MagSize;
         public int MaxAmmo => _stats.MaxAmmo;
@@ -28,7 +28,11 @@ namespace Weapons
         public int CurrentAmmo => _currentAmmo;
 
         public float RateOfFire => _stats.RateOfFire;
-        
+
+        public float Range => _stats.Range;
+
+
+        public float InaccuracyDistance => _stats.InaccuracyDistance;
 
         
         protected float _cooldownTimer = 0;
@@ -41,6 +45,10 @@ namespace Weapons
         [SerializeField] protected int _currentMagSize;
         [SerializeField] private int _currentAmmo;
         [SerializeField] private bool _isReloading;
+        
+        [SerializeField] protected List<int> _layerTarget = new List<int>{6,7};
+
+        [SerializeField] protected Camera fpsCamera;
 
         private void Start()
         {
@@ -70,10 +78,16 @@ namespace Weapons
             }
             
             _soundEffectController.PlayOnShot();
-            var bullet = Instantiate(BulletPrefab, _barrelExitTransform.position, transform.rotation);
-            bullet.name = "Bullet";
-            bullet.GetComponent<Bullet>().SetOwner(this);
-            
+  
+            RaycastHit hit;
+            var cameraTransform = fpsCamera.transform;
+            var ray = new Ray(cameraTransform.position, cameraTransform.forward);
+
+            if (Physics.Raycast(ray, out hit, Range))
+            {
+                MakeDamage(hit.collider);
+            }
+
             _currentMagSize--;
              StartCoroutine(UI_AmmoUpdater(0));
 
@@ -154,6 +168,18 @@ namespace Weapons
         {
 
             return _currentMagSize == MagSize;
+        }
+
+        protected void MakeDamage(Collider collider)
+        {
+            if (!_layerTarget.Contains(collider.gameObject.layer) ||
+                collider.gameObject.CompareTag("Player")) return;
+            
+            
+            //if whatever is hits is damageable, damage it
+            IDamageable damageable = collider.GetComponent<IDamageable>();
+            damageable?.TakeDamage(Damage);
+            EventsManager.Instance.EventHit();
         }
     }
     

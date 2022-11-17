@@ -13,7 +13,6 @@ MonoBehaviour:
   m_Name: AssaultRifleStats
   m_EditorClassIdentifier: 
   _gunStatsValues:
-    BulletPrefab: {fileID: 8750377684753805614, guid: eef70db8d747f704e93012ec120fec11, type: 3}
     GunPrefab: {fileID: 6172834586263702601, guid: 47468fec1ccafb94db82f0f045d6e7bf, type: 3}
     Damage: 20
     MagSize: 30
@@ -24,3 +23,5 @@ MonoBehaviour:
     WeaponName: AK-47
     InfiniteAmmo: 0
     IsAutomatic: 1
+    Range: 100
+    InaccuracyDistance: 0

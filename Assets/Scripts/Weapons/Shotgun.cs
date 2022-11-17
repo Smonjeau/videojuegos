@@ -1,4 +1,6 @@
 ﻿using Entities;
+using Managers;
+using Strategy;
 using UnityEngine;
 
 namespace Weapons
@@ -15,27 +17,42 @@ namespace Weapons
                 _soundEffectController.PlayOnEmpty();
                 return;
             }
-            if (_currentMagSize > 0)
+
+            if (_currentMagSize <= 0) return;
+            for (int i = 0; i < BulletCount; i++)
             {
-                for (int i = 0; i < BulletCount; i++)
+                RaycastHit hit;
+                if (Physics.Raycast(fpsCamera.transform.position, GetShootingDir(), 
+                        out hit, Range))
                 {
-                    var rot = transform.rotation;
-                    var random = new System.Random();
-                    //rot *= Quaternion.Euler(Vector3.up * (1f * (random.Next(0, 1) == 0 ? 1 : -1)));
-                    rot *= Quaternion.Euler(Vector3.left * (1.2f * (random.Next(0, 1) == 0 ? 1 : -1)));
-                    var bullet = Instantiate(
-                        BulletPrefab,
-                        _barrelExitTransform.position + Random.insideUnitSphere * 0.3f, rot);
-                    bullet.name = "Shotgun Bullet";
-                    bullet.GetComponent<Bullet>().SetOwner(this);
-                    _soundEffectController.PlayOnShot();
-
+                    MakeDamage(hit.collider);
                 }
-                _cooldownTimer = ShotCooldown;
+                    
+                _soundEffectController.PlayOnShot();
 
-                _currentMagSize--;
-                StartCoroutine(UI_AmmoUpdater(0));
             }
+                
+            _cooldownTimer = ShotCooldown;
+
+            _currentMagSize--;
+            StartCoroutine(UI_AmmoUpdater(0));
+        }
+        private Vector3 GetShootingDir()
+        {
+            var camTransform = fpsCamera.transform;
+            Vector3 target = camTransform.position +
+                             camTransform.forward * Range;
+
+            target += new Vector3(Random.Range(-InaccuracyDistance, InaccuracyDistance),
+                Random.Range(-InaccuracyDistance, InaccuracyDistance),
+                Random.Range(-InaccuracyDistance, InaccuracyDistance));
+
+
+            Vector3 direction = target - camTransform.transform.position;
+
+            return direction.normalized;
         }
     }
+    
+ 
 }

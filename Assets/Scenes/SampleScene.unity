@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028305, g: 0.22571313, b: 0.3069213, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657844, g: 0.49641222, b: 0.57481694, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -660,7 +660,7 @@ Transform:
   m_Children:
   - {fileID: 1999788160}
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &133169122
 GameObject:
@@ -1022,7 +1022,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &175763994
 MonoBehaviour:
@@ -1691,7 +1691,7 @@ RectTransform:
   - {fileID: 447638363}
   - {fileID: 736826638}
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -1745,6 +1745,10 @@ MonoBehaviour:
   _spawners:
   - {fileID: 236327790}
   - {fileID: 97382776}
+  _timeRemaining: 10
+  _enemyCount: 0
+  _isLevelStarted: 0
+  _zombieKills: 0
 --- !u!1 &404992779
 GameObject:
   m_ObjectHideFlags: 0
@@ -2891,7 +2895,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &672250489
 GameObject:
@@ -3073,6 +3077,10 @@ MonoBehaviour:
   _spawners:
   - {fileID: 236327790}
   - {fileID: 97382776}
+  _timeRemaining: 10
+  _enemyCount: 0
+  _isLevelStarted: 0
+  _zombieKills: 0
 --- !u!1001 &707310385
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4201,12 +4209,12 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
-  m_LocalRotation: {x: 0, y: 0.6597716, z: 0, w: 0.7514663}
-  m_LocalPosition: {x: 8.737529, y: 4.9975, z: -8.100502}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalRotation: {x: -0, y: -0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.54999995, z: 0}
+  m_LocalScale: {x: 0.41666663, y: 0.3076923, z: 0.41666663}
   m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_Father: {fileID: 133276521}
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 29.861, y: 174.847, z: -1.102}
 --- !u!114 &963194229
 MonoBehaviour:
@@ -5111,6 +5119,10 @@ MonoBehaviour:
   _spawners:
   - {fileID: 236327790}
   - {fileID: 97382776}
+  _timeRemaining: 10
+  _enemyCount: 0
+  _isLevelStarted: 0
+  _zombieKills: 0
 --- !u!4 &1097498374 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 410932, guid: 731670d05affd0045a25600d2045889f, type: 3}
@@ -5418,7 +5430,7 @@ Transform:
   - {fileID: 2026307119}
   - {fileID: 988287136}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1351978161
 GameObject:
@@ -5612,6 +5624,10 @@ MonoBehaviour:
   _spawners:
   - {fileID: 236327790}
   - {fileID: 97382776}
+  _timeRemaining: 10
+  _enemyCount: 0
+  _isLevelStarted: 0
+  _zombieKills: 0
 --- !u!1 &1396800211
 GameObject:
   m_ObjectHideFlags: 0
@@ -6038,7 +6054,7 @@ Transform:
   - {fileID: 1091933668}
   - {fileID: 693670877}
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1558250277
 PrefabInstance:
@@ -6316,7 +6332,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
 --- !u!1 &1616146798
 GameObject:
@@ -7775,6 +7791,9 @@ MonoBehaviour:
   _currentMagSize: 0
   _currentAmmo: 0
   _isReloading: 0
+  _raycastRange: 100
+  _layerTarget: 0600000007000000
+  fpsCamera: {fileID: 963194227}
 --- !u!4 &919132147750886089 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6836887501124015859, guid: 47468fec1ccafb94db82f0f045d6e7bf, type: 3}
@@ -8003,6 +8022,9 @@ MonoBehaviour:
   _currentMagSize: 0
   _currentAmmo: 0
   _isReloading: 0
+  _raycastRange: 100
+  _layerTarget: 0600000007000000
+  fpsCamera: {fileID: 963194227}
 --- !u!4 &7447409400198665281 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2443606784485266635, guid: b8a15b328f48113418a6369a421c740c, type: 3}
@@ -8131,6 +8153,10 @@ PrefabInstance:
       propertyPath: _stats
       value: 
       objectReference: {fileID: 11400000, guid: 86d8ccd58262c3c4b8aea367d45906bb, type: 2}
+    - target: {fileID: 4999444334603179999, guid: 1191b84140fcbba49b667e7d8c6c27e6, type: 3}
+      propertyPath: fpsCamera
+      value: 
+      objectReference: {fileID: 963194227}
     - target: {fileID: 5632394062140853602, guid: 1191b84140fcbba49b667e7d8c6c27e6, type: 3}
       propertyPath: m_RootOrder
       value: 2
@@ -8202,7 +8228,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8843097603367975930, guid: ee1aa3b8c849e4eb6a211ecae5d6c833, type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8843097603367975930, guid: ee1aa3b8c849e4eb6a211ecae5d6c833, type: 3}
       propertyPath: m_LocalScale.x

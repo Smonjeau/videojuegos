@@ -4,7 +4,6 @@ namespace Strategy
 {
     public interface IGun
     {
-        GameObject BulletPrefab { get; }
         GameObject GunPrefab { get; }
         int MagSize { get; }
         int MaxAmmo { get; }

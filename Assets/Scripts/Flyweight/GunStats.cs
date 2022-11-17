@@ -7,7 +7,6 @@ namespace Flyweight
     {
         [SerializeField] private GunStatValues _gunStatsValues;
 
-        public GameObject BulletPrefab => _gunStatsValues.BulletPrefab;
         public GameObject GunPrefab => _gunStatsValues.GunPrefab;
         public int Damage => _gunStatsValues.Damage;
         public int MagSize => _gunStatsValues.MagSize;
@@ -20,6 +19,10 @@ namespace Flyweight
 
         public bool IsAutomatic => _gunStatsValues.IsAutomatic;
 
+        public float Range => _gunStatsValues.Range;
+
+        public float InaccuracyDistance => _gunStatsValues.InaccuracyDistance;
+
         public GunStats(GunStatValues gunStatsValues)
         {
             _gunStatsValues = gunStatsValues;
@@ -29,7 +32,6 @@ namespace Flyweight
     [System.Serializable]
     public struct GunStatValues
     {
-        public GameObject BulletPrefab;
         public GameObject GunPrefab;
         public int Damage;
         public int MagSize;
@@ -40,5 +42,7 @@ namespace Flyweight
         public string WeaponName;
         public bool InfiniteAmmo;
         public bool IsAutomatic;
+        public float Range;
+        public float InaccuracyDistance;
     }
 }
