@@ -18,8 +18,9 @@ namespace Controllers
         [SerializeField] private Rigidbody _rigidbody;
 
         private Transform _cameraPosition;
-        private Transform _leftArm;
-        private Transform _rightArm;
+        // private Transform _leftArm;
+        // private Transform _rightArm;
+        private Transform _arms;
 
 
 
@@ -27,8 +28,9 @@ namespace Controllers
         {
             _rigidbody = GetComponent<Rigidbody>();
             _cameraPosition = transform.Find("CM Position");
-            _leftArm = transform.Find("LeftArm");
-            _rightArm = transform.Find("RightArm");
+            _arms = transform.Find("Arms");
+            // _leftArm = transform.Find("LeftArm");
+            // _rightArm = transform.Find("RightArm");
 
         }
 
@@ -69,9 +71,9 @@ namespace Controllers
             rotation.x = Mathf.Clamp(rotation.x, -limit-currRotation.x, limit-currRotation.x);
             
             _cameraPosition.Rotate(rotation);
-            _leftArm.Rotate(rotation);
-            _rightArm.Rotate(rotation);
-            
+            // _leftArm.Rotate(rotation);
+            // _rightArm.Rotate(rotation);
+            _arms.Rotate(rotation);
             
             
             
