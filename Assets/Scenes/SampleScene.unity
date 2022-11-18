@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.12731689, g: 0.13414702, b: 0.1210784, a: 1}
+  m_IndirectSpecularColor: {r: 0.37311992, g: 0.38074034, b: 0.35872713, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -4057,6 +4057,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 955928918}
   m_CullTransparentMesh: 1
+--- !u!198 &960394769 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 7880795448104710083, guid: ee1aa3b8c849e4eb6a211ecae5d6c833, type: 3}
+  m_PrefabInstance: {fileID: 8843097603406731414}
+  m_PrefabAsset: {fileID: 0}
 --- !u!20 &963194227 stripped
 Camera:
   m_CorrespondingSourceObject: {fileID: 1128708609445496406, guid: ee1aa3b8c849e4eb6a211ecae5d6c833, type: 3}
@@ -7636,10 +7641,30 @@ PrefabInstance:
       propertyPath: fpsCamera
       value: 
       objectReference: {fileID: 963194227}
+    - target: {fileID: 977005770126458677, guid: ee1aa3b8c849e4eb6a211ecae5d6c833, type: 3}
+      propertyPath: gunShootEffect
+      value: 
+      objectReference: {fileID: 960394769}
+    - target: {fileID: 2814731110269676964, guid: ee1aa3b8c849e4eb6a211ecae5d6c833, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.54999995
+      objectReference: {fileID: 0}
+    - target: {fileID: 2847930822274060794, guid: ee1aa3b8c849e4eb6a211ecae5d6c833, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 2847930822274060794, guid: ee1aa3b8c849e4eb6a211ecae5d6c833, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 3.05
+      objectReference: {fileID: 0}
     - target: {fileID: 5820537059040546897, guid: ee1aa3b8c849e4eb6a211ecae5d6c833, type: 3}
       propertyPath: fpsCamera
       value: 
       objectReference: {fileID: 963194227}
+    - target: {fileID: 5820537059040546897, guid: ee1aa3b8c849e4eb6a211ecae5d6c833, type: 3}
+      propertyPath: gunShootEffect
+      value: 
+      objectReference: {fileID: 960394769}
     - target: {fileID: 6039455749272676750, guid: ee1aa3b8c849e4eb6a211ecae5d6c833, type: 3}
       propertyPath: _reloadEndClip
       value: 
@@ -7668,10 +7693,18 @@ PrefabInstance:
       propertyPath: fpsCamera
       value: 
       objectReference: {fileID: 963194227}
+    - target: {fileID: 7620113473459974852, guid: ee1aa3b8c849e4eb6a211ecae5d6c833, type: 3}
+      propertyPath: gunShootEffect
+      value: 
+      objectReference: {fileID: 960394769}
     - target: {fileID: 8663512295507765318, guid: ee1aa3b8c849e4eb6a211ecae5d6c833, type: 3}
       propertyPath: fpsCamera
       value: 
       objectReference: {fileID: 963194227}
+    - target: {fileID: 8663512295507765318, guid: ee1aa3b8c849e4eb6a211ecae5d6c833, type: 3}
+      propertyPath: gunShootEffect
+      value: 
+      objectReference: {fileID: 960394769}
     - target: {fileID: 8779419047612807240, guid: ee1aa3b8c849e4eb6a211ecae5d6c833, type: 3}
       propertyPath: Priority
       value: 0

@@ -29,6 +29,8 @@ namespace Weapons
                 }
                     
                 _soundEffectController.PlayOnShot();
+                gunShootEffect.Play();
+
 
             }
                 

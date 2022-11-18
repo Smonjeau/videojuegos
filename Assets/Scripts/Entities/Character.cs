@@ -76,7 +76,7 @@ namespace Entities
 
             _selectedGun = Guns[_selectedGunIndex];
             _selectedGun.gameObject.SetActive(true);
-            _selectedGun.Reset();
+            _selectedGun.Reset(false);
             _cmdAttack = new CmdAttack(_selectedGun);
 
 
@@ -171,7 +171,7 @@ namespace Entities
             _selectedGun = Guns[index];
             _selectedGunIndex = index;
             _selectedGun.gameObject.SetActive(true);
-            _selectedGun.Reset();
+            _selectedGun.Reset(true);
             _cmdAttack = new CmdAttack(_selectedGun);
 
             EventsManager.Instance.EventWeaponChange(index);

@@ -51,6 +51,8 @@ namespace Weapons
         [SerializeField] protected List<int> _layerTarget = new List<int>{6,7};
 
         [SerializeField] protected Camera fpsCamera;
+        [SerializeField] protected ParticleSystem gunShootEffect;
+
         private static readonly int Reloading = Animator.StringToHash("reloading");
 
         private void Start()
@@ -64,8 +66,16 @@ namespace Weapons
             
             
             _parentAnimator = transform.parent.parent.GetComponent<Animator>();
+            
+            SetShootingPosition();
 
             
+        }
+        
+        private void SetShootingPosition()
+        {
+            gunShootEffect.transform.position = _barrelExitTransform.position;
+
         }
 
         private void Update()
@@ -84,6 +94,8 @@ namespace Weapons
             }
             
             _soundEffectController.PlayOnShot();
+            gunShootEffect.Play();
+
   
             RaycastHit hit;
             var cameraTransform = fpsCamera.transform;
@@ -166,11 +178,13 @@ namespace Weapons
 
         protected bool CanFire() => ! (_cooldownTimer > 0);
 
-        public void Reset()
+        public void Reset(bool updateShootingPosition)
         {
+            _barrelExitTransform = transform.GetChild(0);
+            if(updateShootingPosition)
+                SetShootingPosition();
             _cooldownTimer = 0;
         }
-
          protected IEnumerator UI_AmmoUpdater(float secondsToSleep)
          {
              yield return new WaitForSeconds(secondsToSleep);
