@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657844, g: 0.49641222, b: 0.57481694, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -802,6 +802,25 @@ MonoBehaviour:
   _weaponSlot3: 51
   _attack: 323
   _reload: 114
+--- !u!95 &133276523
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 133276520}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 927e4f80d23daaf47aedced46da93fdb, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!54 &133276524
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -4210,7 +4229,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
   m_LocalRotation: {x: -0, y: -0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.54999995, z: 0}
+  m_LocalPosition: {x: 0, y: 0.55, z: 0}
   m_LocalScale: {x: 0.41666663, y: 0.3076923, z: 0.41666663}
   m_Children: []
   m_Father: {fileID: 133276521}
@@ -7791,7 +7810,6 @@ MonoBehaviour:
   _currentMagSize: 0
   _currentAmmo: 0
   _isReloading: 0
-  _raycastRange: 100
   _layerTarget: 0600000007000000
   fpsCamera: {fileID: 963194227}
 --- !u!4 &919132147750886089 stripped
@@ -8022,7 +8040,6 @@ MonoBehaviour:
   _currentMagSize: 0
   _currentAmmo: 0
   _isReloading: 0
-  _raycastRange: 100
   _layerTarget: 0600000007000000
   fpsCamera: {fileID: 963194227}
 --- !u!4 &7447409400198665281 stripped

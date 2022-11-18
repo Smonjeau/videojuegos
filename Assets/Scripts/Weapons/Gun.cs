@@ -31,6 +31,8 @@ namespace Weapons
 
         public float Range => _stats.Range;
 
+        private Animator _parentAnimator;
+
 
         public float InaccuracyDistance => _stats.InaccuracyDistance;
 
@@ -59,7 +61,9 @@ namespace Weapons
             _barrelExitTransform = transform.GetChild(0);
             _soundEffectController = GetComponent<SoundEffectController>();
             
-            _parentArm = transform.parent.gameObject;
+            // _parentArm = transform.parent.gameObject;
+            _parentAnimator = transform.parent.parent.GetComponent<Animator>();
+            _parentAnimator.enabled = true;
         }
 
         private void Update()
@@ -97,6 +101,7 @@ namespace Weapons
         
         public void Reload()
         {
+            
             _isReloading = true;
             if (!CanFire() || OutOfAmmo() || HasFullMag()) {
                 //not ready to fire
@@ -122,18 +127,26 @@ namespace Weapons
         
         private IEnumerator ReloadAnimation()
         {
-            var initialRotation = _parentArm.transform.eulerAngles;
-            _parentArm.transform.eulerAngles = new Vector3(initialRotation.x, initialRotation.y - 75, initialRotation.z);
+            // var initialRotation = _parentArm.transform.eulerAngles;
+            // _parentArm.transform.eulerAngles = new Vector3(initialRotation.x, initialRotation.y - 75, initialRotation.z);
+            //
+
+            _parentAnimator.enabled = false;
+            _parentAnimator.enabled = true;
+            _parentAnimator.SetBool("reloading",true);
             
-            yield return new WaitForSeconds(ReloadCooldown/2);
+            
+            yield return new WaitForSeconds((ReloadCooldown*2)/3);
             
             _soundEffectController.PlayOnReload();
             
-            yield return new WaitForSeconds(ReloadCooldown/2);
-
+            _parentAnimator.SetBool("reloading",false);
+            // yield return new WaitForSeconds(ReloadCooldown/3);
+            
+           
             _isReloading = false;
-            var currentRotation = _parentArm.transform.eulerAngles;
-            _parentArm.transform.eulerAngles = new Vector3(currentRotation.x, currentRotation.y + 75, currentRotation.z);
+            // var currentRotation = _parentArm.transform.eulerAngles;
+            // _parentArm.transform.eulerAngles = new Vector3(currentRotation.x, currentRotation.y + 75, currentRotation.z);
         }
 
         public void AddAmmo(int amount)

@@ -63,7 +63,6 @@ namespace Entities
         private Vector3 _rotationX;
         private Vector3 _rotationY;
 
-
         
 
     
@@ -72,6 +71,7 @@ namespace Entities
             _movementController = GetComponent<MovementController>();
             _lifeController = GetComponent<LifeController>();
             _soundEffectController = GetComponent<SoldierSoundController>();
+            
             
             foreach (var gun in Guns) {gun.gameObject.SetActive(false);}
 
@@ -89,6 +89,7 @@ namespace Entities
      
             EventsManager.Instance.OnLowLife += OnLowLife;
             EventsManager.Instance.OnLifeHealed += OnLifeHealed;
+            
         }
 
         void Update()
