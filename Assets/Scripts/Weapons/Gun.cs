@@ -61,9 +61,10 @@ namespace Weapons
             _barrelExitTransform = transform.GetChild(0);
             _soundEffectController = GetComponent<SoundEffectController>();
             
-            // _parentArm = transform.parent.gameObject;
+            
             _parentAnimator = transform.parent.parent.GetComponent<Animator>();
-            _parentAnimator.enabled = true;
+
+            
         }
 
         private void Update()
@@ -127,26 +128,20 @@ namespace Weapons
         
         private IEnumerator ReloadAnimation()
         {
-            // var initialRotation = _parentArm.transform.eulerAngles;
-            // _parentArm.transform.eulerAngles = new Vector3(initialRotation.x, initialRotation.y - 75, initialRotation.z);
-            //
-
-            _parentAnimator.enabled = false;
-            _parentAnimator.enabled = true;
+            
             _parentAnimator.SetBool("reloading",true);
-            
-            
-            yield return new WaitForSeconds((ReloadCooldown*2)/3);
-            
             _soundEffectController.PlayOnReload();
             
+            yield return new WaitForSeconds(ReloadCooldown-1);
+
+            
+            
             _parentAnimator.SetBool("reloading",false);
-            // yield return new WaitForSeconds(ReloadCooldown/3);
+            yield return new WaitForSeconds(1);
             
            
             _isReloading = false;
-            // var currentRotation = _parentArm.transform.eulerAngles;
-            // _parentArm.transform.eulerAngles = new Vector3(currentRotation.x, currentRotation.y + 75, currentRotation.z);
+            
         }
 
         public void AddAmmo(int amount)
@@ -194,6 +189,8 @@ namespace Weapons
             damageable?.TakeDamage(Damage);
             EventsManager.Instance.EventHit();
         }
+
+        
     }
     
 }
