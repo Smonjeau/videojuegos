@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using Command;
 using Managers;
@@ -20,8 +21,9 @@ namespace Entities
 
         // CONTROLLERS
         private MovementController _movementController;
-        private SoldierSoundController _soundEffectController;   
+        private SoldierSoundController _soundEffectController;
 
+        
         private Gun _selectedGun;
         private int _selectedGunIndex;
 
@@ -62,16 +64,14 @@ namespace Entities
         
         private Vector3 _rotationX;
         private Vector3 _rotationY;
+        private static readonly int IsMoving = Animator.StringToHash("IsMoving");
 
-        
 
-    
         // Start is called before the first frame update
         void Start() {
             _movementController = GetComponent<MovementController>();
             _soundEffectController = GetComponent<SoldierSoundController>();
-            
-            
+
             foreach (var gun in Guns) {gun.gameObject.SetActive(false);}
 
             _selectedGun = Guns[_selectedGunIndex];
@@ -95,6 +95,9 @@ namespace Entities
         {
 
             if (GlobalData.Instance.GamePaused) return;
+            
+           
+            
             if (Input.GetKey(_moveForward)) EventQueueManager.Instance.AddMovementCommand(_cmdMoveForward);
             if (Input.GetKey(_moveBack))    EventQueueManager.Instance.AddMovementCommand(_cmdMoveBack);
             if (Input.GetKey(_moveLeft))    EventQueueManager.Instance.AddMovementCommand(_cmdMoveLeft);
@@ -103,9 +106,9 @@ namespace Entities
             
             _rotationX = new Vector3(0f, Input.GetAxis("Mouse X"), 0f);
             _rotationY = new Vector3(Input.GetAxis("Mouse Y"), 0f, 0f);
-        
-        
+
             
+
             if(Input.GetKeyDown(_attack))
             {
                 _isFiring = true;
