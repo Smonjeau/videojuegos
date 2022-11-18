@@ -14,6 +14,14 @@ namespace Controllers
         
         private void Update()
         {
+
+            if (GlobalData.Instance.GameOver)
+            {
+                Cursor.lockState = CursorLockMode.None;
+
+                return;
+
+            }
             bool gamePaused = GlobalData.Instance.GamePaused;
             switch (gamePaused)
             {

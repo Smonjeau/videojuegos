@@ -54,7 +54,8 @@ namespace Managers
             _isVictory = isVictory;
             
             GlobalData.Instance.SetVictory(_isVictory);
-
+            GlobalData.Instance.SetGameOver(true);
+    
             StartCoroutine(_uiManager.FadeOut("Endgame",isVictory));
         }
         

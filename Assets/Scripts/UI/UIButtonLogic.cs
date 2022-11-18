@@ -14,7 +14,10 @@ namespace UI
     {
         public void LoadMenuScene() => SceneManager.LoadScene("Main Menu");
 
-        public void LoadGameScene() => SceneManager.LoadScene("Load Screen");
+        public void LoadGameScene()
+        {
+            SceneManager.LoadScene("Load Screen");
+        }
 
         public void LoadHelpPopup()
         {
@@ -35,6 +38,7 @@ namespace UI
             var uiManager = GetComponent<UIManager>();
             var gameManager = GetComponent<GameManager>();
             gameManager.ResumeGame();
+            GlobalData.Instance.SetGameOver(true);
             StartCoroutine(uiManager.FadeOut("Main Menu",true));
         }
 
