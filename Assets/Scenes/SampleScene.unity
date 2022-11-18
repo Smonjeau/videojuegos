@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.12731689, g: 0.13414702, b: 0.1210784, a: 1}
+  m_IndirectSpecularColor: {r: 0.37311953, g: 0.38074014, b: 0.3587274, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -7607,6 +7607,14 @@ PrefabInstance:
       propertyPath: _audioClip
       value: 
       objectReference: {fileID: 8300000, guid: e12dc3bfc8770c640b69523f5086cd9f, type: 3}
+    - target: {fileID: 207566443343643668, guid: ee1aa3b8c849e4eb6a211ecae5d6c833, type: 3}
+      propertyPath: _reloadEndClip
+      value: 
+      objectReference: {fileID: 8300000, guid: f2f37940c7fadb147ae53c575ce87899, type: 3}
+    - target: {fileID: 207566443343643668, guid: ee1aa3b8c849e4eb6a211ecae5d6c833, type: 3}
+      propertyPath: _reloadStartClip
+      value: 
+      objectReference: {fileID: 8300000, guid: e2a1f6418398e3544ae5871384f34294, type: 3}
     - target: {fileID: 977005770126458677, guid: ee1aa3b8c849e4eb6a211ecae5d6c833, type: 3}
       propertyPath: fpsCamera
       value: 
@@ -7615,6 +7623,22 @@ PrefabInstance:
       propertyPath: fpsCamera
       value: 
       objectReference: {fileID: 963194227}
+    - target: {fileID: 6039455749272676750, guid: ee1aa3b8c849e4eb6a211ecae5d6c833, type: 3}
+      propertyPath: _reloadEndClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 137976710c1070e4d939979c22eeb387, type: 3}
+    - target: {fileID: 6039455749272676750, guid: ee1aa3b8c849e4eb6a211ecae5d6c833, type: 3}
+      propertyPath: _reloadStartClip
+      value: 
+      objectReference: {fileID: 8300000, guid: e2a1f6418398e3544ae5871384f34294, type: 3}
+    - target: {fileID: 6343275634346991194, guid: ee1aa3b8c849e4eb6a211ecae5d6c833, type: 3}
+      propertyPath: _reloadEndClip
+      value: 
+      objectReference: {fileID: 8300000, guid: bea4880fb7106bd489f9477a32b5afa7, type: 3}
+    - target: {fileID: 6343275634346991194, guid: ee1aa3b8c849e4eb6a211ecae5d6c833, type: 3}
+      propertyPath: _reloadStartClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 41e94595bffbd5b4d966f74f3a8a6d66, type: 3}
     - target: {fileID: 7620113473459974852, guid: ee1aa3b8c849e4eb6a211ecae5d6c833, type: 3}
       propertyPath: fpsCamera
       value: 

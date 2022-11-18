@@ -52,6 +52,7 @@ namespace Weapons
 
             return direction.normalized;
         }
+        
     }
     
  

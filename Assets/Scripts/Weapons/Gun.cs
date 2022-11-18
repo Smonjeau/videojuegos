@@ -10,7 +10,7 @@ using UnityEngine;
 namespace Weapons
 {
     [RequireComponent(typeof(SoundEffectController))]
-    public class Gun : MonoBehaviour, IGun
+    public abstract class Gun : MonoBehaviour, IGun
     {
         [SerializeField] private GunStats _stats;
         public GameObject GunPrefab => _stats.GunPrefab;
@@ -51,6 +51,7 @@ namespace Weapons
         [SerializeField] protected List<int> _layerTarget = new List<int>{6,7};
 
         [SerializeField] protected Camera fpsCamera;
+        private static readonly int Reloading = Animator.StringToHash("reloading");
 
         private void Start()
         {
@@ -129,20 +130,26 @@ namespace Weapons
         private IEnumerator ReloadAnimation()
         {
             
-            _parentAnimator.SetBool("reloading",true);
-            _soundEffectController.PlayOnReload();
+            _parentAnimator.SetBool(Reloading,true);
+            _soundEffectController.PlayOnReloadStart();
             
             yield return new WaitForSeconds(ReloadCooldown-1);
 
             
             
-            _parentAnimator.SetBool("reloading",false);
-            yield return new WaitForSeconds(1);
-            
+            _parentAnimator.SetBool(Reloading,false);
+           
+            yield return new WaitForSeconds((float)0.5);
+            _soundEffectController.PlayOnReloadEnd();
+            yield return new WaitForSeconds((float)0.5);
            
             _isReloading = false;
             
         }
+
+       
+        
+        
 
         public void AddAmmo(int amount)
         {
