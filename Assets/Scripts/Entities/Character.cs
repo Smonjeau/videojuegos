@@ -20,11 +20,10 @@ namespace Entities
 
         // CONTROLLERS
         private MovementController _movementController;
-        private LifeController _lifeController;
         private SoldierSoundController _soundEffectController;   
 
         private Gun _selectedGun;
-        private int _selectedGunIndex=0;
+        private int _selectedGunIndex;
 
         [SerializeField] public List<Gun> Guns;
 
@@ -39,6 +38,7 @@ namespace Entities
         [SerializeField] private KeyCode _weaponSlot1 = KeyCode.Alpha1;
         [SerializeField] private KeyCode _weaponSlot2 = KeyCode.Alpha2;
         [SerializeField] private KeyCode _weaponSlot3 = KeyCode.Alpha3;
+        [SerializeField] private KeyCode _weaponSlot4 = KeyCode.Alpha4;
         private CmdAttack _cmdAttack;
 
         private bool _isFiring;
@@ -69,7 +69,6 @@ namespace Entities
         // Start is called before the first frame update
         void Start() {
             _movementController = GetComponent<MovementController>();
-            _lifeController = GetComponent<LifeController>();
             _soundEffectController = GetComponent<SoldierSoundController>();
             
             
@@ -141,6 +140,7 @@ namespace Entities
             if (Input.GetKeyDown(_weaponSlot1)) ChangeWeapon(0);
             if (Input.GetKeyDown(_weaponSlot2)) ChangeWeapon(1);
             if (Input.GetKeyDown(_weaponSlot3)) ChangeWeapon(2);
+            if (Input.GetKeyDown(_weaponSlot4)) ChangeWeapon(3);
 
         }
 
