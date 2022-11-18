@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -25,7 +26,7 @@ namespace Managers
             {
                 var progress = operation.progress;
                 _progressBar.fillAmount = progress + 0.1f;
-                _progressValue.text = $"Cargando ... {progress * 100} %";
+                _progressValue.text = $"Cargando ... {Math.Floor(progress*100 + 10)} %";
                 
                 if(operation.progress >= .9f)
                 {
