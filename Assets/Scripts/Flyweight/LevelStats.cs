@@ -18,6 +18,7 @@ namespace Flyweight
         public List<float> EnemiesSpawnChance => _levelStatsValues.EnemiesSpawnChance;
         public bool IsFinalLevel => _levelStatsValues.IsFinalLevel;
         public string LevelName => _levelStatsValues.LevelName;
+        public float IncreaseZombieLife => _levelStatsValues.IncreaseZombieLife;
     }
     
     [System.Serializable]
@@ -31,5 +32,6 @@ namespace Flyweight
         public List<float> EnemiesSpawnChance;
         public bool IsFinalLevel;
         public string LevelName;
+        public float IncreaseZombieLife;
     }
 }

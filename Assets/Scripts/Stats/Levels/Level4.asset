@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _levelStatsValues:
     LevelNumber: 4
-    MinRandomSpawnTime: 4
-    MaxRandomSpawnTime: 6
+    MinRandomSpawnTime: 3
+    MaxRandomSpawnTime: 4
     MaxEnemyCount: 20
     ZombieStats:
     - {fileID: 11400000, guid: e404c7d5e3b4a47d38be16601c7cc148, type: 2}
@@ -25,3 +25,4 @@ MonoBehaviour:
     - 0.7
     IsFinalLevel: 1
     LevelName: iv
+    IncreaseZombieLife: 1.8

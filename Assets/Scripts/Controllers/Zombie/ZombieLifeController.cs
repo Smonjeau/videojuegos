@@ -9,14 +9,17 @@ namespace Controllers
     {
         
         private Zombies.Zombie _zombie;
-        public new int MaxLife => _zombie.Stats.MaxLife;
+        private float _lifeIncrement;
         
-        private void Start()
+        public override void Start()
         {
             _zombie = GetComponent<Zombies.Zombie>();
-            SetLife(MaxLife);
+            _maxLife = (int)(_zombie.Stats.MaxLife*_lifeIncrement);
+            SetLife(_maxLife);
             dieable = GetComponent<IDieable>();
         }
+
+        public void SetLifeIncrement(float value) =>  _lifeIncrement = value;
 
         public override void TakeDamage(int damage) {}
 

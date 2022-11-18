@@ -10,10 +10,10 @@ namespace Controllers
         public int Life => _life;
         [SerializeField] private int _life;
         public int MaxLife => _maxLife;
-        [SerializeField] public int _maxLife = 100;
+        public int _maxLife = 100;
         public IDieable dieable;
 
-        private void Start()
+        public virtual void Start()
         {
             ResetLife();
             dieable = gameObject.GetComponent<IDieable>();
@@ -45,8 +45,11 @@ namespace Controllers
             if (dieable != null) dieable.Die();
             else Destroy(gameObject);
         }
-        
-        public void SetLife(int life) => _life = life;
+
+        public void SetLife(int life)
+        {
+            _life = life;
+        } 
         
         public void Heal(int heal)
         {

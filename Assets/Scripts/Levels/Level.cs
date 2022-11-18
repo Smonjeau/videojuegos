@@ -23,6 +23,7 @@ namespace Levels
         private List<float> _zombieSpawnChance => Stats.EnemiesSpawnChance;
         private bool _isFinalLevel => Stats.IsFinalLevel;
         public bool IsFinalLevel => _isFinalLevel;
+        public float IncreaseZombieLife => Stats.IncreaseZombieLife;
         
 
         private int _spawnersCount;
@@ -107,7 +108,7 @@ namespace Levels
             {
                 if (random < _zombieChances[i])
                 {
-                    spawner.Spawn(_zombieStats[i]);
+                    spawner.Spawn(_zombieStats[i], IncreaseZombieLife);
                     break;
                 }
             }
