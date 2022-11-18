@@ -4952,7 +4952,7 @@ Light:
   m_Type: 2
   m_Shape: 0
   m_Color: {r: 0.9485294, g: 0.59393716, b: 0.27200472, a: 1}
-  m_Intensity: 5
+  m_Intensity: 6
   m_Range: 35
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.802082
@@ -5014,7 +5014,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5d795c9ee70446a0a84adfbaddef44f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _maxReduction: 0.1
-  _maxIncrease: 0.1
-  _rate: 0.8
-  _strenght: 300

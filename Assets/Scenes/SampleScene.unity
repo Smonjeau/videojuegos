@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.37311953, g: 0.38074014, b: 0.3587274, a: 1}
+  m_IndirectSpecularColor: {r: 0.12731689, g: 0.13414702, b: 0.1210784, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -607,11 +607,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 10852728, guid: 731670d05affd0045a25600d2045889f, type: 3}
       propertyPath: m_Range
-      value: 35
+      value: 40
       objectReference: {fileID: 0}
     - target: {fileID: 10852728, guid: 731670d05affd0045a25600d2045889f, type: 3}
       propertyPath: m_Intensity
-      value: 3
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 10852728, guid: 731670d05affd0045a25600d2045889f, type: 3}
       propertyPath: m_Shadows.m_Type
@@ -960,14 +960,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.21960786, g: 0.21960786, b: 0.21960786, a: 1}
+  m_Color: {r: 0.735849, g: 0.68378425, b: 0.68378425, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Texture: {fileID: 2800000, guid: 4a2f4b715f0892a45af078b0b11525cf, type: 3}
+  m_Texture: {fileID: 2800000, guid: 4042c3949958b4db39745ed54f0436f0, type: 3}
   m_UVRect:
     serializedVersion: 2
     x: 0
@@ -1062,6 +1062,7 @@ GameObject:
   - component: {fileID: 175763995}
   - component: {fileID: 175763996}
   - component: {fileID: 175763994}
+  - component: {fileID: 175763997}
   m_Layer: 0
   m_Name: Managers
   m_TagString: Untagged
@@ -1133,7 +1134,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 5c718e61c3cb8014b9d243d67230529a, type: 3}
   - {fileID: 21300000, guid: 0713990e87f0d794b89fd914629173d0, type: 3}
   - {fileID: 21300000, guid: bbaac56ba18be9b47b4440248fdf8cd9, type: 3}
-  - {fileID: 21300000, guid: c05961d74e3df405d92b9c5f1b54da01, type: 3}
+  - {fileID: 21300000, guid: bca71a630201a4346b93f626326e1089, type: 3}
   gunSight: {fileID: 139388388}
   hitmarker: {fileID: 1477802877}
   _helpPopup: {fileID: 873667369}
@@ -1160,6 +1161,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c92b330ee08723248a9507ba7ab8f9cf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &175763997
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 175763990}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 20618c1f568c4e689a76a4ee7dd3c720, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1001 &183236314
@@ -1378,11 +1391,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 10852728, guid: 731670d05affd0045a25600d2045889f, type: 3}
       propertyPath: m_Range
-      value: 35
+      value: 40
       objectReference: {fileID: 0}
     - target: {fileID: 10852728, guid: 731670d05affd0045a25600d2045889f, type: 3}
       propertyPath: m_Intensity
-      value: 3
+      value: 6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 731670d05affd0045a25600d2045889f, type: 3}
@@ -3242,11 +3255,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 10852728, guid: 731670d05affd0045a25600d2045889f, type: 3}
       propertyPath: m_Range
-      value: 35
+      value: 40
       objectReference: {fileID: 0}
     - target: {fileID: 10852728, guid: 731670d05affd0045a25600d2045889f, type: 3}
       propertyPath: m_Intensity
-      value: 3
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 10852728, guid: 731670d05affd0045a25600d2045889f, type: 3}
       propertyPath: m_Shadows.m_Type
@@ -5674,14 +5687,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 0, b: 0, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Texture: {fileID: 2800000, guid: 2651878673f42d44cb1c5af83930bdff, type: 3}
+  m_Texture: {fileID: 2800000, guid: 3bbe70a260c024c5883d8fc267251421, type: 3}
   m_UVRect:
     serializedVersion: 2
     x: 0
@@ -6022,11 +6035,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 10852728, guid: 731670d05affd0045a25600d2045889f, type: 3}
       propertyPath: m_Range
-      value: 35
+      value: 40
       objectReference: {fileID: 0}
     - target: {fileID: 10852728, guid: 731670d05affd0045a25600d2045889f, type: 3}
       propertyPath: m_Intensity
-      value: 3
+      value: 6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 731670d05affd0045a25600d2045889f, type: 3}
@@ -6543,11 +6556,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 10852728, guid: 731670d05affd0045a25600d2045889f, type: 3}
       propertyPath: m_Range
-      value: 35
+      value: 40
       objectReference: {fileID: 0}
     - target: {fileID: 10852728, guid: 731670d05affd0045a25600d2045889f, type: 3}
       propertyPath: m_Intensity
-      value: 3
+      value: 6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 731670d05affd0045a25600d2045889f, type: 3}
@@ -7168,8 +7181,12 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 10852728, guid: 731670d05affd0045a25600d2045889f, type: 3}
+      propertyPath: m_Range
+      value: 40
+      objectReference: {fileID: 0}
+    - target: {fileID: 10852728, guid: 731670d05affd0045a25600d2045889f, type: 3}
       propertyPath: m_Intensity
-      value: 3
+      value: 6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 731670d05affd0045a25600d2045889f, type: 3}
@@ -7639,6 +7656,14 @@ PrefabInstance:
       propertyPath: _reloadStartClip
       value: 
       objectReference: {fileID: 8300000, guid: 41e94595bffbd5b4d966f74f3a8a6d66, type: 3}
+    - target: {fileID: 6758345509155990154, guid: ee1aa3b8c849e4eb6a211ecae5d6c833, type: 3}
+      propertyPath: _shotClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 457d8e210e5444806a22079889b9270d, type: 3}
+    - target: {fileID: 6758345509155990154, guid: ee1aa3b8c849e4eb6a211ecae5d6c833, type: 3}
+      propertyPath: _reloadStartClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 3a4f6e4a082354ed688b36a449f2a97f, type: 3}
     - target: {fileID: 7620113473459974852, guid: ee1aa3b8c849e4eb6a211ecae5d6c833, type: 3}
       propertyPath: fpsCamera
       value: 
