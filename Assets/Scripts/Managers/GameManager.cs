@@ -42,6 +42,7 @@ namespace Managers
 
         private void Update()
         {
+            if (SceneManager.GetActiveScene().name != "SampleScene") return;
             if (!Input.GetKeyDown(KeyCode.Escape) || _uiManager.IsHelpPopupActive()) return;
             if (_gamePaused) ResumeGame();
             else PauseGame();
