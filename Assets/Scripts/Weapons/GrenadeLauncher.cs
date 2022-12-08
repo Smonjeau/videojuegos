@@ -16,7 +16,7 @@ namespace Weapons
             Rigidbody rb = grenade.GetComponent<Rigidbody>();
             rb.AddForce(transform.forward * _throwForce, ForceMode.VelocityChange);
             _currentMagSize--;
-            
+            _recoilLogic.Recoil(transform.forward);
             StartCoroutine(UI_AmmoUpdater(0));
         }
         

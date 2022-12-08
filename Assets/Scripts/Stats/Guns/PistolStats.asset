@@ -18,10 +18,13 @@ MonoBehaviour:
     MagSize: 10
     MaxAmmo: 0
     BulletCount: 1
-    RateOfFire: 150
+    RateOfFire: 400
     ReloadCooldown: 3
     WeaponName: Desert Eagle
     InfiniteAmmo: 1
     IsAutomatic: 0
     Range: 100
     InaccuracyDistance: 0
+    RecoilY: 0.5
+    RecoilX: 2
+    RecoilDuration: 0.1
