@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Cinemachine;
 using Controllers;
 using Entities;
 using Flyweight;
@@ -31,8 +32,14 @@ namespace Weapons
 
         public float Range => _stats.Range;
 
+        public float RecoilY => _stats.RecoilY;
+        public float RecoilX => _stats.RecoilX;
+        public float RecoilDuration => _stats.RecoilDuration;
+
+
         private Animator _parentAnimator;
 
+        protected RecoilLogic _recoilLogic;
 
         public float InaccuracyDistance => _stats.InaccuracyDistance;
 
@@ -57,17 +64,21 @@ namespace Weapons
 
         private void Start()
         {
+
             _currentMagSize = MagSize;
             if (!InfiniteAmmo) _currentAmmo = MaxAmmo - _currentMagSize;
             EventsManager.Instance.EventAmmoChange(_currentMagSize,_currentAmmo,InfiniteAmmo);
             
             _barrelExitTransform = transform.GetChild(0);
             _soundEffectController = GetComponent<SoundEffectController>();
-            
+            _recoilLogic = GetComponent<RecoilLogic>();
+            _recoilLogic.SetValues(RecoilY, RecoilX, RecoilDuration);
             
             _parentAnimator = transform.parent.parent.GetComponent<Animator>();
             
             SetShootingPosition();
+            
+            
 
             
         }
@@ -95,12 +106,11 @@ namespace Weapons
             
             _soundEffectController.PlayOnShot();
             gunShootEffect.Play();
-
-  
+            
             RaycastHit hit;
             var cameraTransform = fpsCamera.transform;
             var ray = new Ray(cameraTransform.position, cameraTransform.forward);
-
+            _recoilLogic.Recoil(ray.direction);
             if (Physics.Raycast(ray, out hit, Range))
             {
                 MakeDamage(hit.collider);
@@ -184,6 +194,7 @@ namespace Weapons
             if(updateShootingPosition)
                 SetShootingPosition();
             _cooldownTimer = 0;
+            
         }
          protected IEnumerator UI_AmmoUpdater(float secondsToSleep)
          {

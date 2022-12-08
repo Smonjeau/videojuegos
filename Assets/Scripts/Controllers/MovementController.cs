@@ -24,7 +24,7 @@ namespace Controllers
         private void Start()
         {
             _rigidbody = GetComponent<Rigidbody>();
-            _cameraPosition = transform.Find("CM Position");
+            _cameraPosition = GameObject.FindGameObjectWithTag("cam-position").transform;
             _arms = transform.Find("Arms");
 
         }

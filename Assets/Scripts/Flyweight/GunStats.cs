@@ -22,6 +22,12 @@ namespace Flyweight
         public float Range => _gunStatsValues.Range;
 
         public float InaccuracyDistance => _gunStatsValues.InaccuracyDistance;
+        
+        public float RecoilY => _gunStatsValues.RecoilY;
+        public float RecoilX => _gunStatsValues.RecoilX;
+        public float RecoilDuration => _gunStatsValues.RecoilDuration;
+
+        
 
         public GunStats(GunStatValues gunStatsValues)
         {
@@ -44,5 +50,8 @@ namespace Flyweight
         public bool IsAutomatic;
         public float Range;
         public float InaccuracyDistance;
+        public float RecoilY;
+        public float RecoilX;
+        public float RecoilDuration;
     }
 }

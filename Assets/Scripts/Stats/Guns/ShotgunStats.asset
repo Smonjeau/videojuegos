@@ -25,3 +25,6 @@ MonoBehaviour:
     IsAutomatic: 0
     Range: 100
     InaccuracyDistance: 5
+    RecoilY: 15
+    RecoilX: 0
+    RecoilDuration: 0.1

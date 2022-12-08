@@ -33,7 +33,8 @@ namespace Weapons
 
 
             }
-                
+             
+            _recoilLogic.Recoil(GetShootingDir());
             _cooldownTimer = ShotCooldown;
 
             _currentMagSize--;
