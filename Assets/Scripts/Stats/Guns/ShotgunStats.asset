@@ -26,5 +26,5 @@ MonoBehaviour:
     Range: 100
     InaccuracyDistance: 5
     RecoilY: 15
-    RecoilX: 0
+    RecoilX: 10
     RecoilDuration: 0.1

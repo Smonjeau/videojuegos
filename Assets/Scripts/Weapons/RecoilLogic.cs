@@ -3,6 +3,7 @@ using System.Numerics;
 using Cinemachine;
 using Controllers;
 using UnityEngine;
+using Random = UnityEngine.Random;
 using Vector3 = UnityEngine.Vector3;
 
 namespace Weapons
@@ -44,8 +45,9 @@ namespace Weapons
         {
             if (!(_time > 0)) return;
             var dirY = Vector3.left * (recoilY/1000) / duration;
-            var dirX = Vector3.up * (recoilX / 1000) / duration;
+            var dirX = Vector3.up * (Random.Range(-recoilX, recoilX) / 1000) / duration;
             _movementController.RotateY(dirY);
+            _movementController.RotateX(dirX);
             //_camera.Rotate(dirX);
             _time -= Time.deltaTime;
             
