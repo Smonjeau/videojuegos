@@ -9,6 +9,8 @@ namespace Controllers
         [SerializeField] private AudioClip _audioClip;
         public AudioSource AudioSource => _audioSource;
         private AudioSource _audioSource;
+
+        [SerializeField] private AudioClip hitByThrowableClip;
         
         public void InitAudioSource()
         {
@@ -29,6 +31,11 @@ namespace Controllers
         public void Stop()
         {
             AudioSource.Stop();
+        }
+
+        public void PlayHitByThrowable()
+        {
+            AudioSource.PlayOneShot(hitByThrowableClip);
         }
     }
 }

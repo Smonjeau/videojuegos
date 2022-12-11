@@ -10,13 +10,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6f8eb788a7304c6da525e75df08ac89b, type: 3}
-  m_Name: BasicZombieStats
+  m_Name: RangeAttackZombie
   m_EditorClassIdentifier: 
   _statValues:
     MaxLife: 100
-    MovementSpeed: 1
+    MovementSpeed: 1.5
     AttackSpeed: 0.8
     AttackRange: 4.5
     AttackDamage: 5
-    ZombiePrefab: {fileID: 3520478986436058278, guid: d3d55f4536d430f43980b159940930f3, type: 3}
-    RangeAttack: 0
+    ZombiePrefab: {fileID: 3520478986436058278, guid: 96814381349cc6d48a697c892920f82a, type: 3}
+    CanDoRangeAttack: 1
+    IsBoss: 0
+    ThrowablePrefab: {fileID: 8551828735191891502, guid: 9ac01e2aa1b43234b95feec10c97b7c1, type: 3}
+    ThrowableDamage: 10

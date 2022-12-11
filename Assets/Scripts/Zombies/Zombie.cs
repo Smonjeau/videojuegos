@@ -29,6 +29,7 @@ namespace Zombies
         private ZombieSoundEffectController _soundEffectController;
         private NavMeshAgent _navMeshAgent;
         Collider[] _colliders;
+        private Transform _rightHand;
     
         // ANIMATIONS
         private Animation _animations;
@@ -44,7 +45,8 @@ namespace Zombies
             _navMeshAgent = GetComponent<NavMeshAgent>();
             _soundEffectController = GetComponent<ZombieSoundEffectController>();
             _colliders = GetComponents<Collider>();
-        
+            _rightHand = GetRightHandTransform();
+
             _navMeshAgent.stoppingDistance = _attackRange;
             _navMeshAgent.speed = _movementSpeed;
 
@@ -55,6 +57,7 @@ namespace Zombies
             _animations.Play(_state);
         
             InvokeRepeating(nameof(PlaySound), 2, 5);
+            InvokeRepeating(nameof(RangeAttackAction),1,7);
             
             EventsManager.Instance.OnGameOver += OnGameOver;
         }
@@ -80,7 +83,9 @@ namespace Zombies
                 CancelInvoke(nameof(Attack));
                 ChangeStateTo(_baseState);
             }
+
         
+            
             if (_state == ZombieState.WALK || _state == ZombieState.RUN) MoveTowards(playerPosition);
         }
 
@@ -102,6 +107,24 @@ namespace Zombies
             IDamageable damageable = _target.GetComponent<IDamageable>();
             damageable?.TakeDamage(_hitDamage);
         }
+
+        private void RangeAttack()
+        {
+
+            GameObject throwable = Instantiate(_stats.ThrowablePrefab, _rightHand.position, transform.rotation);
+            
+            Rigidbody rb = throwable.GetComponent<Rigidbody>();
+    
+
+            var targetPos = _target.transform.position;
+            targetPos.y += 1;
+            var cam = GameObject.FindGameObjectWithTag("cam-position").transform.position;
+            cam.y += 5;
+            rb.AddForce(-(_rightHand.position - cam) , ForceMode.VelocityChange);
+            _soundEffectController.PlayOnZombieThrow();
+            ChangeStateTo(_baseState);
+
+        }
     
         private void ChangeStateTo(string state)
         {
@@ -117,6 +140,7 @@ namespace Zombies
             _colliders.ToList().ForEach(c => c.enabled = false);
             _navMeshAgent.enabled = false;
             ChangeStateTo(ZombieState.DIE);
+     
             LevelManager.Instance.ZombieKill();
             Destroy(gameObject, 2f);
         }
@@ -127,6 +151,26 @@ namespace Zombies
             CancelInvoke(nameof(Attack));
             ChangeStateTo(ZombieState.IDLE);
             Destroy(this);
+        }
+
+
+        private Transform GetRightHandTransform()
+        {
+     
+            return transform.GetChild(0).GetChild(2).GetChild(0).GetChild(0).GetChild(2).GetChild(0)
+                .GetChild(0).GetChild(0);
+        }
+
+        private void RangeAttackAction()
+        {
+            var playerPosition = _target.transform.position;
+            float distance = DistanceBetween(playerPosition, transform.position);
+            if (_stats.CanDoRangeAttack && distance > _attackRange && _state != ZombieState.RANGE_ATTACK )
+            {
+                ChangeStateTo(ZombieState.RANGE_ATTACK);
+                
+            }
+
         }
     }
 }

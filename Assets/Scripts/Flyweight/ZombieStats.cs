@@ -12,6 +12,14 @@ namespace Flyweight
         public int AttackDamage => _statValues.AttackDamage;
         public float AttackSpeed => _statValues.AttackSpeed;
         public float AttackRange => _statValues.AttackRange;
+        public bool CanDoRangeAttack => _statValues.CanDoRangeAttack;
+
+        public GameObject ThrowablePrefab => _statValues.ThrowablePrefab;
+
+        public float ThrowableDamage => _statValues.ThrowableDamage;
+        
+
+        public bool IsBoss => _statValues.IsBoss;
         public GameObject ZombiePrefab => _statValues.ZombiePrefab;
     }
 
@@ -24,5 +32,9 @@ namespace Flyweight
         public float AttackRange;
         public int AttackDamage;
         public GameObject ZombiePrefab;
+        public bool CanDoRangeAttack;
+        public bool IsBoss;
+        public GameObject ThrowablePrefab;
+        public float ThrowableDamage;
     }
 }

@@ -11,7 +11,7 @@ namespace Controllers
         public AudioClip AudioClip => _audioClip;
         [SerializeField] private AudioClip _audioClip;
         [SerializeField] private AudioClip _hitAudioClip;
-
+        [SerializeField] private AudioClip _throwAudoClip;
         public AudioSource AudioSource => _audioSource;
         private AudioSource _audioSource;
         
@@ -25,6 +25,8 @@ namespace Controllers
         public void Stop() => AudioSource.Stop();
         
         public void PlayOnHit() => AudioSource.PlayOneShot(_hitAudioClip);
+        public void PlayOnZombieThrow() => AudioSource.PlayOneShot(_throwAudoClip);
+
 
         void Start() =>  InitAudioSource();
     }

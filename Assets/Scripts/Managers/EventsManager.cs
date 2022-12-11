@@ -21,6 +21,7 @@ namespace Managers
         public event Action OnHit;
         public event Action OnLowLife;
         public event Action<int, int, int> OnLifeHealed;
+        public event Action OnPlayerHitWithThrowable;
 
         
         public void EventGameOver(bool isVictory)
@@ -58,6 +59,11 @@ namespace Managers
         public void EventLifeHealed(int life, int maxLife, int criticalLife)
         {
             OnLifeHealed?.Invoke(life, maxLife, criticalLife);
+        }
+
+        public void EventPlayerHitWithThrowable()
+        {
+            OnPlayerHitWithThrowable?.Invoke();
         }
     }
 }

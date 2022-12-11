@@ -19,7 +19,8 @@ MonoBehaviour:
     MaxEnemyCount: 10
     ZombieStats:
     - {fileID: 11400000, guid: e404c7d5e3b4a47d38be16601c7cc148, type: 2}
-    - {fileID: 11400000, guid: 2fab3f0f45e3e46dcb17d7cb1cce07ae, type: 2}
+    - {fileID: 11400000, guid: 54b3b7415d0e92a4ba61fab4ee2a21eb, type: 2}
+    BossStats: {fileID: 0}
     EnemiesSpawnChance:
     - 0.8
     - 0.2

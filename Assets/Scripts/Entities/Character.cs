@@ -88,11 +88,17 @@ namespace Entities
      
             EventsManager.Instance.OnLowLife += OnLowLife;
             EventsManager.Instance.OnLifeHealed += OnLifeHealed;
-            
+            EventsManager.Instance.OnPlayerHitWithThrowable += OnPlayerHitWithThrowable;
+
         }
+
+   
 
         void Update()
         {
+            
+           
+
 
             if (GlobalData.Instance.GamePaused) return;
             
@@ -184,6 +190,10 @@ namespace Entities
             EventsManager.Instance.EventGameOver(false);
             _soundEffectController.Stop();
             Destroy(gameObject);
+        }
+        private void OnPlayerHitWithThrowable()
+        {
+            _soundEffectController.PlayHitByThrowable();
         }
     }
 }

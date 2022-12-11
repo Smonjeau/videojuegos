@@ -5546,6 +5546,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _audioClip: {fileID: 8300000, guid: e12dc3bfc8770c640b69523f5086cd9f, type: 3}
+  hitByThrowableClip: {fileID: 8300000, guid: 6375e64f1b77e944d9afdd6db48d0d3f, type: 3}
 --- !u!82 &8779419047612807240
 AudioSource:
   m_ObjectHideFlags: 0
