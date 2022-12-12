@@ -983,6 +983,7 @@ Animation:
   - {fileID: 7400000, guid: de559bbb071ebfd40ab5af80881e75e8, type: 2}
   - {fileID: 7400000, guid: 23ee7f6864c52b243bfb4f2da09bc287, type: 2}
   - {fileID: 7400000, guid: fc9a62f9b1354f342bacfbbe077c503e, type: 2}
+  - {fileID: 7400000, guid: 871bf6ec3bba34349b53d4ba42e1671a, type: 2}
   m_WrapMode: 0
   m_PlayAutomatically: 0
   m_AnimatePhysics: 0
@@ -1177,6 +1178,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0907885767fb4918a072e604dfc12235, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  CriticLife: 20
   _life: 0
   _maxLife: 100
 --- !u!1 &3648539170161296439

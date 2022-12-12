@@ -999,7 +999,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8eaac6b2326b4406c9af9060e75682c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _stats: {fileID: 11400000, guid: 2fab3f0f45e3e46dcb17d7cb1cce07ae, type: 2}
+  _stats: {fileID: 11400000, guid: 54b3b7415d0e92a4ba61fab4ee2a21eb, type: 2}
   _state: Z_Walk_InPlace
 --- !u!82 &-7373416789637420472
 AudioSource:
@@ -1177,6 +1177,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0907885767fb4918a072e604dfc12235, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  CriticLife: 20
   _life: 0
   _maxLife: 100
 --- !u!1 &3648539170161296439
