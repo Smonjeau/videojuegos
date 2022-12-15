@@ -30,6 +30,8 @@ namespace Zombies
         private NavMeshAgent _navMeshAgent;
         Collider[] _colliders;
         private Transform _rightHand;
+        private bool _isBoss => _stats.IsBoss;
+
     
         // ANIMATIONS
         private Animation _animations;
@@ -141,7 +143,10 @@ namespace Zombies
             _navMeshAgent.enabled = false;
             ChangeStateTo(ZombieState.DIE);
      
-            LevelManager.Instance.ZombieKill();
+            if (_isBoss)
+                LevelManager.Instance.BossKill();
+            else
+                LevelManager.Instance.ZombieKill();
             Destroy(gameObject, 2f);
         }
 

@@ -10,13 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ab45f0157b8849bd9312e9f9608ea98e, type: 3}
-  m_Name: Level4
+  m_Name: Level3_2
   m_EditorClassIdentifier: 
   _levelStatsValues:
-    LevelNumber: 4
-    MinRandomSpawnTime: 3
-    MaxRandomSpawnTime: 4
-    MaxEnemyCount: 20
+    LevelNumber: 8
+    MinRandomSpawnTime: 5
+    MaxRandomSpawnTime: 6
+    MaxEnemyCount: 24
     ZombieStats:
     - {fileID: 11400000, guid: e404c7d5e3b4a47d38be16601c7cc148, type: 2}
     - {fileID: 11400000, guid: 54b3b7415d0e92a4ba61fab4ee2a21eb, type: 2}
@@ -25,6 +25,10 @@ MonoBehaviour:
     - 0.2
     - 0.4
     - 0.4
-    IsFinalLevel: 1
-    LevelName: iv
-    IncreaseZombieLife: 1.8
+    IsFinalLevel: 0
+    LevelName: viii
+    IncreaseZombieLife: 1.35
+    IsLevelFinisherRound: 0
+    IsLevelStarterRound: 0
+    RoomNumber: 3
+    BossStats: {fileID: 0}

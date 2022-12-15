@@ -20,6 +20,8 @@ namespace Levels
         private float _maxRandomSpawnTime => Stats.MaxRandomSpawnTime;
         private int _maxEnemyCount => Stats.MaxEnemyCount;
         private List<ZombieStats> _zombieStats => Stats.ZombieStats;
+        private ZombieStats _bossStats => Stats.BossStats;
+
         private List<float> _zombieSpawnChance => Stats.EnemiesSpawnChance;
         private bool _isFinalLevel => Stats.IsFinalLevel;
         public bool IsFinalLevel => _isFinalLevel;
@@ -61,19 +63,28 @@ namespace Levels
             _isLevelStarted = true;
             _zombieKills = 0;
             LevelManager.Instance.OnZombieKill += OnZombieKill;
+            LevelManager.Instance.OnBossKill += OnBossKill;
         }
         
         public void EndLevel()
         {
             _isLevelStarted = false;
             LevelManager.Instance.OnZombieKill -= OnZombieKill;
+            LevelManager.Instance.OnBossKill -= OnBossKill;
+
             LevelManager.Instance.CompletedLevel(this);
         }
         
         private void OnZombieKill()
         {
             _zombieKills++;
-            if (_zombieKills == _maxEnemyCount) EndLevel();
+            if (_zombieKills == _maxEnemyCount  )
+            {
+                if (_stats.IsLevelFinisherRound)
+                    Invoke(nameof(SpawnBoss),3f);
+                else 
+                    EndLevel();
+            };
         }
         
         private void Update()
@@ -112,6 +123,17 @@ namespace Levels
                     break;
                 }
             }
+        }
+        
+        public void SpawnBoss()
+        {
+            var spawnerInt = UnityEngine.Random.Range(0, _spawnersCount);
+            var spawner = _spawners[spawnerInt];
+            spawner.Spawn(_bossStats,1f);
+        }
+        private void OnBossKill()
+        {
+            EndLevel();
         }
     }
 }
