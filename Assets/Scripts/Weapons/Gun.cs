@@ -64,7 +64,6 @@ namespace Weapons
 
         private void Start()
         {
-
             _currentMagSize = MagSize;
             if (!InfiniteAmmo) _currentAmmo = MaxAmmo - _currentMagSize;
             EventsManager.Instance.EventAmmoChange(_currentMagSize,_currentAmmo,InfiniteAmmo);
@@ -76,11 +75,7 @@ namespace Weapons
             
             _parentAnimator = transform.parent.parent.GetComponent<Animator>();
             
-            SetShootingPosition();
-            
-            
-
-            
+            SetShootingPosition(); 
         }
         
         private void SetShootingPosition()
@@ -142,7 +137,7 @@ namespace Weapons
             }
             else
             {
-                var ammoToAdd = _currentAmmo < MagSize ? _currentAmmo : MagSize - _currentMagSize;
+                var ammoToAdd = _currentAmmo < MagSize ? _currentAmmo - _currentMagSize : MagSize - _currentMagSize;
                 _currentMagSize += ammoToAdd;
                 _currentAmmo -= ammoToAdd;
             }
