@@ -15,4 +15,4 @@ MonoBehaviour:
   _deployableStatsValues:
     DeployablePrefab: {fileID: 3117583709154973047, guid: b6f178f5ff8004048b9f0a9f79de9716, type: 3}
     Damage: 50
-    Range: 0.5
+    Range: 3
