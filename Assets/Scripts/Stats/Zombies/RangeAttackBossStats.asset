@@ -22,4 +22,4 @@ MonoBehaviour:
     CanDoRangeAttack: 1
     IsBoss: 1
     ThrowablePrefab: {fileID: 8551828735191891502, guid: 9ac01e2aa1b43234b95feec10c97b7c1, type: 3}
-    ThrowableDamage: 40
+    ThrowableDamage: 30

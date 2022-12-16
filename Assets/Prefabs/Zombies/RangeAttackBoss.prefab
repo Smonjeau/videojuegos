@@ -890,7 +890,7 @@ GameObject:
   - component: {fileID: 8771218893984188144}
   - component: {fileID: -2872319253270026483}
   m_Layer: 6
-  m_Name: Boss1
+  m_Name: RangeAttackBoss
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

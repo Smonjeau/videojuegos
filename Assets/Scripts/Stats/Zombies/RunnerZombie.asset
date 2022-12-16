@@ -13,9 +13,13 @@ MonoBehaviour:
   m_Name: RunnerZombie
   m_EditorClassIdentifier: 
   _statValues:
-    MaxLife: 100
+    MaxLife: 80
     MovementSpeed: 3.5
     AttackSpeed: 1
     AttackRange: 4.5
     AttackDamage: 5
     ZombiePrefab: {fileID: 3520478986436058278, guid: b2b704e37c56e4fd0bd131915516289b, type: 3}
+    CanDoRangeAttack: 0
+    IsBoss: 0
+    ThrowablePrefab: {fileID: 0}
+    ThrowableDamage: 0

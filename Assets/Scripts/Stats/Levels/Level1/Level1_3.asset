@@ -13,10 +13,10 @@ MonoBehaviour:
   m_Name: Level1_3
   m_EditorClassIdentifier: 
   _levelStatsValues:
-    LevelNumber: 1
-    MinRandomSpawnTime: 4
-    MaxRandomSpawnTime: 6
-    MaxEnemyCount: 2
+    LevelNumber: 3
+    MinRandomSpawnTime: 3
+    MaxRandomSpawnTime: 4
+    MaxEnemyCount: 12
     ZombieStats:
     - {fileID: 11400000, guid: e404c7d5e3b4a47d38be16601c7cc148, type: 2}
     - {fileID: 11400000, guid: 54b3b7415d0e92a4ba61fab4ee2a21eb, type: 2}
@@ -25,9 +25,10 @@ MonoBehaviour:
     - 0.6
     IsFinalLevel: 0
     LevelName: iii
-    IncreaseZombieLife: 1.1
+    IncreaseZombieLife: 1
     IsLevelFinisherRound: 1
     IsLevelStarterRound: 0
     RoomNumber: 1
-    BossStats: {fileID: 11400000, guid: 26254ca460a45445095bc1e80aad8bff, type: 2}
+    BossStats:
+    - {fileID: 11400000, guid: 26254ca460a45445095bc1e80aad8bff, type: 2}
     Weapons: 0000000002000000

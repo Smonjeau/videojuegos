@@ -14,9 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _levelStatsValues:
     LevelNumber: 1
-    MinRandomSpawnTime: 7
-    MaxRandomSpawnTime: 10
-    MaxEnemyCount: 2
+    MinRandomSpawnTime: 4
+    MaxRandomSpawnTime: 5
+    MaxEnemyCount: 6
     ZombieStats:
     - {fileID: 11400000, guid: e404c7d5e3b4a47d38be16601c7cc148, type: 2}
     EnemiesSpawnChance:
@@ -27,5 +27,6 @@ MonoBehaviour:
     IsLevelFinisherRound: 0
     IsLevelStarterRound: 1
     RoomNumber: 1
-    BossStats: {fileID: 0}
+    BossStats:
+    - {fileID: 0}
     Weapons: 0000000002000000

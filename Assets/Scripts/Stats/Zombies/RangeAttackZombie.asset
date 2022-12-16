@@ -17,7 +17,7 @@ MonoBehaviour:
     MovementSpeed: 1.5
     AttackSpeed: 0.8
     AttackRange: 4.5
-    AttackDamage: 5
+    AttackDamage: 3
     ZombiePrefab: {fileID: 3520478986436058278, guid: 96814381349cc6d48a697c892920f82a, type: 3}
     CanDoRangeAttack: 1
     IsBoss: 0
