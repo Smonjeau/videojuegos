@@ -14,9 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _gunStatsValues:
     GunPrefab: {fileID: 6172834586263702601, guid: 47468fec1ccafb94db82f0f045d6e7bf, type: 3}
-    Damage: 20
+    Damage: 15
     MagSize: 30
-    MaxAmmo: 200
+    MaxAmmo: 300
     BulletCount: 1
     RateOfFire: 700
     ReloadCooldown: 2

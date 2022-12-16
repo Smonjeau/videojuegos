@@ -17,7 +17,7 @@ MonoBehaviour:
     Damage: 20
     MagSize: 7
     MaxAmmo: 21
-    BulletCount: 6
+    BulletCount: 8
     RateOfFire: 70
     ReloadCooldown: 3
     WeaponName: Winchester 21
