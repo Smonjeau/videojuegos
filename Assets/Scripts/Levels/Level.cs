@@ -75,6 +75,7 @@ namespace Levels
             LevelManager.Instance.OnBossKill -= OnBossKill;
 
             LevelManager.Instance.CompletedLevel(this);
+            Debug.Log("END LEVEL AL LEVEL " + LevelName);
         }
         
         private void OnZombieKill()
@@ -96,7 +97,7 @@ namespace Levels
             
             if (_enemyCount >= _maxEnemyCount) return;
             
-            if (_zombieKills == _maxEnemyCount) EndLevel();
+            if (_zombieKills == _maxEnemyCount && !_stats.IsLevelFinisherRound) EndLevel();
             
             if (_timeRemaining <= 0)
             {

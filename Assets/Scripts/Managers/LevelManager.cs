@@ -53,6 +53,7 @@ namespace Managers
 
         public void CompletedLevel(Level level)
         {
+            Debug.Log("room " + level._stats.RoomNumber + " round " + level._stats.LevelNumber +" completed");
             //Si es el final termina el juego
             if (level.IsFinalLevel)
             {
@@ -72,6 +73,7 @@ namespace Managers
                 OnLevelTransition?.Invoke();
                 Debug.Log(_currentLevel._stats.RoomNumber);
                 roomChangerColliders[_currentLevel._stats.RoomNumber-1].SetActive(true);
+                Debug.Log("activando el trigger de la puerta " + _currentLevel._stats.RoomNumber);
                 _doorColliders[_currentLevel._stats.RoomNumber-1].isTrigger= true;
             }
         }

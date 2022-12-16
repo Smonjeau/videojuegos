@@ -5,30 +5,32 @@ namespace Controllers
 {
     public class DoorController : MonoBehaviour {
         // public GameObject DoorButton;
-        [SerializeField] private float smooth;
+        [SerializeField] private Vector3 doorOpen ;
  
-        private Vector3 _doorOpen;
         private Vector3 _doorClosed;
+        //private Vector3 _doorClosed;
         private bool _open;
  
         private void Start() {
-            var position = transform.position;
-            _doorOpen = position;
-            _doorOpen.x = 0.56f;
-            _doorClosed = position;
+            _doorClosed = transform.position;
+           
         }
    
-        void OnTriggerEnter(Collider player)
+        private void OnTriggerEnter(Collider other)
         {
-            if (_open || player.CompareTag("Player")) return;
+            Debug.Log("EN ON TRIGGER DE PUERTA");
+            Debug.Log("EL CHOQUE FUE CON el tag" + other.tag);
+            Debug.Log("EL CHOQUE FUE CON el obejto" + other.name);
+
+            if (_open || !other.CompareTag("Player")) return;
  
             // if (cube.tag == "DoorButton")
             //     DoorButton.SetActive(true);
             // Debug.Log("button activated");
 
-     
+            Debug.Log("ABRIENDO PUERTA");
  
-            StartCoroutine(WaitAndMove(0.2f,_doorClosed,_doorOpen));
+            StartCoroutine(WaitAndMove(0.2f,_doorClosed,doorOpen));
             _open = true;
             GetComponent<Collider>().isTrigger = false;
         }
@@ -37,7 +39,7 @@ namespace Controllers
         {
             if (_open)
             {
-                StartCoroutine(WaitAndMove(0.2f,_doorOpen,_doorClosed));
+                StartCoroutine(WaitAndMove(0.2f,doorOpen,_doorClosed));
                 _open = false;
             }
         }

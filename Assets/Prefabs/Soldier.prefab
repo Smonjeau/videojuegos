@@ -190,7 +190,7 @@ GameObject:
   - component: {fileID: 699782004288458873}
   m_Layer: 8
   m_Name: RightArm
-  m_TagString: Untagged
+  m_TagString: right-arm
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -304,7 +304,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4518687597596958492}
   m_LocalRotation: {x: -0, y: -0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.55, z: 0}
+  m_LocalPosition: {x: 0, y: 0.54999995, z: 0}
   m_LocalScale: {x: 0.41666663, y: 0.3076923, z: 0.41666663}
   m_Children: []
   m_Father: {fileID: 8843097603367975930}
@@ -6146,14 +6146,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 47468fec1ccafb94db82f0f045d6e7bf, type: 3}
---- !u!1 &1784143238840988191 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6172834586263702601, guid: 47468fec1ccafb94db82f0f045d6e7bf, type: 3}
-  m_PrefabInstance: {fileID: 5577950629281037910}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1407758055591405733 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6836887501124015859, guid: 47468fec1ccafb94db82f0f045d6e7bf, type: 3}
+  m_PrefabInstance: {fileID: 5577950629281037910}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1784143238840988191 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6172834586263702601, guid: 47468fec1ccafb94db82f0f045d6e7bf, type: 3}
   m_PrefabInstance: {fileID: 5577950629281037910}
   m_PrefabAsset: {fileID: 0}
 --- !u!114 &7620113473459974852
