@@ -21,15 +21,17 @@ MonoBehaviour:
     - {fileID: 11400000, guid: e404c7d5e3b4a47d38be16601c7cc148, type: 2}
     - {fileID: 11400000, guid: 54b3b7415d0e92a4ba61fab4ee2a21eb, type: 2}
     - {fileID: 11400000, guid: 5f1db46aa86ea6b43872037452e823b1, type: 2}
+    - {fileID: 11400000, guid: 3e97bc5456fe3490d90f514e074b29ea, type: 2}
     EnemiesSpawnChance:
-    - 0.15
-    - 0.45
+    - 0.1
+    - 0.2
     - 0.4
+    - 0.3
     IsFinalLevel: 1
     LevelName: ix
     IncreaseZombieLife: 1.4
-    IsLevelFinisherRound: 0
-    IsLevelStarterRound: 1
+    IsLevelFinisherRound: 1
+    IsLevelStarterRound: 0
     RoomNumber: 3
     BossStats: {fileID: 11400000, guid: 2fab3f0f45e3e46dcb17d7cb1cce07ae, type: 2}
-    Weapons: 000000000200000001000000
+    Weapons: 00000000020000000100000003000000
