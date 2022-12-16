@@ -15,7 +15,7 @@ namespace Command
 
         public void Execute() 
         {
-            Debug.LogWarning("executing deploy");
+            
             
             _deployable.Deploy();
         } 

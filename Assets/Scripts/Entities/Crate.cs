@@ -57,9 +57,9 @@ namespace Entities
 
         private void CreatePowerUp()
         {
-            Debug.Log("Has power up...");
+            // Debug.Log("Has power up...");
             _powerUp = PowerUpsFactory.Instance.CreatePowerUp(_powerUpType, gameObject);
-            Debug.Log(_powerUp);
+            // Debug.Log(_powerUp);
             _powerUp.GetComponent<IPowerUp>().Init();
             // _powerUp.SetActive(false);
         }

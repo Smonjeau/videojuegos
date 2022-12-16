@@ -7,18 +7,15 @@ using UnityEngine;
 
 namespace Entities
 {
+    [RequireComponent(typeof(SoundEffectController))]
     public class Mine : MonoBehaviour
     {
-        
+        [SerializeField] private int _targetLayer;
         [SerializeField] private GameObject _eplosionPrefab;
         [SerializeField] private DeployableStats _stat;
-        // [SerializeField] private GameObject _minePrefab;  
         private GameObject _character;
-        // private Transform _deployLocationTransform;
-        // private Animator _armAnimator;
-        // private SoundEffectController _soundEffectController;
-        // private static readonly int Reloading = Animator.StringToHash("reloading");
-        //
+        private SoundEffectController _soundEffectController;
+        
         private float _radius => _stat.Range;
         private float _force = 800f;
         private int _damage => _stat.Damage;
@@ -26,17 +23,13 @@ namespace Entities
         
         public void Start()
         {
-            
-            // _soundEffectController = GetComponent<SoundEffectController>();
-            // _armAnimator = transform.parent.parent.GetComponent<Animator>();
-            // _character = transform.parent.parent.parent.gameObject;
-            // _deployLocationTransform = _character.transform.GetChild(_character.transform.childCount - 1);
-            
+            _soundEffectController = GetComponent<SoundEffectController>();
+
         }
         private void OnTriggerEnter(Collider other)
         {
             
-            if (other.gameObject.layer.ToString() != "8")
+            if (other.gameObject.layer == _targetLayer)
             {
                 Explode();
             }
@@ -47,7 +40,7 @@ namespace Entities
         {
             Instantiate(_eplosionPrefab, transform.position, transform.rotation);
             Collider[] colliders = Physics.OverlapSphere(transform.position, _radius);
-
+            _soundEffectController.PlayOnShot();
             foreach (Collider collider in colliders)
             {
                 Rigidbody rb = collider.GetComponent<Rigidbody>();
@@ -64,26 +57,7 @@ namespace Entities
             }
             Destroy(gameObject);
         }
-
-       
-        // public void Deploy()
-        // {
-        //     
-        //     StartCoroutine(DeployMine());
-        //     
-        // }
-        //
-        // private IEnumerator DeployMine()
-        // {
-        //     _armAnimator.SetBool(Reloading,true);
-        //     _soundEffectController.PlayOnReloadStart();
-        //     yield return new WaitForSeconds((float)0.5);
-        //     _armAnimator.SetBool(Reloading,false);
-        //     Instantiate(_minePrefab, _deployLocationTransform.position, _deployLocationTransform.rotation);
-        //     _character.GetComponent<Character>().DeployableReset();
-        //    
-        //     
-        // }
+        
     }
 
 }
