@@ -16,7 +16,7 @@ namespace Flyweight
 
         public GameObject ThrowablePrefab => _statValues.ThrowablePrefab;
 
-        public float ThrowableDamage => _statValues.ThrowableDamage;
+        public int ThrowableDamage => _statValues.ThrowableDamage;
         
 
         public bool IsBoss => _statValues.IsBoss;
@@ -35,6 +35,6 @@ namespace Flyweight
         public bool CanDoRangeAttack;
         public bool IsBoss;
         public GameObject ThrowablePrefab;
-        public float ThrowableDamage;
+        public int ThrowableDamage;
     }
 }

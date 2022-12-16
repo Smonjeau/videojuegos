@@ -109,7 +109,7 @@ namespace Zombies
         {
 
             GameObject throwable = Instantiate(_stats.ThrowablePrefab, _rightHand.position, transform.rotation);
-            
+            throwable.GetComponent<ZombieThrowable>().SetDamage(_stats.ThrowableDamage);
             Rigidbody rb = throwable.GetComponent<Rigidbody>();
     
 

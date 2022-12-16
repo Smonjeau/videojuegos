@@ -8,7 +8,7 @@ namespace Zombies
     {
         [SerializeField] private float _radius = 10f;
         [SerializeField] private float _force = 800f;
-        [SerializeField] private int _damage = 30;
+        [SerializeField] private int _damage;
 
 
         private void OnTriggerEnter(Collider collider)
@@ -21,6 +21,11 @@ namespace Zombies
                 damageable?.TakeDamage(_damage);
             }
             Destroy(gameObject);
+        }
+
+        public void SetDamage(int damage)
+        {
+            _damage = damage;
         }
         
     
