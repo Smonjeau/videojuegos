@@ -154,7 +154,7 @@ namespace UI
         private void OnLevelTransition()
         {
             _tranisitioningLevel = true;
-            _nextLevel.text = "Go through the door to enter next room";
+            _nextLevel.text = "Go through the door to enter next room\nWeapon unlocked!";
             StartCoroutine(FadeTextToFullAlpha(2f, _nextLevel,100));
         }
         private void OnHit()

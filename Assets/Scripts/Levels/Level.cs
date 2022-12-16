@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Controllers;
 using Flyweight;
@@ -20,7 +19,7 @@ namespace Levels
         private float _maxRandomSpawnTime => Stats.MaxRandomSpawnTime;
         private int _maxEnemyCount => Stats.MaxEnemyCount;
         private List<ZombieStats> _zombieStats => Stats.ZombieStats;
-        private ZombieStats _bossStats => Stats.BossStats;
+        private List<ZombieStats> _bossStats => Stats.BossStats;
 
         private List<float> _zombieSpawnChance => Stats.EnemiesSpawnChance;
         private bool _isFinalLevel => Stats.IsFinalLevel;
@@ -36,7 +35,8 @@ namespace Levels
         [SerializeField] private bool _isLevelStarted;
         private float[] _zombieChances;
 
-        [SerializeField] private int _zombieKills;
+        private int _zombieKills;
+        private int _bossKills;
 
         public void Start()
         {
@@ -130,13 +130,20 @@ namespace Levels
         
         public void SpawnBoss()
         {
-            var spawnerInt = UnityEngine.Random.Range(0, _spawnersCount);
-            var spawner = _spawners[spawnerInt];
-            spawner.Spawn(_bossStats,1f);
+            foreach (var bossStat in _bossStats)
+            {
+                var spawnerInt = UnityEngine.Random.Range(0, _spawnersCount);
+                var spawner = _spawners[spawnerInt];
+                spawner.Spawn(bossStat,1f);
+            }
         }
         private void OnBossKill()
         {
-            EndLevel();
+            _bossKills++;
+            if (_bossKills == _bossStats.Count)
+            {
+                EndLevel();
+            }
         }
     }
 }

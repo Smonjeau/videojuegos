@@ -23,7 +23,7 @@ namespace Flyweight
         public bool IsLevelFinisherRound => _levelStatsValues.IsLevelFinisherRound;
         public bool IsLevelStarterRound => _levelStatsValues.IsLevelStarterRound;
         public int RoomNumber => _levelStatsValues.RoomNumber;
-        public ZombieStats BossStats => _levelStatsValues.BossStats;
+        public List<ZombieStats> BossStats => _levelStatsValues.BossStats;
         public List<WeaponType> Weapons => _levelStatsValues.Weapons;
     }
     
@@ -42,7 +42,7 @@ namespace Flyweight
         public bool IsLevelFinisherRound;
         public bool IsLevelStarterRound;
         public int RoomNumber;
-        public ZombieStats BossStats;
+        public List<ZombieStats> BossStats;
         public List<WeaponType> Weapons;
     }
 }
