@@ -64,7 +64,7 @@ namespace Entities
             // _powerUp.SetActive(false);
         }
 
-        public void Die()
+        public void Die(bool doAnimation = false)
         {
             wholeCrate.enabled = false;
             boxCollider.enabled = false;

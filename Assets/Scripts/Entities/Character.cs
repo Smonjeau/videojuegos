@@ -200,7 +200,7 @@ namespace Entities
 
         }
 
-        public void Die()
+        public void Die(bool doAnimation = false)
         {
             EventsManager.Instance.EventGameOver(false);
             _soundEffectController.Stop();
