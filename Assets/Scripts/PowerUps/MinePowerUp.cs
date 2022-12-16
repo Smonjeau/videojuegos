@@ -11,6 +11,7 @@ namespace PowerUps
         {
             var character = target.GetComponent<Character>();
             if (character == null) return;
+            if(!character.CanDeploy())return;
             character.ActivateDeployable();
             Die();
         }

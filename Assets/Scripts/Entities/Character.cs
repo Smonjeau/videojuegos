@@ -246,5 +246,10 @@ namespace Entities
             
             
         }
+
+        public bool CanDeploy()
+        {
+            return !_selectedGun.IsReloading;
+        }
     }
 }
