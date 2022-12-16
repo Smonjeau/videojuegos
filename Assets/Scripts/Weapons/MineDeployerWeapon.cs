@@ -14,50 +14,45 @@ namespace Weapons
         private Transform _deployLocationTransform;
         private Animator _armAnimator;
         private SoundEffectController _soundEffectController;
-        private static readonly int IsDeploy = Animator.StringToHash("isDeploy");
+        private static readonly int IsDeploy = Animator.StringToHash("IsDeploying");
+        private bool first;
         
         public void Start()
         {
-            
-            Debug.Log("MDW start start");
+            first = true;
             _soundEffectController = GetComponent<SoundEffectController>();
             _armAnimator = transform.parent.parent.GetComponent<Animator>();
             _character = transform.parent.parent.parent.gameObject;
             _deployLocationTransform = _character.transform.GetChild(_character.transform.childCount - 1);
-            Debug.Log("MDW start end");
-            
-            
+
+
         }
         
         public void Deploy()
         {
-           
-            // Debug.Log("Starting coroutine");
-            // StartCoroutine(DeployMine());
-            Instantiate(_minePrefab, _deployLocationTransform.position, _deployLocationTransform.rotation);
-            // Debug.Log("ended instantiation");
-            // Debug.Log("Starting callback");
+            if (!first)return;
+            first = false;
             
-            _character.GetComponent<Character>().DeployableReset();
+            StartCoroutine(DeployMine());
+           
         }
         
         private IEnumerator DeployMine()
         {
-            Debug.Log("Starting coroutine inside");
+            
             _armAnimator.SetBool(IsDeploy,true);
-            _soundEffectController.PlayOnReloadStart();
-            Debug.Log("Starting yield coroutine");
-            yield return new WaitForSeconds((float)0.5);
-            Debug.Log("recovered yield coroutine");
-            _armAnimator.SetBool(IsDeploy,false);
-            Debug.Log("Starting instantiation");
-            Instantiate(_minePrefab, _deployLocationTransform.position, _deployLocationTransform.rotation);
-            Debug.Log("ended instantiation");
-            Debug.Log("Starting callback");
             
-            _character.GetComponent<Character>().DeployableReset();
+            
+            yield return new WaitForSeconds((float)1);
            
+            _armAnimator.SetBool(IsDeploy,false);
             
+            _soundEffectController.PlayOnShot();
+            Instantiate(_minePrefab, _deployLocationTransform.position, _deployLocationTransform.rotation);
+
+            _character.GetComponent<Character>().DeployableReset();
+            first = true;
+
         }
         
         

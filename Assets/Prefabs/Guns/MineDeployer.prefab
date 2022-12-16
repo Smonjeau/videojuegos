@@ -144,7 +144,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _audioClip: {fileID: 0}
-  _shotClip: {fileID: 0}
+  _shotClip: {fileID: 8300000, guid: 19d30be7b1b9a7341a16a96b836568be, type: 3}
   _reloadStartClip: {fileID: 0}
   _reloadEndClip: {fileID: 0}
   _emptyClip: {fileID: 0}

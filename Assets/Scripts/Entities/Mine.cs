@@ -38,8 +38,6 @@ namespace Entities
             
             if (other.gameObject.layer.ToString() != "8")
             {
-                Debug.LogError("Exploded");
-                Debug.LogError(other.gameObject.layer.ToString());
                 Explode();
             }
            
