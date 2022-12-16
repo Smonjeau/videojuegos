@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using Command;
 using Managers;
@@ -26,8 +27,11 @@ namespace Entities
         
         private Gun _selectedGun;
         private int _selectedGunIndex;
+        private bool _isDeploying;
 
         [SerializeField] public List<Gun> Guns;
+        [SerializeField] public MineDeployerWeapon Deployable;
+        private GameObject _mineDeployer;
 
         // MOVEMENT KEYS
         [SerializeField] private KeyCode _moveForward = KeyCode.W;
@@ -42,6 +46,7 @@ namespace Entities
         [SerializeField] private KeyCode _weaponSlot3 = KeyCode.Alpha3;
         [SerializeField] private KeyCode _weaponSlot4 = KeyCode.Alpha4;
         private CmdAttack _cmdAttack;
+        private CmdDeploy _cmdDeploy;
 
         private bool _isFiring;
         
@@ -78,6 +83,7 @@ namespace Entities
             _selectedGun.gameObject.SetActive(true);
             _selectedGun.Reset(false);
             _cmdAttack = new CmdAttack(_selectedGun);
+            _cmdDeploy = new CmdDeploy(Deployable);
 
 
 
@@ -89,6 +95,14 @@ namespace Entities
             EventsManager.Instance.OnLowLife += OnLowLife;
             EventsManager.Instance.OnLifeHealed += OnLifeHealed;
             EventsManager.Instance.OnPlayerHitWithThrowable += OnPlayerHitWithThrowable;
+            
+            Transform rightHand = transform.GetChild(2).GetChild(0);
+
+            _mineDeployer = rightHand.GetChild(rightHand.childCount - 1).gameObject;
+            Debug.Log("CHARACTER");
+            Debug.Log(_mineDeployer.name+"was found as mine deployer");
+            _mineDeployer.SetActive(false);
+            Debug.Log("mine is active? "+_mineDeployer.activeSelf);
 
         }
 
@@ -125,7 +139,12 @@ namespace Entities
                 _isFiring = false;
             }
 
-            if (_isFiring)
+            if (_isDeploying && _isFiring)
+            {
+                Debug.LogWarning("deploying, sending command to deploy");
+                EventQueueManager.Instance.AddCommand(_cmdDeploy);
+            }
+            if (!_isDeploying &&_isFiring)
             {
                 EventQueueManager.Instance.AddCommand(_cmdAttack);
 
@@ -173,6 +192,7 @@ namespace Entities
         {
 
             if (_selectedGun.IsReloading) return;
+            if (_isDeploying)return;
             _selectedGun.gameObject.SetActive(false);
             _selectedGun = Guns[index];
             _selectedGunIndex = index;
@@ -194,6 +214,37 @@ namespace Entities
         private void OnPlayerHitWithThrowable()
         {
             _soundEffectController.PlayHitByThrowable();
+        }
+
+        public void ActivateDeployable()
+        {
+            foreach (var gun in Guns) {gun.gameObject.SetActive(false);}
+
+            _isDeploying = true;
+            Debug.Log("attempting to activate mine");
+            _mineDeployer.SetActive(true);
+            
+            Debug.Log("mine active?"+_mineDeployer.activeSelf);
+            
+            _cmdDeploy = new CmdDeploy(_mineDeployer.GetComponent<MineDeployerWeapon>());
+            // transform.Find("MineDeployer").gameObject.SetActive(true);
+            // Deployable.gameObject.SetActive(true);
+
+        }
+
+        public void DeployableReset()
+        {
+         
+            Debug.Log("Starting recovery");
+            _isDeploying = false;
+            _selectedGun.gameObject.SetActive(true);
+            _selectedGun.Reset(true);
+            _cmdAttack = new CmdAttack(_selectedGun);
+            EventsManager.Instance.EventWeaponChange(_selectedGunIndex);
+            EventsManager.Instance.EventAmmoChange(_selectedGun.CurrentMagSize,_selectedGun.CurrentAmmo,_selectedGun.InfiniteAmmo);
+            _mineDeployer.SetActive(false);
+            Debug.Log("ended recovery");
+            
         }
     }
 }

@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 01eecd6e1e8b4172bba08a5863d3484a, type: 3}
+  m_Name: MineDeployer
+  m_EditorClassIdentifier: 
+  _gunStatsValues:
+    GunPrefab: {fileID: 277688790620579975, guid: d47f48c9b77a1014f9e14cef42aa1faf, type: 3}
+    Damage: 0
+    MagSize: 1
+    MaxAmmo: 4
+    BulletCount: 0
+    RateOfFire: 0
+    ReloadCooldown: 2
+    WeaponName: FragmentationMine
+    InfiniteAmmo: 0
+    IsAutomatic: 0
+    Range: 0
+    InaccuracyDistance: 0
+    RecoilY: 0
+    RecoilX: 0
+    RecoilDuration: 0
