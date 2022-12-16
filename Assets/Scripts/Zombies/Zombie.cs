@@ -132,14 +132,16 @@ namespace Zombies
 
         private void PlaySound() => _soundEffectController.Play();
 
-        public void Die()
+        public void Die(bool doAnimation = true)
         {
             CancelInvoke(nameof(PlaySound));
             CancelInvoke(nameof(RangeAttackAction));
             CancelInvoke(nameof(Attack));
             _colliders.ToList().ForEach(c => c.enabled = false);
             _navMeshAgent.enabled = false;
-            ChangeStateTo(ZombieState.DIE);
+            
+            if (doAnimation)
+                ChangeStateTo(ZombieState.DIE);
      
             if (_isBoss)
                 LevelManager.Instance.BossKill();

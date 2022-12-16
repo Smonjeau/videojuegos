@@ -23,7 +23,7 @@ namespace Zombies
                     damageable.TakeDamage(_hitDamage);
                 }
             }
-            Destroy(gameObject);
+            Die(false);
         }
     }
 }
