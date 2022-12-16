@@ -147,7 +147,15 @@ namespace Zombies
                 LevelManager.Instance.BossKill();
             else
                 LevelManager.Instance.ZombieKill();
-            Destroy(gameObject, 2f);
+            if (doAnimation)
+            {
+                Destroy(gameObject, 2f);
+            }
+            else
+            {
+                Destroy(gameObject);
+            }
+            
         }
 
         private void OnGameOver(bool gameOver)

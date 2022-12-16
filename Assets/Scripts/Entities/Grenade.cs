@@ -18,6 +18,8 @@ namespace Entities
         {
             _audioSource = GetComponent<AudioSource>();
             _audioSource.clip = _explosionSound;
+            
+
         }
 
         private void OnTriggerEnter(Collider other)
@@ -45,7 +47,7 @@ namespace Entities
                     damageable.TakeDamage(_damage);
                 }
             }
-            Destroy(gameObject);
+            Destroy(gameObject,0.4f);
         }
 
         public void SetDamage(int damage)
