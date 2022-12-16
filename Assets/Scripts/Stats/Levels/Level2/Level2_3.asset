@@ -25,7 +25,7 @@ MonoBehaviour:
     - 0.15
     - 0.45
     - 0.4
-    IsFinalLevel: 1
+    IsFinalLevel: 0
     LevelName: vi
     IncreaseZombieLife: 1.25
     IsLevelFinisherRound: 1

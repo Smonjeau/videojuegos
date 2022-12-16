@@ -135,6 +135,8 @@ namespace Zombies
         public void Die()
         {
             _colliders.ToList().ForEach(c => c.enabled = false);
+            CancelInvoke(nameof(PlaySound));
+            CancelInvoke(nameof(RangeAttackAction));
             _navMeshAgent.enabled = false;
             ChangeStateTo(ZombieState.DIE);
      
