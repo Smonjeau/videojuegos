@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using Controllers;
 using Flyweight;
+using Managers;
 using UnityEngine;
 
 namespace Flyweight
@@ -23,6 +24,7 @@ namespace Flyweight
         public bool IsLevelStarterRound => _levelStatsValues.IsLevelStarterRound;
         public int RoomNumber => _levelStatsValues.RoomNumber;
         public ZombieStats BossStats => _levelStatsValues.BossStats;
+        public List<WeaponType> Weapons => _levelStatsValues.Weapons;
     }
     
     [System.Serializable]
@@ -41,5 +43,6 @@ namespace Flyweight
         public bool IsLevelStarterRound;
         public int RoomNumber;
         public ZombieStats BossStats;
+        public List<WeaponType> Weapons;
     }
 }

@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using Controllers;
+using Factory;
 using Flyweight;
 using Strategy;
+
 
 namespace Entities
 {
@@ -19,7 +21,7 @@ namespace Entities
         public CrateStats Stats => _stats;
         [SerializeField] public CrateStats _stats;
         private float _powerUpChance => Stats.PowerUpChance;
-        private List<GameObject> _powerUpPrefabs => Stats.PowerUpPrefabs;
+        private List<PowerUpType> _powerUps => Stats.PowerUps;
         private List<float> _powerUpChances => Stats.PowerUpChances;
 
         public MeshRenderer wholeCrate;
@@ -28,7 +30,7 @@ namespace Entities
         public AudioSource crashAudioClip;
 
         private bool _hasPowerUp;
-        private GameObject _powerUpPrefab;
+        private PowerUpType _powerUpType;
         private GameObject _powerUp;
 
         private void Start()
@@ -46,20 +48,20 @@ namespace Entities
                 sum += _powerUpChances[i];
                 if (random <= sum)
                 {
-                    _powerUpPrefab = _powerUpPrefabs[i];
+                    _powerUpType = _powerUps[i];
                     break;
                 }
             }
-            CreatePowerUp();
+            // CreatePowerUp();
         }
 
         private void CreatePowerUp()
         {
-            var position = transform.position;
-            _powerUp = Instantiate(_powerUpPrefab, 
-                new Vector3(position.x, 2.5f, position.z), 
-                _powerUpPrefab.transform.rotation);
-            _powerUp.SetActive(false);
+            Debug.Log("Has power up...");
+            _powerUp = PowerUpsFactory.Instance.CreatePowerUp(_powerUpType, gameObject);
+            Debug.Log(_powerUp);
+            _powerUp.GetComponent<IPowerUp>().Init();
+            // _powerUp.SetActive(false);
         }
 
         public void Die()
@@ -70,8 +72,9 @@ namespace Entities
             crashAudioClip.Play();
             if (_hasPowerUp)
             {
-                _powerUp.GetComponent<IPowerUp>().Init();
-                _powerUp.SetActive(true);
+                CreatePowerUp();
+                // _powerUp.GetComponent<IPowerUp>().Init();
+                // _powerUp.SetActive(true);
             }
             Destroy(gameObject, 2f);
         }

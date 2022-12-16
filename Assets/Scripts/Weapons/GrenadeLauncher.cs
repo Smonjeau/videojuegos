@@ -12,7 +12,9 @@ namespace Weapons
             if (!CanFire() || _currentMagSize <= 0) return; //not ready to fire
 
             GameObject grenade = Instantiate(_bulletPrefab, _barrelExitTransform.position + transform.forward * 2, _barrelExitTransform.rotation);
-
+            _soundEffectController.PlayOnShot();
+            gunShootEffect.Play();
+            
             Rigidbody rb = grenade.GetComponent<Rigidbody>();
             rb.AddForce(transform.forward * _throwForce, ForceMode.VelocityChange);
             _currentMagSize--;

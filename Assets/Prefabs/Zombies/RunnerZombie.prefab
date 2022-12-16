@@ -1000,7 +1000,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _stats: {fileID: 11400000, guid: 54b3b7415d0e92a4ba61fab4ee2a21eb, type: 2}
-  _state: Z_Walk_InPlace
+  _state: Z_Run_InPlace
 --- !u!82 &-7373416789637420472
 AudioSource:
   m_ObjectHideFlags: 0
@@ -1165,6 +1165,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _audioClip: {fileID: 8300000, guid: 297cdbcab390b4473ae4986b5dbf8114, type: 3}
   _hitAudioClip: {fileID: 8300000, guid: 2ff66202cae8144b6bab3834e2208870, type: 3}
+  _throwAudoClip: {fileID: 0}
 --- !u!114 &-2872319253270026483
 MonoBehaviour:
   m_ObjectHideFlags: 0

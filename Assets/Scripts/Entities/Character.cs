@@ -23,15 +23,19 @@ namespace Entities
         // CONTROLLERS
         private MovementController _movementController;
         private SoldierSoundController _soundEffectController;
-
         
         private Gun _selectedGun;
         private int _selectedGunIndex;
         private bool _isDeploying;
 
-        [SerializeField] public List<Gun> Guns;
         [SerializeField] public MineDeployerWeapon Deployable;
         private GameObject _mineDeployer;
+        [SerializeField] public List<WeaponType> GunType;
+        [SerializeField] public List<Gun> GunValue;
+        [SerializeField] public List<KeyCode> GunKey;
+        private Dictionary<WeaponType, Gun> _gunPrefabs = new Dictionary<WeaponType, Gun>();
+        private Dictionary<WeaponType, KeyCode> _gunKeys = new Dictionary<WeaponType, KeyCode>();
+        private List<WeaponType> _activeWeapons;
 
         // MOVEMENT KEYS
         [SerializeField] private KeyCode _moveForward = KeyCode.W;
@@ -53,9 +57,6 @@ namespace Entities
         [SerializeField] private KeyCode _attack = KeyCode.Mouse0;
         [SerializeField] private KeyCode _reload = KeyCode.R;
 
-        
-        
-        
         //MOVEMENT
         private CmdMovement _cmdMoveForward;
         private CmdMovement _cmdMoveBack;
@@ -70,22 +71,23 @@ namespace Entities
         private Vector3 _rotationX;
         private Vector3 _rotationY;
         private static readonly int IsMoving = Animator.StringToHash("IsMoving");
-
-
-        // Start is called before the first frame update
+        
+        
         void Start() {
             _movementController = GetComponent<MovementController>();
             _soundEffectController = GetComponent<SoldierSoundController>();
+            
+            for (var i = 0; i < GunType.Count; i++) {
+                _gunPrefabs.Add(GunType[i], GunValue[i]);
+                GunValue[i].gameObject.SetActive(false);
+                _gunKeys.Add(GunType[i], GunKey[i]);
+            }
 
-            foreach (var gun in Guns) {gun.gameObject.SetActive(false);}
-
-            _selectedGun = Guns[_selectedGunIndex];
+            _selectedGun = _gunPrefabs[WeaponType.Pistol];
             _selectedGun.gameObject.SetActive(true);
             _selectedGun.Reset(false);
             _cmdAttack = new CmdAttack(_selectedGun);
             _cmdDeploy = new CmdDeploy(Deployable);
-
-
 
             _cmdMoveForward = new CmdMovement(_movementController, Directions.Forward);
             _cmdMoveBack = new CmdMovement(_movementController, Directions.Backward);
@@ -104,30 +106,20 @@ namespace Entities
             _mineDeployer.SetActive(false);
             Debug.Log("mine is active? "+_mineDeployer.activeSelf);
 
+            WeaponsManager.Instance.OnWeaponsChanged += OnWeaponsChanged;
         }
-
-   
 
         void Update()
         {
-            
-           
-
-
             if (GlobalData.Instance.GamePaused) return;
-            
-           
             
             if (Input.GetKey(_moveForward)) EventQueueManager.Instance.AddMovementCommand(_cmdMoveForward);
             if (Input.GetKey(_moveBack))    EventQueueManager.Instance.AddMovementCommand(_cmdMoveBack);
             if (Input.GetKey(_moveLeft))    EventQueueManager.Instance.AddMovementCommand(_cmdMoveLeft);
             if (Input.GetKey(_moveRight))   EventQueueManager.Instance.AddMovementCommand(_cmdMoveRight);
             
-            
             _rotationX = new Vector3(0f, Input.GetAxis("Mouse X"), 0f);
             _rotationY = new Vector3(Input.GetAxis("Mouse Y"), 0f, 0f);
-
-            
 
             if(Input.GetKeyDown(_attack))
             {
@@ -151,24 +143,29 @@ namespace Entities
                 if (!_selectedGun.IsAutomatic || _selectedGun.CurrentMagSize == 0)
                     _isFiring = false;
             }
-
-
-
-
+            
             if (Input.GetKeyDown(_reload)) _selectedGun.Reload();
 
             if (Input.GetKeyDown(KeyCode.Y))
             {
                 _selectedGunIndex++;
-                if (_selectedGunIndex >= Guns.Count)
+                if (_selectedGunIndex >= _activeWeapons.Count)
                     _selectedGunIndex = 0;
                 ChangeWeapon(_selectedGunIndex);
             }
             
-            if (Input.GetKeyDown(_weaponSlot1)) ChangeWeapon(0);
-            if (Input.GetKeyDown(_weaponSlot2)) ChangeWeapon(1);
-            if (Input.GetKeyDown(_weaponSlot3)) ChangeWeapon(2);
-            if (Input.GetKeyDown(_weaponSlot4)) ChangeWeapon(3);
+            for (var i = 0; i < _activeWeapons.Count; i++)
+            {
+                if (Input.GetKeyDown(_gunKeys[_activeWeapons[i]]))
+                {
+                    ChangeWeapon(i);
+                }
+            }
+            
+            // if (Input.GetKeyDown(_weaponSlot1)) ChangeWeapon(0);
+            // if (Input.GetKeyDown(_weaponSlot2)) ChangeWeapon(1);
+            // if (Input.GetKeyDown(_weaponSlot3)) ChangeWeapon(2);
+            // if (Input.GetKeyDown(_weaponSlot4)) ChangeWeapon(3);
 
         }
 
@@ -194,7 +191,7 @@ namespace Entities
             if (_selectedGun.IsReloading) return;
             if (_isDeploying)return;
             _selectedGun.gameObject.SetActive(false);
-            _selectedGun = Guns[index];
+            _selectedGun = GunValue[index];
             _selectedGunIndex = index;
             _selectedGun.gameObject.SetActive(true);
             _selectedGun.Reset(true);
@@ -216,9 +213,14 @@ namespace Entities
             _soundEffectController.PlayHitByThrowable();
         }
 
+        private void OnWeaponsChanged(List<WeaponType> weapons)
+        {
+            _activeWeapons = weapons;
+        }
+
         public void ActivateDeployable()
         {
-            foreach (var gun in Guns) {gun.gameObject.SetActive(false);}
+            foreach (var gun in GunValue) {gun.gameObject.SetActive(false);}
 
             _isDeploying = true;
             Debug.Log("attempting to activate mine");

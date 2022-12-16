@@ -8,11 +8,6 @@ using UnityEngine.AI;
 
 namespace Zombies
 {
-    [RequireComponent( 
-        typeof(NavMeshAgent),
-        typeof(ZombieLifeController),
-        typeof(ZombieSoundEffectController))]
-    [RequireComponent(typeof(Animation), typeof(Collider))]
     public class Zombie : MonoBehaviour, IDieable
     {
 
@@ -20,13 +15,13 @@ namespace Zombies
         [SerializeField] public ZombieStats _stats;
 
         // ATTACK CONFIGURATION
-        private int _hitDamage => _stats.AttackDamage;
+        public int _hitDamage => _stats.AttackDamage;
         private float _attackRange => _stats.AttackRange;
         private float _attackSpeed => _stats.AttackSpeed;
         private float _movementSpeed => _stats.MovementSpeed;
 
         // COMPONENTS
-        private ZombieSoundEffectController _soundEffectController;
+        public ZombieSoundEffectController _soundEffectController;
         private NavMeshAgent _navMeshAgent;
         Collider[] _colliders;
         private Transform _rightHand;
@@ -103,7 +98,7 @@ namespace Zombies
             _navMeshAgent.SetDestination(playerPosition);
         }
 
-        private void Attack()
+        public virtual void Attack()
         {
             _soundEffectController.PlayOnHit();
             IDamageable damageable = _target.GetComponent<IDamageable>();

@@ -15,11 +15,8 @@ MonoBehaviour:
   _stats:
     CratePrefab: {fileID: 9065924571364506927, guid: d22404bbc14524845b77fe1548c3aa4c, type: 3}
     Health: 30
-    PowerUpChance: 1
-    PowerUpPrefabs:
-    - {fileID: 7169054663632484900, guid: 7846388dc4c164297916ae6329dd23f9, type: 3}
-    - {fileID: 731813801729813074, guid: 975e90ff36128422a98cb39ab2669e9d, type: 3}
-    - {fileID: 4653376580528904223, guid: 6b30dcf5ceda9504aaea6e876a505724, type: 3}
+    PowerUpChance: 0.5
+    PowerUps: 000000000100000002000000
     PowerUpChances:
     - 0
     - 0

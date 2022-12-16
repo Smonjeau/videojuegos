@@ -32,3 +32,4 @@ MonoBehaviour:
     IsLevelStarterRound: 0
     RoomNumber: 2
     BossStats: {fileID: 11400000, guid: 2fab3f0f45e3e46dcb17d7cb1cce07ae, type: 2}
+    Weapons: 000000000200000001000000

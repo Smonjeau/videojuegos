@@ -1166,6 +1166,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _audioClip: {fileID: 8300000, guid: 297cdbcab390b4473ae4986b5dbf8114, type: 3}
   _hitAudioClip: {fileID: 8300000, guid: 2ff66202cae8144b6bab3834e2208870, type: 3}
+  _throwAudoClip: {fileID: 0}
 --- !u!114 &-2872319253270026483
 MonoBehaviour:
   m_ObjectHideFlags: 0

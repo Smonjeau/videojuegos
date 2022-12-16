@@ -12,7 +12,7 @@ namespace PowerUps
         {
             var character = target.GetComponent<Character>();
             if (character == null) return;
-            var guns = character.Guns;
+            var guns = character.GunValue;
             foreach (var gun in guns) gun.FullAmmo();
             Die();
         }

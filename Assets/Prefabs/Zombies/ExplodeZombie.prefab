@@ -739,13 +739,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2720769954193737336}
   m_LocalRotation: {x: -0.18852562, y: -0.19862312, z: -0.07134897, w: 0.95912266}
-  m_LocalPosition: {x: -0.1371595, y: 0.00000005722046, z: 0.00000030517577}
+  m_LocalPosition: {x: -0.13715954, y: 0.000000057220458, z: 0.00000030517577}
   m_LocalScale: {x: 0.99999964, y: 0.9999998, z: 1.0000004}
   m_Children:
   - {fileID: 1789622717885758545}
   m_Father: {fileID: 5757531898413605882}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 67.03524, y: 6.286781, z: 4.5}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2758159089055745860
 GameObject:
   m_ObjectHideFlags: 0
@@ -885,12 +885,13 @@ GameObject:
   - component: {fileID: -5946186136426882985}
   - component: {fileID: -2346238673414099765}
   - component: {fileID: -7767020893312083063}
-  - component: {fileID: -9159611219540136418}
   - component: {fileID: -7373416789637420472}
   - component: {fileID: 8771218893984188144}
   - component: {fileID: -2872319253270026483}
+  - component: {fileID: 3429131882138505883}
+  - component: {fileID: 1254103379577043709}
   m_Layer: 6
-  m_Name: Boss1
+  m_Name: ExplodeZombie
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -905,7 +906,7 @@ Transform:
   m_GameObject: {fileID: 3520478986436058278}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 6.5, y: 5, z: 7}
+  m_LocalScale: {x: 3.5, y: 3.25, z: 3.5}
   m_Children:
   - {fileID: 2626244503200830990}
   - {fileID: 671203971658015734}
@@ -988,21 +989,6 @@ Animation:
   m_PlayAutomatically: 0
   m_AnimatePhysics: 0
   m_CullingType: 0
---- !u!114 &-9159611219540136418
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3520478986436058278}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8eaac6b2326b4406c9af9060e75682c3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _stats: {fileID: 11400000, guid: 2fab3f0f45e3e46dcb17d7cb1cce07ae, type: 2}
-  _soundEffectController: {fileID: 0}
-  _state: Z_Walk_InPlace
 --- !u!82 &-7373416789637420472
 AudioSource:
   m_ObjectHideFlags: 0
@@ -1166,8 +1152,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _audioClip: {fileID: 8300000, guid: 297cdbcab390b4473ae4986b5dbf8114, type: 3}
-  _hitAudioClip: {fileID: 8300000, guid: 2ff66202cae8144b6bab3834e2208870, type: 3}
-  _throwAudoClip: {fileID: 8300000, guid: 8a4cfd85cc01b0040abf6f96ab11ed8e, type: 3}
+  _hitAudioClip: {fileID: 8300000, guid: dd06b445ad94d724490b791d9677f8ea, type: 3}
+  _throwAudoClip: {fileID: 0}
 --- !u!114 &-2872319253270026483
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1183,6 +1169,43 @@ MonoBehaviour:
   CriticLife: 20
   _life: 0
   _maxLife: 100
+--- !u!114 &3429131882138505883
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3520478986436058278}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: afdb09cdf44744968ceb82bf65a005c0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _speed: 1
+  _startIntensity: 0
+  _endIntensity: 0.5
+  _glowColor: {r: 1, g: 0.2688679, b: 0.2688679, a: 0}
+  _material: {fileID: 2100000, guid: eac241ef58c5d4d47b69896eb040eda2, type: 2}
+  _repeatable: 1
+  _startTime: 0
+--- !u!114 &1254103379577043709
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3520478986436058278}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 36958ae3248546a3b7e5963d9ef4ff11, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _stats: {fileID: 11400000, guid: 3e97bc5456fe3490d90f514e074b29ea, type: 2}
+  _soundEffectController: {fileID: 0}
+  _state: Z_Run_InPlace
+  _eplosionPrefab: {fileID: 100008, guid: 06736895ea0a4ff408d25e6684dce797, type: 3}
+  _radius: 10
+  _force: 800
 --- !u!1 &3648539170161296439
 GameObject:
   m_ObjectHideFlags: 0
@@ -1286,6 +1309,7 @@ GameObject:
   - component: {fileID: 28968269811181037}
   - component: {fileID: 6518499951557711833}
   - component: {fileID: 7257241150676705641}
+  - component: {fileID: 1088794766357797497}
   m_Layer: 6
   m_Name: Z_Head
   m_TagString: Untagged
@@ -1327,7 +1351,7 @@ SkinnedMeshRenderer:
   m_RendererPriority: 0
   m_Materials:
   - {fileID: 2100000, guid: 8fbc9cde5127189429857a1607c506cf, type: 2}
-  - {fileID: 2100000, guid: 6756ab06c00bf4113a6ca97876dd1093, type: 2}
+  - {fileID: 2100000, guid: eac241ef58c5d4d47b69896eb040eda2, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1384,6 +1408,20 @@ CapsuleCollider:
   m_Height: 0.28
   m_Direction: 2
   m_Center: {x: 0.00000004500976, y: -0.024, z: 1.67}
+--- !u!114 &1088794766357797497
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4413880799579831514}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dfc526187ad4427fb97e36cfb1c79dc4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _damageRatio: 1
+  _parentObject: {fileID: 0}
 --- !u!1 &4781818641512131078
 GameObject:
   m_ObjectHideFlags: 0
@@ -1809,6 +1847,7 @@ SkinnedMeshRenderer:
   m_RendererPriority: 0
   m_Materials:
   - {fileID: 2100000, guid: 8fbc9cde5127189429857a1607c506cf, type: 2}
+  - {fileID: 2100000, guid: eac241ef58c5d4d47b69896eb040eda2, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

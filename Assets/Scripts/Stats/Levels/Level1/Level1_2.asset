@@ -30,3 +30,4 @@ MonoBehaviour:
     IsLevelStarterRound: 0
     RoomNumber: 1
     BossStats: {fileID: 0}
+    Weapons: 0000000002000000

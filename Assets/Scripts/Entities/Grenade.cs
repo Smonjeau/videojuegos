@@ -5,13 +5,22 @@ using UnityEngine;
 
 namespace Entities
 {
+    [RequireComponent(typeof(AudioSource))]
     public class Grenade : MonoBehaviour
     {
         [SerializeField] private GameObject _eplosionPrefab;
         [SerializeField] private float _radius = 10f;
         [SerializeField] private float _force = 800f;
         [SerializeField] private int _damage = 50;
-
+        [SerializeField] private AudioClip _explosionSound;
+        
+        private AudioSource _audioSource;
+        
+        private void Start()
+        {
+            _audioSource = GetComponent<AudioSource>();
+            _audioSource.clip = _explosionSound;
+        }
 
         private void OnTriggerEnter(Collider other)
         {
@@ -20,6 +29,7 @@ namespace Entities
 
         private void Explode()
         {
+            _audioSource.Play();
             Instantiate(_eplosionPrefab, transform.position, transform.rotation);
             Collider[] colliders = Physics.OverlapSphere(transform.position, _radius);
 

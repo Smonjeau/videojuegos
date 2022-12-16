@@ -26,6 +26,7 @@ namespace Levels
         private bool _isFinalLevel => Stats.IsFinalLevel;
         public bool IsFinalLevel => _isFinalLevel;
         public float IncreaseZombieLife => Stats.IncreaseZombieLife;
+        public List<WeaponType> Weapons => Stats.Weapons;
         
 
         private int _spawnersCount;
@@ -62,6 +63,7 @@ namespace Levels
             _timeRemaining = 5f;
             _isLevelStarted = true;
             _zombieKills = 0;
+            WeaponsManager.Instance.ChangeWeapons(Weapons);
             LevelManager.Instance.OnZombieKill += OnZombieKill;
             LevelManager.Instance.OnBossKill += OnBossKill;
         }

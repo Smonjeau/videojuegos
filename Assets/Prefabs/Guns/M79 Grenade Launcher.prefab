@@ -359,5 +359,6 @@ MonoBehaviour:
   _isReloading: 0
   _layerTarget: 0600000007000000
   fpsCamera: {fileID: 0}
+  gunShootEffect: {fileID: 0}
   _bulletPrefab: {fileID: 964348418913359277, guid: bf62bfdfe35764537af05874015d0878, type: 3}
   _throwForce: 40
