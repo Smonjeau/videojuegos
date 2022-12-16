@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 namespace Controllers
@@ -6,28 +7,52 @@ namespace Controllers
         // public GameObject DoorButton;
         [SerializeField] private float smooth;
  
-        private Quaternion DoorOpen;
-        private Quaternion DoorClosed;
-        private bool open;
+        private Vector3 _doorOpen;
+        private Vector3 _doorClosed;
+        private bool _open;
  
-        void Start() {
-            // DoorButton.SetActive(false);
+        private void Start() {
+            var position = transform.position;
+            _doorOpen = position;
+            _doorOpen.x = 0.56f;
+            _doorClosed = position;
         }
    
         void OnTriggerEnter(Collider player)
         {
-            if (open || player.CompareTag("Player")) return;
+            if (_open || player.CompareTag("Player")) return;
  
             // if (cube.tag == "DoorButton")
             //     DoorButton.SetActive(true);
             // Debug.Log("button activated");
+
+     
  
-            DoorOpen = Quaternion.Euler(0, -90, 0);
-            DoorClosed = transform.rotation;
- 
-            transform.rotation = Quaternion.Lerp(DoorClosed, DoorOpen, Time.deltaTime * smooth);
-            Debug.Log("Door Opened");
-            open = true;
+            StartCoroutine(WaitAndMove(0.2f,_doorClosed,_doorOpen));
+            _open = true;
+            GetComponent<Collider>().isTrigger = false;
+        }
+
+        public void CloseDoor()
+        {
+            if (_open)
+            {
+                StartCoroutine(WaitAndMove(0.2f,_doorOpen,_doorClosed));
+                _open = false;
+            }
+        }
+
+        private IEnumerator WaitAndMove(float delayTime,Vector3 from, Vector3 to)
+        {
+            yield return new WaitForSeconds(delayTime); 
+            float startTime = Time.time; 
+            while (Time.time - startTime <= 1)
+            {
+                // until one second passed
+                transform.position = Vector3.Lerp(from, to, Time.time - startTime); // lerp from A to B in one second
+                yield return 1; // wait for next frame
+                
+            }
         }
     }
 }

@@ -19,6 +19,10 @@ namespace Flyweight
         public bool IsFinalLevel => _levelStatsValues.IsFinalLevel;
         public string LevelName => _levelStatsValues.LevelName;
         public float IncreaseZombieLife => _levelStatsValues.IncreaseZombieLife;
+        public bool IsLevelFinisherRound => _levelStatsValues.IsLevelFinisherRound;
+        public bool IsLevelStarterRound => _levelStatsValues.IsLevelStarterRound;
+        public int RoomNumber => _levelStatsValues.RoomNumber;
+        public ZombieStats BossStats => _levelStatsValues.BossStats;
     }
     
     [System.Serializable]
@@ -33,5 +37,9 @@ namespace Flyweight
         public bool IsFinalLevel;
         public string LevelName;
         public float IncreaseZombieLife;
+        public bool IsLevelFinisherRound;
+        public bool IsLevelStarterRound;
+        public int RoomNumber;
+        public ZombieStats BossStats;
     }
 }

@@ -15,6 +15,7 @@ namespace UI
         /* Text Reference */
         [SerializeField] private Text _nextLevel;
         [SerializeField] private Text _level;
+        private bool _tranisitioningLevel;
         
         public Image blackoutImg;
         public Image redImg;
@@ -32,6 +33,7 @@ namespace UI
         {
             if (SceneManager.GetActiveScene().name != "SampleScene") return;
             LevelManager.Instance.OnNextLevel += OnNextLevel;
+            LevelManager.Instance.OnLevelTransition += OnLevelTransition;
             EventsManager.Instance.OnAmmoChange += OnAmmoChange;
             EventsManager.Instance.OnWeaponChange += OnWeaponChange;
             EventsManager.Instance.OnAttacked += OnAttacked;
@@ -39,6 +41,7 @@ namespace UI
             EventsManager.Instance.OnLifeHealed += OnLifeHealed;
             EventsManager.Instance.OnHit += OnHit;
             _weapon.sprite = _weaponSprites[0];
+            _tranisitioningLevel = false;
 
         }
 
@@ -126,12 +129,34 @@ namespace UI
 
         private void OnNextLevel(LevelStats nextLevel)
         {
-            _nextLevel.text = "Round " + nextLevel.LevelName;
+            string textToSet;
+            if (nextLevel.IsLevelStarterRound)
+            {
+                if (_tranisitioningLevel)
+                {
+                    _nextLevel.text = "";
+                    _tranisitioningLevel = false;
+                }
+
+                textToSet = "Room " + nextLevel.RoomNumber + "\nRound " + nextLevel.LevelName;
+            }
+            else
+            {
+                textToSet = "Round " + nextLevel.LevelName;
+
+            }
+            _nextLevel.text = textToSet;
             StartCoroutine(FadeTextToFullAlpha(2f, _nextLevel));
             _level.text = nextLevel.LevelName;
             Invoke(nameof(DisableLevelText), 5f);
         }
 
+        private void OnLevelTransition()
+        {
+            _tranisitioningLevel = true;
+            _nextLevel.text = "Go through the door to enter next room";
+            StartCoroutine(FadeTextToFullAlpha(2f, _nextLevel,100));
+        }
         private void OnHit()
         {
             hitmarker.gameObject.SetActive(true);
@@ -148,14 +173,16 @@ namespace UI
             StartCoroutine(FadeTextToZeroAlpha(2f, _nextLevel));
         }
         
-        private IEnumerator FadeTextToFullAlpha(float t, Text i)
+        private IEnumerator FadeTextToFullAlpha(float t, Text i,int fontSize = 300)
         {
+            i.fontSize = fontSize;
             i.color = new Color(i.color.r, i.color.g, i.color.b, 0);
             while (i.color.a < 1.0f)
             {
                 i.color = new Color(i.color.r, i.color.g, i.color.b, i.color.a + (Time.deltaTime / t));
                 yield return null;
             }
+
         }
  
         private IEnumerator FadeTextToZeroAlpha(float t, MaskableGraphic i)
