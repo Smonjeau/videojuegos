@@ -1,5 +1,3 @@
-using System;
-using Controllers;
 using Strategy;
 using UnityEngine;
 
@@ -11,8 +9,8 @@ namespace Entities
         [SerializeField] private GameObject _eplosionPrefab;
         [SerializeField] private float _radius = 10f;
         [SerializeField] private float _force = 800f;
-        [SerializeField] private int _damage = 50;
         [SerializeField] private AudioClip _explosionSound;
+        private int _damage;
         
         private AudioSource _audioSource;
         
@@ -48,6 +46,11 @@ namespace Entities
                 }
             }
             Destroy(gameObject);
+        }
+
+        public void SetDamage(int damage)
+        {
+            _damage = damage;
         }
     }
 

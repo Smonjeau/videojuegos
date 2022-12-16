@@ -15,8 +15,8 @@ MonoBehaviour:
   _levelStatsValues:
     LevelNumber: 6
     MinRandomSpawnTime: 3
-    MaxRandomSpawnTime: 5
-    MaxEnemyCount: 24
+    MaxRandomSpawnTime: 6
+    MaxEnemyCount: 18
     ZombieStats:
     - {fileID: 11400000, guid: e404c7d5e3b4a47d38be16601c7cc148, type: 2}
     - {fileID: 11400000, guid: 54b3b7415d0e92a4ba61fab4ee2a21eb, type: 2}

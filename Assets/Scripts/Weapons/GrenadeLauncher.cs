@@ -1,3 +1,4 @@
+using Entities;
 using UnityEngine;
 
 namespace Weapons
@@ -14,6 +15,8 @@ namespace Weapons
             GameObject grenade = Instantiate(_bulletPrefab, _barrelExitTransform.position + transform.forward * 2, _barrelExitTransform.rotation);
             _soundEffectController.PlayOnShot();
             gunShootEffect.Play();
+            
+            grenade.GetComponent<Grenade>().SetDamage(Damage);
             
             Rigidbody rb = grenade.GetComponent<Rigidbody>();
             rb.AddForce(transform.forward * _throwForce, ForceMode.VelocityChange);

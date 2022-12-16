@@ -29,4 +29,4 @@ MonoBehaviour:
     RoomNumber: 1
     BossStats:
     - {fileID: 0}
-    Weapons: 0000000002000000
+    Weapons: 00000000020000000100000003000000
